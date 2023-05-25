@@ -9,15 +9,15 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser
 from questions.serializers import QuestionSerializer as QS
 from questions.serializers import SubmittedQuestionSerializer as SQSerializer
-from questions.models import Question
+from questions.serializers import QuestionRecursiveSerializer as QRSerializer
+from questions.models import CurrentQuestions
 from  questions.models import SubmittedQuestions as SQ
-# Create your views here.
 
+# Create your views here.
 @api_view(['GET', 'POST'])
 def questions_lists(request): 
-    
     if request.method == 'GET': 
-        questions = Question.objects.all() 
+        questions = CurrentQuestions.objects.all()
         serializer = QS(questions, many=True)
         return Response(serializer.data)
     
@@ -30,14 +30,13 @@ def questions_lists(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 @csrf_exempt
 @api_view(['GET', 'PUT', 'DELETE'])
 def question_detail_single(request, id):
     ''' Retrieve, edit, put single question '''
     try: 
-        question = Question.objects.get(question_id = id)
-    except Question.DoesNotExist:
+        question = CurrentQuestions.objects.get(question_id = id)
+    except CurrentQuestions.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
     
     if request.method == 'GET':
@@ -59,7 +58,6 @@ def question_detail_single(request, id):
 @csrf_exempt
 def submitted_questions(request):
     ''' Submit a new question '''
-    
     if request.method =='GET': 
         questions = SQ.objects.all()
         serializer = SQSerializer(questions, many=True)
@@ -73,14 +71,13 @@ def submitted_questions(request):
 
 @api_view(['GET'])
 def recursive_questions(request): 
-    query = Question.objects.filter(parent_question__isnull=True)
+    query = CurrentQuestions.objects.filter(parent_question__isnull=True)
     if request.method == 'GET': 
-        serializer = QS(query, many=True)
+        serializer = QRSerializer(query, many=True)
         return Response(serializer.data)
 
 
 
- 
 
 
 
