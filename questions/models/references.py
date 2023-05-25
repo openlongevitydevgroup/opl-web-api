@@ -1,6 +1,4 @@
 from django.db import models 
-from questions import Questions
-
 
 class Author(models.Model): 
     author_id = models.AutoField(primary_key=True) 
@@ -45,7 +43,7 @@ class Reference(models.Model):
     relevance = models.PositiveSmallIntegerField()
     publish_date = models.DateField()
     isbn = models.TextField()
-    journal_id = models.ForeignKey(Journal)
+    journal_id = models.ForeignKey(Journal, on_delete=models.SET_NULL, null=True)
     authors = models.ManyToManyField(Author)
 
     class Meta: 
@@ -56,13 +54,3 @@ class Reference(models.Model):
         return f'{self.ref_id}: {self.ref_title}'
 
 
-
-class QuestionReference(models.Model): 
-    question_id = models.ForeignKey(Questions)
-    reference_id = models.ForeignKey(Reference)
-
-    class Meta: 
-        db_table = "Questions-references"
-        db_table_comment = "Table containing which references are tied to which questions"
-
-    

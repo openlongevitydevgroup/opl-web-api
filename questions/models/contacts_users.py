@@ -17,7 +17,7 @@ class JobField(JobInformation):
 
 class Contact(models.Model): 
     first_name = models.CharField(max_length=50)
-    last_name = models.ChartField(max_length=50)
+    last_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=50)
-    job_field = models.ForeignKey(JobField)
+    job_field = models.ForeignKey(JobField, on_delete=models.SET_NULL, null=True)
     organisation = models.CharField(max_length=100)
