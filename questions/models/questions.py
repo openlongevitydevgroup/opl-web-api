@@ -9,15 +9,15 @@ class Question(models.Model):
         abstract = True
     question_id = models.AutoField(
         primary_key=True, serialize=True, default=None)
-    title = models.CharField(max_length=200, blank=True)
-    excerpt = models.TextField(blank=True)
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
     # Foreign keys from other tables
     contact = models.OneToOneField(
-        Contact, null=True, on_delete=models.SET_NULL)
+        Contact, null=True, on_delete=models.SET_NULL, blank=True)
     species = models.ForeignKey(
-        Species, on_delete=models.SET_NULL, null=True)
+        Species, on_delete=models.SET_NULL, null=True, blank=True)
     reference = models.ForeignKey(
-        Reference, on_delete=models.SET_NULL, null=True)
+        Reference, on_delete=models.SET_NULL, null=True, blank=True)
 
 
 class Questions(Question):
@@ -26,10 +26,11 @@ class Questions(Question):
         db_table_comment = 'These are the current questions that we have accepted from the submitted questions'
 
     def __str__(self):
-        return f'{self.id}: {self.title}'
+        return f'{self.question_id}: {self.title}'
 
 
 class SubmittedQuestions(Question):
+    parent_question = models.OneToOneField(Questions,null=True, blank=True, on_delete=models.SET_NULL)
     class Meta:
         db_table = 'Submitted-questions'
         db_table_comment = 'These are the submitted questions from users that will undergo review'
