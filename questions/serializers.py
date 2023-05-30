@@ -27,5 +27,5 @@ class QuestionSerializer(serializers.ModelSerializer):
 class SubmittedQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubmittedQuestions
-        fields = ['question_id', 'title', 'excerpt',
-                  'species', 'citation', 'parent_question']
+        fields = ['question_id', 'title', 'description',
+                  'species', 'citation', 'parent_question', 'contact']

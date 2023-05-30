@@ -33,6 +33,11 @@ class Questions(Question):
 
 class SubmittedQuestions(Question):
     parent_question = models.ForeignKey(Questions,null=True, blank=True, on_delete=models.SET_NULL)
+    first_name = models.CharField(max_length=50, blank=True)
+    last_name = models.CharField(max_length=50, blank=True)
+    email = models.EmailField(max_length=50, null=True, blank=True)
+    job_field = models.CharField(max_length=100, blank=True)
+    organisation = models.CharField(max_length=100, blank=True)
     class Meta:
         db_table = 'Submitted-questions'
         db_table_comment = 'These are the submitted questions from users that will undergo review'
