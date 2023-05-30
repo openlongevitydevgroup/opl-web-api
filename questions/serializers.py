@@ -1,26 +1,31 @@
 from rest_framework import serializers
-from .models.questions import Questions
-# from questions.models import CurrentQuestions, SubmittedQuestions 
-from rest_framework_recursive.fields import RecursiveField 
+from .models.questions import Questions, RelatedQuestions, SubmittedQuestions
+# from questions.models import CurrentQuestions, SubmittedQuestions
+from rest_framework_recursive.fields import RecursiveField
+
+
+class RecursiveSerializer(serializers.Serializer):
+    ''' Handle self-nested serializer'''
+
+    def to_representation(self, instance):
+        serializer = self.parent.parent.__class__(
+            instance, context=self.context)
+        return serializer.data
+
 
 class QuestionSerializer(serializers.ModelSerializer):
+    children = RecursiveSerializer(many=True, read_only=True)
+ 
     class Meta:
         model = Questions
-        fields = ['question_id', 'title', 'description', 'contact', 'species', 'reference']
+        fields = ['question_id', 'title', 'description',
+                  'contact', 'species', 'reference', 'parent_question', 'children']    
+    def get_children(obj):
+        return QuestionSerializer(obj.parent.all(), many=True).data
 
 
-    def create(self, validated_data):
-        return Questions.objects.create(**validated_data)
-    
-
-# class SubmittedQuestionSerializer(serializers.ModelSerializer):
-#     class Meta: 
-#         model = SubmittedQuestions
-#         fields = ['question_id', 'title', 'excerpt', 'species', 'citation', 'parent_question']
-
-
-# class QuestionRecursiveSerializer(serializers.ModelSerializer):
-#     children  = RecursiveField(many = True)
-#     class Meta:
-#         model = CurrentQuestions 
-#         fields = ['question_id', 'title', 'excerpt', 'species', 'citation', 'parent_question', 'children']
+class SubmittedQuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubmittedQuestions
+        fields = ['question_id', 'title', 'excerpt',
+                  'species', 'citation', 'parent_question']
