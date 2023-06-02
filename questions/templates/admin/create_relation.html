@@ -1,18 +1,17 @@
 {% extends "admin/base_site.html"%}
-{% load i18n %}
 
 {% block content %}
 <H1>Select the parent question</H1>
 <p>The other question will be selected as the child question.</p>
-<form action="" method="post" name="parent">
+<form action="" method="post" name="action">
     {% csrf_token %}
-    <select name="{{selected_checkbox_name}}" id="parent">
-        {% for query in queries %}
-        <option id="{{query.question_id}}" value="{{query.question_id}}" name="{{action_checkbox_name}}">{{query.title}}</option>
-        {%endfor%}
-    </select>
-    <input type="hidden" name="action" value="admin_action">
-    <input type="submit" name="apply">
+    {{ form }}
+    {% for obj in query %}
+    <input type="hidden" name="_selected_action" value="{{obj.pk}}">
+    {% endfor %}
+    <input type="hidden" name="action" value="create_relationship">
+    <input type="submit" name="apply" value="Update status"/>
+
 </form>
 
 {% endblock %}

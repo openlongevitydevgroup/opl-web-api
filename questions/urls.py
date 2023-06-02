@@ -1,5 +1,6 @@
 from django.urls import path 
-from questions import views 
+from questions import views
+from questions.admin import QuestionsAdmin
 
 urlpatterns = [
     path('questions/', views.questions_list), #All questions
