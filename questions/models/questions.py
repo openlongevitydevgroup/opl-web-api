@@ -33,6 +33,8 @@ class Questions(Question):
 
 class SubmittedQuestions(Question):
     parent_question = models.ForeignKey(Questions,null=True, blank=True, on_delete=models.SET_NULL)
+    species = models.CharField(max_length=50, null=True, blank=True)
+    citation = models.TextField(blank=True)
     first_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50, blank=True)
     email = models.EmailField(max_length=50, null=True, blank=True)

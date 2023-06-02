@@ -41,7 +41,7 @@ def question_detail(request, id):
 
     return Response(serializer.data)
 
-@api_view(['GET', 'POST', 'DELETE'])
+@api_view(['GET', 'POST'])
 @csrf_exempt
 def submitted_questions(request):
     ''' Submit a new question '''
