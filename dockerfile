@@ -1,5 +1,14 @@
 FROM python:latest 
 
+ENV PYTHONUNBUFFERED 1
+
 ENV DockerHome = /home/backend
 
-RUN mkdir -p ${DockerHome}
+RUN mkdir /backend 
+
+WORKDIR /backend 
+
+ADD . /backend/ 
+
+RUN pip install -r requirements.txt
+
