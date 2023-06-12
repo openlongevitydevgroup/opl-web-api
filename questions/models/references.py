@@ -9,7 +9,6 @@ class Author(models.Model):
     
     class Meta: 
         db_table = "Authors"
-        db_table_comment = "Contains all authors for references"
 
 
 class Journal(models.Model): 

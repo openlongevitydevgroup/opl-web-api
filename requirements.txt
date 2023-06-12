@@ -1,3 +1,8 @@
-Django==4.1.7
+Django==4.2.1
 djangorestframework==3.14.0
 djangorestframework_recursive==0.1.2
+django-cors-headers==3.14.0
+django-js-asset==2.0.0
+django-mptt==0.14.0
+importlib-metadata==4.11.3
+psycopg2-binary==2.9.5
