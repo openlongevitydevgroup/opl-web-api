@@ -24,5 +24,7 @@ services:
       - POSTGRES_USER=angelo 
       - POSTGRES_DB=OPL 
       - POSTGRES_PASSWORD=Brause134!
+    ports:
+      - 5432:5432
     volumes:
       - /home/admin/OPL_backup_files/opl-backup/docker-entrypoint-initdb.d/opl-backup
