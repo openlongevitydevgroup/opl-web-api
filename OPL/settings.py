@@ -87,10 +87,16 @@ WSGI_APPLICATION = "OPL.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": 'OPL',
+        "NAME": 'openlongevity',
         "USER": 'angelo',
         "PASSWORD": 'Brause134!',
         "HOST": '34.89.3.62',
+        "OPTIONS": {
+            'sslmode':'verify-ca', 
+             'sslrootcert': '/Users/angelo/DocumentsA/Development/pass/server-ca.cer', 
+             'sslcert': '/Users/angelo/DocumentsA/Development/pass/client-cert.cer', 
+             "sslkey": "/Users/angelo/DocumentsA/Development/pass/client-key.cer"
+        }
     }
 }
 
@@ -132,5 +138,4 @@ STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
