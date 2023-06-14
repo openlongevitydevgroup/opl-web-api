@@ -1,0 +1,10 @@
+runtime: python39
+entrypoint: gunicorn -0b $:PORT ./OPL/w
+
+
+env_variables:
+  DJANGO_SETTINGS_MODULE: "OPL.settings"
+
+handlers:
+- url: /.*
+  script: auto
