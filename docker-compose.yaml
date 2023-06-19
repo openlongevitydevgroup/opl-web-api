@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  web:
+    build: . #Build from current directory 
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes: #Map current directory to backend directory 
+      -.:/backend
+    ports:
+    - "8000:8000"
+  db:
+  
+
+    

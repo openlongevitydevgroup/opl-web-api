@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-import environ 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -86,16 +85,10 @@ WSGI_APPLICATION = "OPL.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": 'openlongevity',
+        "NAME": 'OPL',
         "USER": 'angelo',
         "PASSWORD": 'Brause134!',
-        "HOST": '34.89.3.62',
-        "OPTIONS": {
-            'sslmode':'verify-ca', 
-             'sslrootcert': '/Users/angelo/DocumentsA/Development/pass/server-ca.cer', 
-             'sslcert': '/Users/angelo/DocumentsA/Development/pass/client-cert.cer', 
-             "sslkey": "/Users/angelo/DocumentsA/Development/pass/client-key.cer"
-        }
+        "HOST": 'localhost',
     }
 }
 
