@@ -5,7 +5,7 @@ services:
     build: . #Build from current directory 
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes: #Map current directory to backend directory 
-      -.:/backend
+      - .:/backend
     ports:
     - "8000:8000"
   db:
@@ -19,7 +19,7 @@ services:
       POSTGRES_DB: opl-dev
     volumes: 
       - ../sql/opl-backup.sql:/docker-entrypoint-initdb.d/opl-backup.sql 
-      
+
 
 
   
