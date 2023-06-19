@@ -27,9 +27,9 @@ services:
     networks:
       - deployment
 
-  networks:
-    deployment:
-      driver: bridge
+networks:
+  deployment:
+    driver: bridge
 
   
 
