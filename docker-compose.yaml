@@ -9,7 +9,7 @@ services:
     ports:
       - "127.0.0.1:8000:8000"
     dns: 
-      - 79.99.42.79
+      - 212.227.123.16
       - 8.8.8.8
     networks:
       - deployment
