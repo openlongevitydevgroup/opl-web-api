@@ -11,7 +11,8 @@ services:
     dns: 
       - 212.227.123.16
       - 8.8.8.8
-    network_mode: "host" 
+    networks:
+      - deployment
   db:
     image: postgres
     restart: always 
@@ -23,8 +24,12 @@ services:
       POSTGRES_DB: opl-dev
     volumes: 
       - ../sql/opl-backup.sql:/docker-entrypoint-initdb.d/opl-backup.sql 
+    networks:
+      - deployment
 
-
+  networks:
+    deployment:
+      driver: bridge
 
   
 
