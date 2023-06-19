@@ -7,10 +7,11 @@ services:
     volumes: #Map current directory to backend directory 
       - .:/backend
     ports:
-    - "8000:8000"
+      - "8000:8000"
     dns: 
-    - 212.227.123.16
-    - 8.8.8.8
+      - 212.227.123.16
+      - 8.8.8.8
+    network_mode: "host" 
   db:
     image: postgres
     restart: always 
