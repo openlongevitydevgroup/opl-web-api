@@ -3,11 +3,11 @@ version: '3'
 services:
   web:
     build: . #Build from current directory 
-    command: python3 manage.py runserver 127.0.0.1:8080:8080
+    command: python3 manage.py runserver 0.0.0.0:8080
     volumes: #Map current directory to backend directory 
       - .:/backend
     ports:
-      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:8000:8080"
     dns: 
       - 212.227.123.16
       - 8.8.8.8
