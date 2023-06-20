@@ -27,6 +27,9 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - deployment
+  
+volumes:
+  postgres_data:
 
 networks:
   deployment:
