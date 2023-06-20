@@ -91,7 +91,7 @@ DATABASES = {
         "NAME": 'OPL',
         "USER": os.environ.get('POSTGRES_USER'),
         "PASSWORD": os.environ.get('POSTGRES_PASSWORD'),
-        "HOST": 'localhost',
+        "HOST": '172.18.0.1', #SHOULDN'T HARD CODE WILL FIX LATER
     }
 }
 
