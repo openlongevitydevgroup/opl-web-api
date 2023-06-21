@@ -59,7 +59,7 @@ MIDDLEWARE = [
 ]
 CORS_ALLOWED_ORIGINS = ["https://127.0.0.1:3000",
                          "https://localhost:3000",
-                         "https://143.58.218.152"]#Home address
+                         os.environ.get("HOME_IP")]#Home address
 
 REST_FRAMEWORK = {"DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"]}
 
