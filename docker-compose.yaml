@@ -28,12 +28,7 @@ services:
     networks:
       - development
   
-volumes:
-  postgres_data:
 
-networks:
-  development:
-    driver: bridge
 
   
 
