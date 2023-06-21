@@ -28,8 +28,8 @@ SECRET_KEY = "django-insecure-8jm!x+=odu&_!=-x-6getujiwxkphe!6z(i&j)v$3aj_&_zk_)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['79.99.42.79'] #Server IP 
-BIND = ['0.0.0.0']
+ALLOWED_HOSTS = ['79.99.42.79', 'localhost', "127.0.0.1"] #Server IP 
+# BIND = ['0.0.0.0']
 
 # Application definition
 
@@ -57,10 +57,9 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-CORS_ALLOWED_ORIGINS = ["https://127.0.0.1:3000",
-                         "https://localhost:3000",
-                         os.environ.get("HOME_IP")]#Home address
-
+# CORS_ALLOWED_ORIGINS = ["https://localhost",
+#                          os.environ.get("HOME_IP")]#Home address
+C0RS_ALLOW_ALL_ORIGINS = True
 REST_FRAMEWORK = {"DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"]}
 
 ROOT_URLCONF = "OPL.urls"
@@ -92,7 +91,7 @@ DATABASES = {
         "NAME": os.environ.get('DB_NAME'),
         "USER": os.environ.get('POSTGRES_USER'),
         "PASSWORD": os.environ.get('POSTGRES_PASSWORD'),
-        "HOST": 'opl-backend-db-1', #SHOULDN'T HARD CODE WILL FIX LATER
+        "HOST": os.environ.get('HOST'), 
         "PORT": "5432"
     }
 }
