@@ -12,7 +12,7 @@ services:
       - 212.227.123.16
       - 8.8.8.8
     networks:
-      - deployment
+      - development
   db:
     image: postgres
     restart: always 
@@ -26,13 +26,13 @@ services:
       - ./opl-backup.sql:/docker-entrypoint-initdb.d/opl-backup.sql 
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - deployment
+      - development
   
 volumes:
   postgres_data:
 
 networks:
-  deployment:
+  development:
     driver: bridge
 
   
