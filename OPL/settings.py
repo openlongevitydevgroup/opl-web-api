@@ -59,7 +59,7 @@ MIDDLEWARE = [
 ]
 # CORS_ALLOWED_ORIGINS = ["https://localhost",
 #                          os.environ.get("HOME_IP")]#Home address
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True 
 REST_FRAMEWORK = {"DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"]}
 
 ROOT_URLCONF = "OPL.urls"
