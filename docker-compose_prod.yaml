@@ -30,8 +30,8 @@ services:
   nginx:
     image: nginx 
     build: 
-      dockerfile: nginx/Dockerfile 
-      context: nginx/
+      dockerfile: ./nginx/Dockerfile 
+      context: ./nginx/
     restart: always
     volumes:
       - static_volume:/home/backend/staticfiles/
