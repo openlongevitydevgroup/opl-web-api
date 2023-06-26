@@ -29,7 +29,7 @@ services:
       - production
   nginx:
     build: 
-      context: nginx/
+      context: .
       dockerfile: nginx/Dockerfile
     restart: always
     volumes:
