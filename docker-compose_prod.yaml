@@ -40,7 +40,9 @@ services:
       - production
 
     
-
+networks:
+  production:
+    driver: bridge
 volumes:
   postgres_data:
   static_volume:
