@@ -28,7 +28,6 @@ services:
     networks:
       - production
   nginx:
-    image: nginx 
     build: 
       context: ./nginx/
       dockerfile: ./nginx/Dockerfile 
