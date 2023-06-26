@@ -8,7 +8,10 @@ RUN mkdir /backend
 
 WORKDIR /backend 
 
+RUN mkdir staticfiles
+
 ADD . /backend/ 
+
 RUN pip install -r requirements.txt
 
 
