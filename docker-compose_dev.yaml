@@ -8,6 +8,8 @@ services:
       - .:/backend
     ports:
     - "8000:8000"
+    networks:
+      - production
   db:
     image: postgres
     restart: always
@@ -18,6 +20,8 @@ services:
     volumes: 
       - ./opl-backup.sql:/docker-entrypoint-initdb.d/opl-backup.sql
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - production
   volumes:
     postgres_data:
 
