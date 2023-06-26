@@ -30,6 +30,7 @@ services:
   nginx:
     image: nginx 
     build: 
+      context: ./nginx/
       dockerfile: ./nginx/Dockerfile 
     restart: always
     volumes:
