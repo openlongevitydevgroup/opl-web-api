@@ -39,8 +39,7 @@ services:
       - 81:80
     networks:
       - production
-    depends_on:
-      - web
+
     
 
 volumes:
