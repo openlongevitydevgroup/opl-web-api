@@ -2,28 +2,25 @@ version: '3'
 
 services:
   web:
-    build: #Build from current directory 
-      dockerfile: dockerfile.prod 
+    build:
+      dockerfile: dockerfile.prod
       context: .
     command: gunicorn OPL.wsgi:application --bind 0.0.0.0:8000
-    volumes: #Map current directory to backend directory 
+    volumes:
       - .:/backend
     ports:
-    - "8001:8000"
+      - "8001:8000"
   db:
     image: postgres
     restart: always
-    environment: 
+    environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: OPL
-    volumes: 
+    ports:
+      - "5433:5432"
+    volumes:
       - ./opl-backup.sql:/docker-entrypoint-initdb.d/opl-backup.sql
       - postgres_data:/var/lib/postgresql/data
-  volumes:
-    postgres_data:
-
-
-  
-
-    
+volumes:
+  postgres_data:
