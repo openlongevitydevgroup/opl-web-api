@@ -57,7 +57,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-CORS_ALLOWED_ORIGINS = ["http://localhost",f'http://{os.environ.get("HOME_IP")}','http://127.0.0.1:8000']#Home address
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000",f'http://{os.environ.get("HOME_IP")}','http://127.0.0.1:8000']#Home address
 # CORS_ALLOW_ALL_ORIGINS = True 
 REST_FRAMEWORK = {"DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"]}
 
