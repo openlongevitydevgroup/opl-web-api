@@ -29,8 +29,8 @@ services:
       - production
   nginx:
     build: 
-      context: ./nginx/
-      dockerfile: ./nginx/Dockerfile 
+      context: nginx/
+      dockerfile: ./Dockerfile 
     restart: always
     volumes:
       - static_volume:/home/backend/staticfiles/
