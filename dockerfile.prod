@@ -11,7 +11,7 @@ WORKDIR /backend
 ADD . /backend/ 
 RUN pip install -r requirements.txt
 
-CMD ["python3", "manage.py", "collectstatic"]
+RUN ["python3", "manage.py", "collectstatic"]
 
 FROM nginx 
 
