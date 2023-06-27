@@ -27,17 +27,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - production
-  # nginx:
-  #   build: 
-  #     context: .
-  #     dockerfile: nginx/Dockerfile
-  #   restart: always
-  #   volumes:
-  #     - static_volume:/backend/staticfiles/
-  #   ports:
-  #     - 80:80
-  #   networks:
-  #     - production
+
 
     
 networks:
