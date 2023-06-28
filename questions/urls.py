@@ -7,5 +7,5 @@ urlpatterns = [
     path('questions/root', views.questions_root),
     path('questions/<int:id>', views.question_detail), 
     path('questions/submit', views.submitted_questions),
-    # path('questions/recursive', views.recursive_questions)
+    path('verify-token', views.verify_token)
 ]
