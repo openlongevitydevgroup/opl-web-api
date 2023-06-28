@@ -3,7 +3,6 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.generics import ListAPIView
-
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from questions.serializers import QuestionSerializer
@@ -11,7 +10,7 @@ from .models.questions import Questions, RelatedQuestions
 from questions.serializers import SubmittedQuestionSerializer as SQSerializer
 # from questions.models import CurrentQuestions
 from .models.questions import SubmittedQuestions as SQ
-
+from requests import post
 # # Gets all the questions
 
 
@@ -54,3 +53,12 @@ def submitted_questions(request):
         if question_serializer.is_valid(raise_exception=True):
             question_serializer.save()
             return Response(question_serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['POST'])
+def verify_token(request):
+    ''' Verify google recaptcha token'''
+    if request.method == 'POST':
+        data = request.data
+        post_request = post('https://www.google.com/recaptcha/api/siteverify', data={'secret':data['secret'], 'response':data['response'] })
+        content = post_request.text
+        return Response(content)
