@@ -37,7 +37,7 @@ def question_detail(request, id):
     ''' Retrieve a single question and its children'''
     question = Questions.objects.get(question_id=id)
     serializer = QuestionSerializer(question)
-
+    
     return Response(serializer.data)
 
 @api_view(['GET', 'POST'])

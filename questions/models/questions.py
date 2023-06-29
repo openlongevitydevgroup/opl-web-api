@@ -80,3 +80,8 @@ class QuestionReference(models.Model):
         db_table = "Questions-references"
         db_table_comment = "Table containing which references are tied to which questions"
 
+
+class QuestionSpecies(models.Model): 
+    species_id = models.ForeignKey(Species, on_delete=models.DO_NOTHING, null=True)
+    question_id = models.ForeignKey(Questions, on_delete=models.DO_NOTHING)
+    
