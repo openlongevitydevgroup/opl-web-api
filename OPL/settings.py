@@ -60,7 +60,7 @@ MIDDLEWARE = [
 ]
 CORS_ALLOWED_ORIGINS = ["http://localhost:3000", f'http://{os.environ.get("HOME_IP")}', 'http://127.0.0.1:8000',
                         'https://www.longevityknowledge.app', 'https://admin.longevityknowledge.app']  # Home address
-CSFRF_TRUSTED_ORIGINS = ["https://admin.longevityknowledge.app"]
+CSRF_TRUSTED_ORIGINS = ["https://admin.longevityknowledge.app"]
 REST_FRAMEWORK = {"DEFAULT_PERMISSION_CLASSES": [
     "rest_framework.permissions.AllowAny"]}
 
