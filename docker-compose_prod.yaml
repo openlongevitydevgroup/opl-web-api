@@ -8,7 +8,7 @@ services:
     command: gunicorn OPL.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/backend
-      - static_volume:/home/backend/staticfiles/
+      - static_volume:/backend/staticfiles/
     ports:
       - "8001:8000"
     networks:
@@ -27,20 +27,12 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - production
-  nginx:
-    image: nginx 
-    build: 
-      dockerfile: ./nginx/Dockerfile 
-    restart: always
-    volumes:
-      - static_volume:/home/backend/staticfiles/
-    ports:
-      - 81:80
-    networks:
-      - production
+
 
     
-
+networks:
+  production:
+    driver: bridge
 volumes:
   postgres_data:
   static_volume:
