@@ -19,7 +19,7 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Questions
         fields = ['question_id', 'title', 'description',
-                  'contact', 'species', 'reference', 'parent_question', 'children']    
+                  'contact', 'reference', 'parent_question', 'children']    
     def get_children(obj):
         return QuestionSerializer(obj.parent.all(), many=True).data
 
