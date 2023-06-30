@@ -1,7 +1,7 @@
 from django.db import models
 from .contacts_users import Contact
 from .references import Reference
-
+from .species import Species
 
 class Question(models.Model):
     class Meta:
@@ -79,6 +79,6 @@ class QuestionReference(models.Model):
 
 
 class QuestionSpecies(models.Model): 
-    species_id = models.ForeignKey(on_delete=models.DO_NOTHING)
-    question_id = models.ForeignKey(on_delete=models.DO_NOTHING)
+    species_id = models.ForeignKey(Species,on_delete=models.DO_NOTHING)
+    question_id = models.ForeignKey(Question,on_delete=models.DO_NOTHING)
     
