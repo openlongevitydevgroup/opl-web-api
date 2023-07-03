@@ -80,5 +80,4 @@ class QuestionReference(models.Model):
 
 class QuestionSpecies(models.Model): 
     species_id = models.ForeignKey(Species,on_delete=models.DO_NOTHING)
-    question_id = models.ForeignKey(Question,on_delete=models.DO_NOTHING)
-    
+    question_id = models.ForeignKey(Questions,on_delete=models.DO_NOTHING)

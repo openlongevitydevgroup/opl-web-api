@@ -2,7 +2,7 @@ from django.db.models import models
 from questions import Question 
 from references import Reference
 
-#The 
+#Theory models to attach for a particular open problem. 
 class Theory(models.Model):
     theory_id = models.BigIntegerField(db_column='Theory_id', primary_key=True)  # Field name made lowercase.
     theorytitle = models.CharField(db_column='TheoryTitle', max_length=40, blank=True, null=True)  # Field name made lowercase.
