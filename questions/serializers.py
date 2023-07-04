@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models.questions import Questions, RelatedQuestions, SubmittedQuestions
+from .models.open_problems import OpenProblems, RelatedProblem, SubmittedProblems
 # from questions.models import CurrentQuestions, SubmittedQuestions
 from rest_framework_recursive.fields import RecursiveField
 
@@ -17,7 +17,7 @@ class QuestionSerializer(serializers.ModelSerializer):
     children = RecursiveSerializer(many=True, read_only=True)
  
     class Meta:
-        model = Questions
+        model = OpenProblems
         fields = ['question_id', 'title', 'description',
                   'contact', 'reference', 'parent_question', 'children']    
     def get_children(obj):
@@ -26,6 +26,6 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 class SubmittedQuestionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SubmittedQuestions
+        model = SubmittedProblems
         fields = ['question_id', 'title', 'description',
                   'species', 'citation', 'parent_question', 'contact']

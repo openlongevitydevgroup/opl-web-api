@@ -28,7 +28,7 @@ class OpenProblems(OpenProblem):
         return f'{self.question_id}: {self.title}'
 
 
-class SubmittedQuestions(OpenProblem):
+class SubmittedProblems(OpenProblem):
     parent_question = models.ForeignKey(OpenProblems,null=True, blank=True, on_delete=models.SET_NULL)
     species = models.CharField(max_length=50, null=True, blank=True)
     citation = models.TextField(blank=True)
