@@ -7,8 +7,10 @@ class Theory(models.Model):
     theory_id = models.BigIntegerField(db_column='Theory_id', primary_key=True)  # Field name made lowercase.
     theorytitle = models.CharField(db_column='TheoryTitle', max_length=40, blank=True, null=True)  # Field name made lowercase.
     theorydesc = models.TextField(db_column='TheoryDesc', blank=True, null=True)  # Field name made lowercase.
-    parent_t = models.ForeignKey('self', models.DO_NOTHING, db_column='Parent_T_id', blank=True, null=True)  # Field name made lowercase.
-
+# edited by Hamid
+    #parent_t = models.ForeignKey('self', models.DO_NOTHING, db_column='Parent_T_id', blank=True, null=True)  # Field name made lowercase.
+    parent_t_id = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='children')
+# end of edit by Hamid
     class Meta:
         managed = False
         db_table = 'theory'
