@@ -1,6 +1,6 @@
-from django.db.models import models 
-from questions import Question 
-from references import Reference
+from django.db import models 
+from .questions import Questions 
+from .references import Reference
 
 #Theory models to attach for a particular open problem. 
 class Theory(models.Model):
@@ -17,7 +17,7 @@ class Theory(models.Model):
 
 
 class TheoryQuestion(models.Model):
-    opinion = models.OneToOneField(Question, models.DO_NOTHING, db_column='Opinion_id', primary_key=True)  # Field name made lowercase. The composite primary key (Opinion_id, species_id, Theory_id) found, that is not supported. The first column is selected.
+    opinion = models.OneToOneField(Questions, models.DO_NOTHING, db_column='Opinion_id', primary_key=True)  # Field name made lowercase. The composite primary key (Opinion_id, species_id, Theory_id) found, that is not supported. The first column is selected.
     species_id = models.BigIntegerField()
     theory = models.ForeignKey(Theory, models.DO_NOTHING, db_column='Theory_id')  # Field name made lowercase.
 

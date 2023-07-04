@@ -1,6 +1,8 @@
 from .models.questions import Questions, SubmittedQuestions, RelatedQuestions
 from .models.references import Reference, Author, Journal, RefType
+from .models.theory import Theory, TheoryQuestion, TheoryReference
 from .forms.forms import CreateRelationForm
+
 from django.contrib import admin
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
@@ -45,4 +47,7 @@ admin.site.register(RelatedQuestions)
 admin.site.register(Reference)
 admin.site.register(Journal)
 admin.site.register(RefType)
+admin.site.register(Theory)
+admin.site.register(TheoryQuestion)
+admin.site.register(TheoryReference)
 
