@@ -8,16 +8,20 @@ services:
       - .:/backend
     ports:
     - "8000:8000"
+    networks:
+      - development
   db:
     image: postgres
     restart: always
     environment: 
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: OPL
+      POSTGRES_DB: ${DB_NAME}
     volumes: 
       - ./opl-backup.sql:/docker-entrypoint-initdb.d/opl-backup.sql
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - development
   volumes:
     postgres_data:
 

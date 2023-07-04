@@ -1,6 +1,5 @@
 from django.db import models
 from .contacts_users import Contact
-from .species import Species
 from .references import Reference
 
 
@@ -14,8 +13,6 @@ class Question(models.Model):
     # Foreign keys from other tables
     contact = models.OneToOneField(
         Contact, null=True, on_delete=models.SET_NULL, blank=True)
-    species = models.ForeignKey(
-        Species, on_delete=models.SET_NULL, null=True, blank=True)
     reference = models.ForeignKey(
         Reference, on_delete=models.SET_NULL, null=True, blank=True)
     
@@ -80,3 +77,8 @@ class QuestionReference(models.Model):
         db_table = "Questions-references"
         db_table_comment = "Table containing which references are tied to which questions"
 
+
+class QuestionSpecies(models.Model): 
+    species_id = models.ForeignKey(on_delete=models.DO_NOTHING)
+    question_id = models.ForeignKey(on_delete=models.DO_NOTHING)
+    
