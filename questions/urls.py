@@ -1,6 +1,6 @@
 from django.urls import path 
 from questions import views
-from questions.admin import QuestionsAdmin
+from questions.admin import OPAdmin
 
 urlpatterns = [
     path('questions/', views.questions_list), #All questions

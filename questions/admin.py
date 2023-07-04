@@ -1,8 +1,7 @@
-from .models.questions import Questions, SubmittedQuestions, RelatedQuestions
+from .models.open_problems import OpenProblems, SubmittedProblems, RelatedProblem
 from .models.references import Reference, Author, Journal, RefType
-from .models.theory import Theory, TheoryQuestion, TheoryReference
+from .models.theory import Theory, TheoryProblem, TheoryReference
 from .forms.forms import CreateRelationForm
-
 from django.contrib import admin
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
@@ -19,8 +18,8 @@ def set_answers(request, queryset):
     return parent_query, child_query
 
 
-class QuestionsAdmin(admin.ModelAdmin):
-    list_display = [field.name for field in Questions._meta.fields]
+class OPAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in OpenProblems._meta.fields]
     actions = ['create_relationship']
     search_fields = ['question_id', 'title']
     @admin.action(description="Create a relationship between two questions")
@@ -31,7 +30,7 @@ class QuestionsAdmin(admin.ModelAdmin):
         form_html = form.as_table()
         if 'apply' in request.POST:
             parent, child = set_answers(request, queryset)
-            RQ = RelatedQuestions(parent_id=parent, child_id=child).save()
+            RP = RelatedProblem(parent_id=parent, child_id=child).save()
             self.message_user(request, f'Created relationship between: {parent.title} and {child.title}')
             return redirect('admin:questions_questions_changelist')
 
@@ -41,13 +40,13 @@ class QuestionsAdmin(admin.ModelAdmin):
 
         
 
-admin.site.register(Questions,QuestionsAdmin)
-admin.site.register(SubmittedQuestions)
-admin.site.register(RelatedQuestions)
+admin.site.register(OpenProblems,OPAdmin)
+admin.site.register(SubmittedProblems)
+admin.site.register(RelatedProblem)
 admin.site.register(Reference)
 admin.site.register(Journal)
 admin.site.register(RefType)
 admin.site.register(Theory)
-admin.site.register(TheoryQuestion)
+admin.site.register(TheoryProblem)
 admin.site.register(TheoryReference)
 

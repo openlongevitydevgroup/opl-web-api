@@ -1,23 +1,20 @@
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
-from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from questions.serializers import QuestionSerializer
-from .models.questions import Questions, RelatedQuestions
-from questions.serializers import SubmittedQuestionSerializer as SQSerializer
+from questions.serializers import OPSerializer
+from .models.open_problems import OpenProblems, RelatedProblem
+from questions.serializers import SubmittedProblemSerializer as SPSerializer
 # from questions.models import CurrentQuestions
-from .models.questions import SubmittedQuestions as SQ
+from .models.open_problems import SubmittedProblems as SOP
 from requests import post
 # # Gets all the questions
 
 
 @api_view(['GET'])
 def questions_list(request):
-    questions = Questions.objects.all()
-    serializer = QuestionSerializer(questions, many=True)
+    questions = OpenProblems.objects.all()
+    serializer = OPSerializer(questions, many=True)
     return Response(serializer.data)
 
 # Get the root questions
@@ -25,8 +22,8 @@ def questions_list(request):
 
 @api_view(['GET'])
 def questions_root(request):
-    root_questions = Questions.objects.filter(parent_question=None)
-    serializer = QuestionSerializer(root_questions, many=True)
+    root_questions = OpenProblems.objects.filter(parent_question=None)
+    serializer = OPSerializer(root_questions, many=True)
     return Response(serializer.data)
 
 # Returns a single question with its child questions
@@ -35,8 +32,8 @@ def questions_root(request):
 @api_view(['GET'])
 def question_detail(request, id):
     ''' Retrieve a single question and its children'''
-    question = Questions.objects.get(question_id=id)
-    serializer = QuestionSerializer(question)
+    question = OpenProblems.objects.get(question_id=id)
+    serializer = OPSerializer(question)
     
     return Response(serializer.data)
 
@@ -46,10 +43,10 @@ def submitted_questions(request):
     ''' Submit a new question '''
     if request.method == 'GET':
         questions = SQ.objects.all()
-        serializer = SQSerializer(questions, many=True)
+        serializer = SPSerializer(questions, many=True)
         return Response(serializer.data)
     if request.method == 'POST':
-        question_serializer = SQSerializer(data=request.data)
+        question_serializer = SPSerializer(data=request.data)
         if question_serializer.is_valid(raise_exception=True):
             question_serializer.save()
             return Response(question_serializer.data, status=status.HTTP_201_CREATED)

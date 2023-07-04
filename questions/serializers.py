@@ -13,7 +13,7 @@ class RecursiveSerializer(serializers.Serializer):
         return serializer.data
 
 
-class QuestionSerializer(serializers.ModelSerializer):
+class OPSerializer(serializers.ModelSerializer):
     children = RecursiveSerializer(many=True, read_only=True)
  
     class Meta:
@@ -21,10 +21,10 @@ class QuestionSerializer(serializers.ModelSerializer):
         fields = ['question_id', 'title', 'description',
                   'contact', 'reference', 'parent_question', 'children']    
     def get_children(obj):
-        return QuestionSerializer(obj.parent.all(), many=True).data
+        return OPSerializer(obj.parent.all(), many=True).data
 
 
-class SubmittedQuestionSerializer(serializers.ModelSerializer):
+class SubmittedProblemSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubmittedProblems
         fields = ['question_id', 'title', 'description',
