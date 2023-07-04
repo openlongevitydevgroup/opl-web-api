@@ -3,7 +3,7 @@ from .contacts_users import Contact
 from .references import Reference
 from .species import Species
 
-class Question(models.Model):
+class OpenProblem(models.Model):
     class Meta:
         abstract = True
     question_id = models.AutoField(
@@ -17,7 +17,7 @@ class Question(models.Model):
         Reference, on_delete=models.SET_NULL, null=True, blank=True)
     
 
-class Questions(Question):
+class OpenProblems(OpenProblem):
     parent_question = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True, related_name='children')
     class Meta:
         db_table = 'Current-questions'
@@ -28,8 +28,8 @@ class Questions(Question):
         return f'{self.question_id}: {self.title}'
 
 
-class SubmittedQuestions(Question):
-    parent_question = models.ForeignKey(Questions,null=True, blank=True, on_delete=models.SET_NULL)
+class SubmittedQuestions(OpenProblem):
+    parent_question = models.ForeignKey(OpenProblems,null=True, blank=True, on_delete=models.SET_NULL)
     species = models.CharField(max_length=50, null=True, blank=True)
     citation = models.TextField(blank=True)
     first_name = models.CharField(max_length=50, blank=True)
@@ -42,7 +42,7 @@ class SubmittedQuestions(Question):
         db_table_comment = 'These are the submitted questions from users that will undergo review'
 
 
-class QuestionRelation(models.Model):
+class ProblemRelation(models.Model):
     QR_id = models.AutoField(primary_key=True)
     QR_title = models.CharField(max_length=100)
     QR_description = models.TextField(blank=True)
@@ -52,13 +52,13 @@ class QuestionRelation(models.Model):
         db_table_comment = 'This contains information about how a question/submitted question is related to a question'
 
 
-class RelatedQuestions(models.Model):
+class RelatedProblem(models.Model):
     id = models.AutoField(primary_key=True) 
-    parent_id = models.ForeignKey(Questions, on_delete=models.SET_NULL, null=True, related_name='parent_relation')
-    child_id = models.ForeignKey(Questions, on_delete=models.SET_NULL, null=True, related_name='child_relation')
+    parent_id = models.ForeignKey(OpenProblems, on_delete=models.SET_NULL, null=True, related_name='parent_relation')
+    child_id = models.ForeignKey(OpenProblems, on_delete=models.SET_NULL, null=True, related_name='child_relation')
     relation_rate = models.IntegerField(null=True, blank=True)
     QR_id = models.ForeignKey(
-        QuestionRelation, on_delete=models.SET_NULL, null=True, blank=True)
+        ProblemRelation, on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         db_table = "Related-questions"
@@ -69,7 +69,7 @@ class RelatedQuestions(models.Model):
 
 class QuestionReference(models.Model):
     question_id = models.ForeignKey(
-        Questions, on_delete=models.SET_NULL, null=True)
+        OpenProblems, on_delete=models.SET_NULL, null=True)
     reference_id = models.ForeignKey(
         Reference, on_delete=models.SET_NULL, null=True)
 
@@ -78,6 +78,6 @@ class QuestionReference(models.Model):
         db_table_comment = "Table containing which references are tied to which questions"
 
 
-class QuestionSpecies(models.Model): 
+class ProblemSpecies(models.Model): 
     species_id = models.ForeignKey(Species,on_delete=models.DO_NOTHING)
-    question_id = models.ForeignKey(Questions,on_delete=models.DO_NOTHING)
+    question_id = models.ForeignKey(OpenProblems,on_delete=models.DO_NOTHING)
