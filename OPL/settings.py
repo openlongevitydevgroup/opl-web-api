@@ -12,7 +12,14 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import json
 from dotenv import load_dotenv
+
+#Load configuration 
+with open('config.json') as file: 
+    configuration = json.load(file)
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -140,7 +147,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Set 'SECURE_PROXY_SSL_HEADER' to tell Django that the connection is HTTPS even if it's forwarded by a proxy.
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+http_protocol = configuration['settings']['http_protocl']
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', http_protocol)
 
 # Set 'SESSION_COOKIE_SECURE' and 'CSRF_COOKIE_SECURE' to True to ensure cookies are only sent over HTTPS.
 SESSION_COOKIE_SECURE = True
