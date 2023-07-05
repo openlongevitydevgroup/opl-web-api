@@ -2,9 +2,9 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from questions.serializers import OPSerializer
+from open_problems.serializers import OPSerializer
 from .models.open_problems import OpenProblems, RelatedProblem
-from questions.serializers import SubmittedProblemSerializer as SPSerializer
+from open_problems.serializers import SubmittedProblemSerializer as SPSerializer
 # from questions.models import CurrentQuestions
 from .models.open_problems import SubmittedProblems as SOP
 from requests import post
@@ -42,7 +42,7 @@ def question_detail(request, id):
 def submitted_questions(request):
     ''' Submit a new question '''
     if request.method == 'GET':
-        questions = SQ.objects.all()
+        questions = SOP.objects.all()
         serializer = SPSerializer(questions, many=True)
         return Response(serializer.data)
     if request.method == 'POST':
