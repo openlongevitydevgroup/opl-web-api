@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
 
 #Load configuration 
-with open(os.path.join(BASE_DIR,'config.json')) as file: 
+with open(os.path.join(BASE_DIR,'OPL/config.json')) as file: 
     configuration = json.load(file)
 
 # Quick-start development settings - unsuitable for production
