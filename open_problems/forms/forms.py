@@ -1,5 +1,5 @@
 from django import forms 
-from questions.models.open_problems import OpenProblems
+from open_problems.models.open_problems import OpenProblems
 
 class CreateRelationForm(forms.Form):
     def __init__(self, *args, **kwargs):
