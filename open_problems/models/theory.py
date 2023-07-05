@@ -7,12 +7,13 @@ class Theory(models.Model):
     theory_id = models.AutoField(db_column='Theory_id', primary_key=True)  # Field name made lowercase.
     theorytitle = models.CharField(db_column='TheoryTitle', max_length=40, blank=True, null=True)  # Field name made lowercase.
     theorydesc = models.TextField(db_column='TheoryDesc', blank=True, null=True)  # Field name made lowercase.
-# edited by Hamid
-    #parent_t = models.ForeignKey('self', models.DO_NOTHING, db_column='Parent_T_id', blank=True, null=True)  # Field name made lowercase.
     parent_t_id = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='children')
 # end of edit by Hamid
     class Meta:
         db_table = 'Theory'
+    def __str__(self) -> str:
+        return f"{self.theory_id}: {self.theorytitle}"
+    
 
 
 class TheoryProblem(models.Model):
