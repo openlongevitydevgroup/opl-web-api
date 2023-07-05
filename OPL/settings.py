@@ -148,4 +148,4 @@ CSRF_COOKIE_SECURE = True
 
 SESSION_COOKIE_DOMAIN = "79.99.42.79"
 
-CSRF_TRUSTED_ORIGINS=['http://admin.longevityknowledge.app']
+CSRF_TRUSTED_ORIGINS=['http://admin.longevityknowledge.app', f"http://{os.environ.get('HOME_IP')}"]
