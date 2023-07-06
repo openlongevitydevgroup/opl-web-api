@@ -12,10 +12,14 @@ class RecursiveSerializer(serializers.Serializer):
             instance, context=self.context)
         return serializer.data
 
+class ParentSerializer(serializers.ModelSerializer): 
+    class Meta: 
+        model = OpenProblems
+        fields  = ["question_id", "title"]
+
 
 class OPSerializer(serializers.ModelSerializer):
-    children = RecursiveSerializer(many=True, read_only=True)
- 
+    children = RecursiveSerializer(many=True, read_only=True) 
     class Meta:
         model = OpenProblems
         fields = ['question_id', 'title', 'description',

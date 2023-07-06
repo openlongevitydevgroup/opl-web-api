@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from open_problems.serializers import OPSerializer
 from .models.open_problems import OpenProblems, RelatedProblem
 from open_problems.serializers import SubmittedProblemSerializer as SPSerializer
+from open_problems.serializers import ParentSerializer as PSerializer
 # from questions.models import CurrentQuestions
 from .models.open_problems import SubmittedProblems as SOP
 from requests import post
@@ -33,9 +34,20 @@ def questions_root(request):
 def question_detail(request, id):
     ''' Retrieve a single question and its children'''
     question = OpenProblems.objects.get(question_id=id)
+    parent_question = question.parent_question
+
     serializer = OPSerializer(question)
-    
-    return Response(serializer.data)
+
+    if not parent_question:
+        parent_serializer = None
+    else:
+        parent_serializer = PSerializer(parent_question).data
+
+    data = {
+        "open_problem": serializer.data, 
+        "parent_data": parent_serializer
+    }
+    return Response(data)
 
 @api_view(['GET', 'POST'])
 @csrf_exempt
