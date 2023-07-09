@@ -23,7 +23,7 @@ services:
     expose:
       - 5432
     volumes:
-      - ./opl-backup2.sql:/docker-entrypoint-initdb.d/opl_backup2.sql
+      - ./opl_backup2.sql:/docker-entrypoint-initdb.d/opl_backup2.sql
       - postgres_data:/var/lib/postgresql/data
     networks:
       - production
