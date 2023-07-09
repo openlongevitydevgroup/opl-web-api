@@ -33,3 +33,7 @@ class SubmittedProblemSerializer(serializers.ModelSerializer):
         model = SubmittedProblems
         fields = ['question_id', 'title', 'description',
                   'species', 'citation', 'parent_question', 'contact']
+
+class SubmissionSerializer(serializers.ModelSerializer): 
+    def get_type(self, obj):
+        type = self.context.get("type") 
