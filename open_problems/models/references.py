@@ -41,7 +41,10 @@ class Reference(models.Model):
     doi = models.CharField(max_length=50)
     relevance = models.PositiveSmallIntegerField()
     publish_date = models.DateField()
-    isbn = models.TextField()
+    # edited by Hamid
+    #isbn = models.TextField()
+    isbn = models.CharField(max_length=13)
+    # end of edit by Hamid
     journal_id = models.ForeignKey(Journal, on_delete=models.SET_NULL, null=True)
     authors = models.ManyToManyField(Author)
 
