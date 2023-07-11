@@ -3,13 +3,13 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from open_problems.serializers import OPSerializer
-from .models.open_problems import OpenProblems, RelatedProblem
+from .models.open_problems import OpenProblems
 from open_problems.serializers import SubmittedProblemSerializer as SPSerializer
 from open_problems.serializers import ParentSerializer as PSerializer
-# from questions.models import CurrentQuestions
+from open_problems.serializers import SubmissionSerializer as SSerializer
 from .models.open_problems import SubmittedProblems as SOP
+from .models.submissions import ResearchSubmission, SolutionSubmission
 from requests import post
-# # Gets all the questions
 
 
 @api_view(['GET'])
@@ -71,3 +71,10 @@ def verify_token(request):
         post_request = post('https://www.google.com/recaptcha/api/siteverify', data={'secret':data['secret'], 'response':data['response'] })
         content = post_request.text
         return Response(content)
+
+@api_view(["POST"])    
+def submit_proposal(request):
+    if request.method == "POST": 
+        submission_data = request.data
+        submission_serializer = SSerializer(data=submission_data, context={type:""})
+        type = submission_serializer.get_type()
