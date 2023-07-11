@@ -6,9 +6,7 @@ from open_problems.serializers import OPSerializer
 from .models.open_problems import OpenProblems
 from open_problems.serializers import SubmittedProblemSerializer as SPSerializer
 from open_problems.serializers import ParentSerializer as PSerializer
-from open_problems.serializers import SubmissionSerializer as SSerializer
 from .models.open_problems import SubmittedProblems as SOP
-from .models.submissions import ResearchSubmission, SolutionSubmission
 from requests import post
 
 
@@ -72,9 +70,3 @@ def verify_token(request):
         content = post_request.text
         return Response(content)
 
-@api_view(["POST"])    
-def submit_proposal(request):
-    if request.method == "POST": 
-        submission_data = request.data
-        submission_serializer = SSerializer(data=submission_data, context={type:""})
-        type = submission_serializer.get_type()
