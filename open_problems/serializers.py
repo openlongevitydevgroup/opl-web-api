@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models.open_problems import OpenProblems, RelatedProblem, SubmittedProblems
-# from questions.models import CurrentQuestions, SubmittedQuestions
 from rest_framework_recursive.fields import RecursiveField
 
 
@@ -34,6 +33,4 @@ class SubmittedProblemSerializer(serializers.ModelSerializer):
         fields = ['question_id', 'title', 'description',
                   'species', 'citation', 'parent_question', 'contact']
 
-class SubmissionSerializer(serializers.ModelSerializer): 
-    def get_type(self, obj):
-        type = self.context.get("type") 
+    
