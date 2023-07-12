@@ -48,7 +48,6 @@ def question_detail(request, id):
     return Response(data)
 
 @api_view(['GET', 'POST'])
-@csrf_exempt
 def submitted_questions(request):
     ''' Submit a new question '''
     if request.method == 'GET':

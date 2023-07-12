@@ -8,3 +8,7 @@ from django.urls import path
 #     path('open-problems/submit', views.submitted_questions),
 #     path('verify-token', views.verify_token)
 # ]
+
+urlpatters = [
+    path("open-problems/<int:id>/submissions")
+]
