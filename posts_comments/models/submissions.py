@@ -12,7 +12,6 @@ class SubmissionManager(models.Manager):
 class Submission(models.Model):
     submission_id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
-    type = models.CharField(null=False, blank=False)
     full_text = models.TextField(null=True)
     open_problem = models.ForeignKey(OpenProblems, on_delete=models.CASCADE)
     contact = models.ForeignKey(Contact, on_delete=models.DO_NOTHING, blank=True, null=True)
