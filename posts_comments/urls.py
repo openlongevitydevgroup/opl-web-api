@@ -1,14 +1,6 @@
 from django.urls import path 
+from posts_comments import views
 
-
-# urlpatterns = [
-#     path('open-problems/', views.questions_list), #All questions
-#     path('open-problems/root', views.questions_root),
-#     path('open-problems/<int:id>', views.question_detail), 
-#     path('open-problems/submit', views.submitted_questions),
-#     path('verify-token', views.verify_token)
-# ]
-
-urlpatters = [
-    path("open-problems/<int:id>/submissions")
+urlpatterns = [
+    path("<int:id>/", views.get_posts),
 ]

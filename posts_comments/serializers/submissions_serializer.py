@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from models.submissions import Submission
+# from models.submissions import Submission
+from posts_comments.models.submissions import Submission
 
 class SubmissionSerializer(serializers.Serializer): 
     class Meta:

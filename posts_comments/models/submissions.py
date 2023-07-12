@@ -16,9 +16,9 @@ class Submission(models.Model):
     full_text = models.TextField(null=True)
     open_problem = models.ForeignKey(OpenProblems, on_delete=models.CASCADE)
     contact = models.ForeignKey(Contact, on_delete=models.DO_NOTHING, blank=True, null=True)
-    references = models.TextField(max_length=200, blank=True, null=True)
-    is_active = models.BooleanField(default=False)
-    manager = SubmissionManager()
+    references = models.TextField(blank=True, null=True)
+    is_active = models.BooleanField(default=False) #When submission is reviewed we set this to true to display on the web page.
+    # manager = SubmissionManager()
     # Are contacts required to submit ??
     
     def __str__(self) -> str:
