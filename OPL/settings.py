@@ -48,9 +48,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    'open_problems',
+    "open_problems",
+    "posts_comments",
     "corsheaders",
-    'mptt'
+    "mptt"
 
 ]
 
