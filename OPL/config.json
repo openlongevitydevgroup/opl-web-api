@@ -1,6 +1,0 @@
-{"settings":{
-    "httpProtocol": "http",
-    "csrf_cookie_secure": "False", 
-    "session_cookie_secure": "False"
-}
-}
