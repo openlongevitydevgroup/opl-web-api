@@ -1,6 +1,13 @@
 {"settings":{
+<<<<<<< HEAD
     "httpProtocol": "https",
     "csrf_cookie_secure": "True", 
     "session_cookie_secure": "True", 
     "session_cookie_domain": "https://admin.longevityknowledge.app"}
+=======
+    "httpProtocol": "http",
+    "csrf_cookie_secure": "False", 
+    "session_cookie_secure": "False"
+}
+>>>>>>> development-submissions
 }
