@@ -42,9 +42,14 @@ class SubmittedProblems(OpenProblem):
     job_field = models.CharField(max_length=100, blank=True)
     organisation = models.CharField(max_length=100, blank=True)
 
+    def __str__(self) -> str:
+        return f"{self.title} : {self.email}"
+        
+
     class Meta:
         db_table = 'Submitted-OP'
         db_table_comment = 'These are the submitted questions from users that will undergo review'
+
 
 
 class ProblemRelation(models.Model):
