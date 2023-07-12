@@ -1,6 +1,6 @@
 from django.db import models
-from .contacts_users import Contact
-from .open_problems import OpenProblems
+from open_problems.models.contacts_users import Contact
+from open_problems.models.open_problems import OpenProblems
 
 
 class Submission(models.Model):
@@ -36,9 +36,4 @@ class SolutionSubmission(Submission):
         return f"{self.submission_id}: {self.question}"
 
 
-class Comments(models.Model):
-    comment_id = models.AutoField(primary_key=True) 
-    question = models.ForeignKey(OpenProblems, null=False, blank=False, on_delete=models.CASCADE)
-    parent = models.ForeignKey("self", null=True, on_delete=models.CASCADE)
-    full_text = models.TextField(blank=False, null=False)
 
