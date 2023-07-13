@@ -22,12 +22,17 @@ class Submission(models.Model):
     def __str__(self) -> str:
         return f"{self.submission_id}: {self.full_text}"
 
-    
-class SubmissionReferences(models.Model): 
+
+# Models for references
+class SubmissionReferences(models.Model): #Model for reviewed references 
     submission_id = models.ForeignKey(Submission, on_delete=models.CASCADE)
     reference_id = models.ForeignKey(Reference, on_delete=models.CASCADE)
 
 
-
+class SubmittedReferences(models.Model): #Model for submitted references 
+    reference_id = models.AutoField(primary_key=True)
+    submission_id = models.ForeignKey(Submission, on_delete=models.CASCADE, null=True)
+    type = models.CharField(max_length=15)
+    ref = models.TextField(blank=True, null=True)
 
 

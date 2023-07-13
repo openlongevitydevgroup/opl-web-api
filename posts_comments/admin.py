@@ -5,3 +5,4 @@ from .models.comments import *
 
 
 admin.site.register(Submission)
+admin.site.register(SubmittedReferences)
