@@ -13,7 +13,7 @@ from .utils.parse_submitted_references import parse_submitted_references
 # Getting the user submitted posts for a single open problem
 @api_view(["GET"])
 def get_posts(requests,id): 
-    submissions_for_open_problem = Submission.objects.filter(open_problem=id)
+    submissions_for_open_problem = Submission.objects.filter(open_problem=id, is_active=True)
     serializer = SubmissionSerializer(submissions_for_open_problem, many=True)
     return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
@@ -44,8 +44,6 @@ def submit_post(request, id):
             if(reference_data):
                 submission_id = serializer["submission_id"].value
                 reference_list = parse_submitted_references(reference_data, submission_id)
-                print(reference_list)
-                print(type(reference_list))
                 submitted_references_serializer = SubmittedReferencesSerializer(data=reference_list, many=True)
                 if submitted_references_serializer.is_valid():
                     submitted_references_serializer.save()

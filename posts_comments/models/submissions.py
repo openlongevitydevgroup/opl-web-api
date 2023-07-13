@@ -14,6 +14,9 @@ class Submission(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     full_text = models.TextField(null=True)
     open_problem = models.ForeignKey(OpenProblems, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=50, null=True, blank=True)
+    last_name = models.CharField(max_length=50, null=True, blank=True)
+    affiliation = models.CharField(max_length=50, null=True, blank=True)
     contact = models.ForeignKey(Contact, on_delete=models.DO_NOTHING, blank=True, null=True)
     submitted_references = models.TextField(blank=True, null=True)
     is_active = models.BooleanField(default=False) #When submission is reviewed we set this to true to display on the web page.
