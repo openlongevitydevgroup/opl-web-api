@@ -1,6 +1,0 @@
-{"settings":{
-    "httpProtocol": "https",
-    "csrf_cookie_secure": "True", 
-    "session_cookie_secure": "True", 
-    "session_cookie_domain": "admin.longevityknowledge.app"}
-}
