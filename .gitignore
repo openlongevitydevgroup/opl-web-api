@@ -1,7 +1,7 @@
 #Specific user created files 
 config_dev.py 
 config_prod.py
-
+OPL/config.json
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
