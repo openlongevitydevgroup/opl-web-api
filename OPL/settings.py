@@ -35,7 +35,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = [os.environ.get('HOME_IP'), 'localhost', "127.0.0.1",
-                 "admin.longevityknowledge.app"]  # Server IP - set to env variable
+                 "admin.longevityknowledge.app", os.environ.get("HOST_HEADER")]  # Server IP - set to env variable
 # BIND = ['0.0.0.0']
 
 # Application definition
