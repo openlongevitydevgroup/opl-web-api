@@ -12,13 +12,18 @@ from .utils.parse_submitted_references import parse_submitted_references
 # Create your views here.
 # Getting the user submitted posts for a single open problem
 @api_view(["GET"])
-def get_posts(requests,id): 
+def get_posts(requests,id): #Get all posts for a given open problem problem 
     submissions_for_open_problem = Submission.objects.filter(open_problem=id, is_active=True)
     serializer = SubmissionSerializer(submissions_for_open_problem, many=True)
     return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
+@api_view(["GET"]) #Retrive the number of posts for a given open problem 
+def get_posts_counts(request,id):
+    submissions_for_open_problem = Submission.objects.filter(open_problem=id, is_active=True).count()
+    return Response({"post_counts": submissions_for_open_problem})
 
-@api_view(["GET"]) #Doesn't work
+
+@api_view(["GET"]) 
 def get_post(request, id): #Return single post 
     submission = Submission.objects.get(submission_id = id)
     sub_serializer = SubmissionSerializer(submission)
@@ -32,7 +37,7 @@ def get_post(request, id): #Return single post
     })
 
 @api_view(["POST"])
-def submit_post(request, id):
+def submit_post(request, id): #Submit post for a open problem.
     if request.method == "POST": 
         serializer = SubmissionSerializer(data=request.data)
         open_problem = OpenProblems.objects.filter(question_id = id ).exists()

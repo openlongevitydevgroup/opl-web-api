@@ -5,7 +5,6 @@ from rest_framework_recursive.fields import RecursiveField
 
 class RecursiveSerializer(serializers.Serializer):
     ''' Handle self-nested serializer'''
-
     def to_representation(self, instance):
         serializer = self.parent.parent.__class__(
             instance, context=self.context)

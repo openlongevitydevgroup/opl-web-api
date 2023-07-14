@@ -13,8 +13,7 @@ class SubmittedReferencesSerializer(serializers.ModelSerializer):
         fields = ["reference_id", "submission_id", "type", "ref"]
 
 class SubmissionSerializer(serializers.ModelSerializer): 
-    
     class Meta:
         model = Submission
-        fields = ["submission_id", "created_at", "full_text", "contact", "submitted_references", "open_problem" ]
+        fields = ["submission_id", "created_at", "full_text", "contact", "submitted_references", "open_problem" , "first_name", "last_name", "affiliation"]
 

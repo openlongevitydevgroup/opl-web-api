@@ -33,8 +33,8 @@ def question_detail(request, id):
     ''' Retrieve a single question and its children'''
     question = OpenProblems.objects.get(question_id=id)
     parent_question = question.parent_question
-
     serializer = OPSerializer(question)
+    
 
     if not parent_question:
         parent_serializer = None
