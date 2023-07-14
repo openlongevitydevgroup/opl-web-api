@@ -44,6 +44,7 @@ class Reference(models.Model):
     isbn = models.TextField()
     journal_id = models.ForeignKey(Journal, on_delete=models.SET_NULL, null=True)
     authors = models.ManyToManyField(Author)
+    link = models.CharField(max_length=200, null=True) #If given source is a Link 
 
     class Meta: 
         db_table = "References"

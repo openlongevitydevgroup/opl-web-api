@@ -5,8 +5,6 @@ from .species import Species
 
 
 class OpenProblem(models.Model):
-    class Meta:
-        abstract = True
     question_id = models.AutoField(
         primary_key=True, serialize=True, default=None)
     title = models.CharField(max_length=200)
@@ -16,6 +14,9 @@ class OpenProblem(models.Model):
         Contact, null=True, on_delete=models.SET_NULL, blank=True)
     reference = models.ForeignKey(
         Reference, on_delete=models.SET_NULL, null=True, blank=True)
+
+    class Meta:
+        abstract = True
 
 
 class OpenProblems(OpenProblem):

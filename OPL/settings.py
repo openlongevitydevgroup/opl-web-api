@@ -35,7 +35,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = [os.environ.get('HOME_IP'), 'localhost', "127.0.0.1",
-                 "admin.longevityknowledge.app"]  # Server IP - set to env variable
+                 "admin.longevityknowledge.app", os.environ.get("HOST_HEADER")]  # Server IP - set to env variable
 # BIND = ['0.0.0.0']
 
 # Application definition
@@ -48,9 +48,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    'open_problems',
+    "open_problems",
+    "posts_comments",
     "corsheaders",
-    'mptt'
+    "mptt"
 
 ]
 
@@ -65,8 +66,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 CORS_ALLOWED_ORIGINS = ["http://localhost:3000", f'http://{os.environ.get("HOME_IP")}', 'http://127.0.0.1:8000',
-                        'https://www.longevityknowledge.app', 'https://admin.longevityknowledge.app']  # Home address
-CSRF_TRUSTED_ORIGINS = ["https://admin.longevityknowledge.app"]
+                        'https://www.longevityknowledge.app', 'https://admin.longevityknowledge.app',"http://79.99.42.79"]  # Home address
+CSRF_TRUSTED_ORIGINS = ["https://admin.longevityknowledge.app", "http://79.99.42.79"]
 REST_FRAMEWORK = {"DEFAULT_PERMISSION_CLASSES": [
     "rest_framework.permissions.AllowAny"]}
 

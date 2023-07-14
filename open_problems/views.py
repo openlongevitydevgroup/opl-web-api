@@ -3,13 +3,11 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from open_problems.serializers import OPSerializer
-from .models.open_problems import OpenProblems, RelatedProblem
+from .models.open_problems import OpenProblems
 from open_problems.serializers import SubmittedProblemSerializer as SPSerializer
 from open_problems.serializers import ParentSerializer as PSerializer
-# from questions.models import CurrentQuestions
 from .models.open_problems import SubmittedProblems as SOP
 from requests import post
-# # Gets all the questions
 
 
 @api_view(['GET'])
@@ -35,8 +33,8 @@ def question_detail(request, id):
     ''' Retrieve a single question and its children'''
     question = OpenProblems.objects.get(question_id=id)
     parent_question = question.parent_question
-
     serializer = OPSerializer(question)
+    
 
     if not parent_question:
         parent_serializer = None
@@ -50,7 +48,6 @@ def question_detail(request, id):
     return Response(data)
 
 @api_view(['GET', 'POST'])
-@csrf_exempt
 def submitted_questions(request):
     ''' Submit a new question '''
     if request.method == 'GET':
@@ -71,3 +68,4 @@ def verify_token(request):
         post_request = post('https://www.google.com/recaptcha/api/siteverify', data={'secret':data['secret'], 'response':data['response'] })
         content = post_request.text
         return Response(content)
+
