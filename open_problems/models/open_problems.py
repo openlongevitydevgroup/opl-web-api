@@ -4,8 +4,8 @@ from .references import Reference
 
 
 class OpenProblem(models.Model):
-    question_id = models.AutoField(
-        primary_key=True, serialize=True, default=None)
+    problem_id = models.AutoField(
+    primary_key=True, serialize=True, default=None)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     contact = models.OneToOneField(
@@ -18,7 +18,7 @@ class OpenProblem(models.Model):
 
 
 class OpenProblems(OpenProblem):
-    parent_question = models.ForeignKey(
+    question = models.ForeignKey(
         'self', on_delete=models.SET_NULL, blank=True, null=True, related_name='children')
 
     class Meta:
@@ -30,7 +30,7 @@ class OpenProblems(OpenProblem):
 
 
 class SubmittedProblems(OpenProblem):
-    parent_question = models.ForeignKey(
+    parent_problem = models.ForeignKey(
         OpenProblems, null=True, blank=True, on_delete=models.SET_NULL)
     species = models.CharField(max_length=50, null=True, blank=True)
     citation = models.TextField(blank=True)
