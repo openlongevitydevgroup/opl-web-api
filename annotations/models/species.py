@@ -1,5 +1,5 @@
 from django.db import models 
-
+from .annotations import AnnotationsProblems
 class Species(models.Model): 
     species_id = models.AutoField(primary_key=True) 
     genus = models.CharField(max_length=50, null=True)
@@ -10,3 +10,10 @@ class Species(models.Model):
     
     class Meta: 
         db_table = "Species"
+
+class SpeciesProblems(AnnotationsProblems): 
+    species = models.ForeignKey(Species, on_delete=models.CASCADE)
+    def __str__(self) -> str:
+        return f"{self.species.species_id}: {self.open_problem.open_problem_id} "
+    class Meta: 
+        db_table_comment = "Relation table for each species and open problem"

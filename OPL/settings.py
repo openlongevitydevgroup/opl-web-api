@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "open_problems",
     "posts_comments",
+    "annotations",
     "corsheaders",
     "mptt"
 

@@ -1,5 +1,6 @@
 from django.db import models 
 from .annotations import AnnotationsProblems
+from open_problems.models import Reference
 
 #Theory models to attach for a particular open problem. 
 class Theory(models.Model):
@@ -10,7 +11,7 @@ class Theory(models.Model):
 # end of edit by Hamid
     class Meta:
         db_table = "Theory"
-        db_comment = "A theory annotation describing and categorisingthe open problem"
+        db_table_comment = "A theory annotation describing and categorisingthe open problem"
     def __str__(self) -> str:
         return f"{self.theory_id}: {self.theorytitle}"
 
@@ -21,3 +22,11 @@ class TheoryProblem(AnnotationsProblems):
         return f"{self.theory}: {self.open_problem} "
     class Meta:
         db_table_comment = "Relation table for each theory and open problem"
+
+class TheoryReferences(models.Model):
+    ref = models.OneToOneField(Reference, models.DO_NOTHING, db_column='Ref_id', primary_key=True)  # Field name made lowercase. The composite primary key (Ref_id, Theory_id) found, that is not supported. The first column is selected.
+    theory = models.ForeignKey(Theory, models.DO_NOTHING, db_column='Theory_id', null=True)  # Field name made lowercase.
+
+    class Meta:
+        db_table = 'theory_reference'
+        unique_together = (('ref', 'theory'))
