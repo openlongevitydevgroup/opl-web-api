@@ -24,7 +24,7 @@ services:
       - 5432
     volumes:
       - ./prod-sql-backup2.sql:/docker-entrypoint-initdb.d/prod-sql-backup2.sql
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_dat_dev:/var/lib/postgresql/data
     networks:
       - production
 
@@ -34,5 +34,5 @@ networks:
   production:
     driver: bridge
 volumes:
-  postgres_data:
+  postgres_data_dev:
   static_volume:
