@@ -23,7 +23,7 @@ services:
       - 5432
     volumes: 
       - ./opl_backup2.sql:/docker-entrypoint-initdb.d/opl_backup2.sql
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data/development/
     networks:
       - development
   volumes:
