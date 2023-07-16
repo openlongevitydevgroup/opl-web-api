@@ -14,15 +14,14 @@ services:
     image: postgres
     restart: always
     environment: 
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: dev_user
+      POSTGRES_PASSWORD: dev_db
+      POSTGRES_DB: OPL_DEV
     ports: 
     - "5433:5432"
     expose:
       - 5432
     volumes: 
-      - ./opl_backup2.sql:/docker-entrypoint-initdb.d/opl_backup2.sql
       - postgres_data:/var/lib/postgresql/data/
     networks:
       - development
