@@ -1,6 +1,5 @@
 from .models.open_problems import OpenProblems, SubmittedProblems, RelatedProblem
 from .models.references import Reference, Author, Journal, RefType
-from .models.theory import Theory, TheoryProblem, TheoryReference
 from .forms.forms import CreateRelationForm
 from django.contrib import admin
 from django.shortcuts import render, redirect
@@ -46,7 +45,4 @@ admin.site.register(RelatedProblem)
 admin.site.register(Reference)
 admin.site.register(Journal)
 admin.site.register(RefType)
-admin.site.register(Theory)
-admin.site.register(TheoryProblem)
-admin.site.register(TheoryReference)
 

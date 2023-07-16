@@ -10,4 +10,3 @@ class Species(models.Model):
     
     class Meta: 
         db_table = "Species"
-

@@ -1,7 +1,6 @@
 from django.db import models
 from .contacts_users import Contact
 from .references import Reference
-from .species import Species
 
 
 class OpenProblem(models.Model):
@@ -9,7 +8,6 @@ class OpenProblem(models.Model):
         primary_key=True, serialize=True, default=None)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    # Foreign keys from other tables
     contact = models.OneToOneField(
         Contact, null=True, on_delete=models.SET_NULL, blank=True)
     reference = models.ForeignKey(
@@ -90,7 +88,3 @@ class QuestionReference(models.Model):
         db_table = "OP-references"
         db_table_comment = "Table containing which references are tied to which questions"
 
-
-class ProblemSpecies(models.Model):
-    species_id = models.ForeignKey(Species, on_delete=models.DO_NOTHING)
-    question_id = models.ForeignKey(OpenProblems, on_delete=models.DO_NOTHING)

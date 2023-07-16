@@ -1,6 +1,7 @@
 from django.db import models 
-from .open_problems import OpenProblems
-from .references import Reference
+
+from open_problems.models import OpenProblems
+from open_problems.models import Reference
 
 #Theory models to attach for a particular open problem. 
 class Theory(models.Model):
