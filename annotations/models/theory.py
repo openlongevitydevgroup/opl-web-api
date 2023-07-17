@@ -5,15 +5,15 @@ from open_problems.models import Reference
 #Theory models to attach for a particular open problem. 
 class Theory(models.Model):
     theory_id = models.AutoField(db_column='Theory_id', primary_key=True)  # Field name made lowercase.
-    theorytitle = models.CharField(db_column='TheoryTitle', max_length=40, blank=True, null=True)  # Field name made lowercase.
-    theorydesc = models.TextField(db_column='TheoryDesc', blank=True, null=True)  # Field name made lowercase.
+    theory_title = models.CharField(db_column='TheoryTitle', max_length=40, blank=True, null=True)  # Field name made lowercase.
+    theory_description = models.TextField(db_column='TheoryDesc', blank=True, null=True)  # Field name made lowercase.
     parent_t_id = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, related_name='children', blank=True)
 # end of edit by Hamid
     class Meta:
         db_table = "Theory"
         db_table_comment = "A theory annotation describing and categorisingthe open problem"
     def __str__(self) -> str:
-        return f"{self.theory_id}: {self.theorytitle}"
+        return f"{self.theory_id}: {self.theory_title}"
 
 
 class TheoryProblem(AnnotationsProblems): 

@@ -5,11 +5,11 @@ from .models.species import Species
 from .models.genes import Gene, GeneProblem
 # Register your models here.
 
-# class AnnotationsProblemsAdmin(admin.ModelAdmin): 
-#     list_display = [field.name for field in AnnotationsProblems._meta.fields]
-    
+class TheoryProblemAdmin(admin.ModelAdmin): 
+    list_fields = ["theory_title", "problem_title"]
+
 admin.site.register(Theory)
-admin.site.register(TheoryProblem)
+admin.site.register(TheoryProblem, TheoryProblemAdmin)
 admin.site.register(Species)
 admin.site.register(Gene)
 admin.site.register(GeneProblem)
