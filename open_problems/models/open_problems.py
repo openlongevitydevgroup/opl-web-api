@@ -18,7 +18,7 @@ class OpenProblem(models.Model):
 
 
 class OpenProblems(OpenProblem):
-    question = models.ForeignKey(
+    parent_problem = models.ForeignKey(
         'self', on_delete=models.SET_NULL, blank=True, null=True, related_name='children')
 
     class Meta:
