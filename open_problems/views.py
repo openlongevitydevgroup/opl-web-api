@@ -7,6 +7,7 @@ from .models.open_problems import OpenProblems
 from open_problems.serializers import SubmittedProblemSerializer as SPSerializer
 from open_problems.serializers import ParentSerializer as PSerializer
 from .models.open_problems import SubmittedProblems as SOP
+from open_problems.serializers import ContactSerializer
 from requests import post
 
 
@@ -34,16 +35,21 @@ def question_detail(request, id):
     problem = OpenProblems.objects.get(problem_id=id)
     parent = problem.parent_problem
     serializer = OPSerializer(problem)
-    
+    contact = problem.contact
 
     if not parent:
         parent_serializer = None
     else:
         parent_serializer = PSerializer(parent).data
+    if not contact: 
+        contact_serializer = None 
+    else: 
+        contact_serializer = ContactSerializer(contact).data
 
     data = {
         "open_problem": serializer.data, 
-        "parent_data": parent_serializer
+        "parent_data": parent_serializer, 
+        "contact": contact_serializer
     }
     return Response(data)
 

@@ -40,11 +40,11 @@ class Reference(models.Model):
     full_citation = models.TextField() 
     doi = models.CharField(max_length=50, null=True, blank=True)
     relevance = models.PositiveSmallIntegerField(null=True, blank=True)
-    publish_date = models.DateField()
-    isbn = models.IntegerField(max_length=15, null=True)
-    journal_id = models.ForeignKey(Journal, on_delete=models.SET_NULL, null=True)
-    authors = models.ManyToManyField(Author)
-    link = models.CharField(max_length=200, null=True) #If given source is a Link 
+    publish_date = models.CharField(max_length=4)
+    isbn = models.IntegerField(max_length=15, null=True, blank=True)
+    journal_id = models.ForeignKey(Journal, on_delete=models.SET_NULL, null=True, blank=True)
+    authors = models.ManyToManyField(Author, blank=True, null=True)
+    link = models.CharField(max_length=200, null=True, blank=True) #If given source is a Link 
 
     class Meta: 
         db_table = "References"

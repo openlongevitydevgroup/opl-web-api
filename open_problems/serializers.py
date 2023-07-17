@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models.open_problems import OpenProblems, RelatedProblem, SubmittedProblems
+from .models.open_problems import OpenProblems, RelatedProblem, SubmittedProblems, Contact
 from rest_framework_recursive.fields import RecursiveField
 
 
@@ -15,13 +15,18 @@ class ParentSerializer(serializers.ModelSerializer):
         model = OpenProblems
         fields  = ["problem_id", "title"]
 
+class ContactSerializer(serializers.ModelSerializer): 
+    class Meta: 
+        model = Contact
+        fields = ["first_name", "last_name"]
+
 
 class OPSerializer(serializers.ModelSerializer):
     children = RecursiveSerializer(many=True, read_only=True) 
     class Meta:
         model = OpenProblems
         fields = ['problem_id', 'title', 'description',
-                  'contact', 'reference', 'parent_problem', 'children']    
+                  'contact', 'parent_problem', 'children']    
     def get_children(obj):
         return OPSerializer(obj.parent.all(), many=True).data
 
@@ -32,4 +37,4 @@ class SubmittedProblemSerializer(serializers.ModelSerializer):
         fields = ['problem_id', 'title', 'description',
                   'species', 'citation', 'parent_problem', 'contact']
 
-    
+

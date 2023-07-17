@@ -10,8 +10,6 @@ class OpenProblem(models.Model):
     description = models.TextField(blank=True)
     contact = models.OneToOneField(
         Contact, null=True, on_delete=models.SET_NULL, blank=True)
-    reference = models.ForeignKey(
-        Reference, on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         abstract = True
