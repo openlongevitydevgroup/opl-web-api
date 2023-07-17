@@ -30,6 +30,6 @@ class SubmittedProblemSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubmittedProblems
         fields = ['problem_id', 'title', 'description',
-                  'species', 'citation', 'parent_question', 'contact']
+                  'species', 'citation', 'parent_problem', 'contact']
 
     
