@@ -7,7 +7,7 @@ class OpenProblem(models.Model):
     problem_id = models.AutoField(
     primary_key=True, serialize=True, default=None)
     title = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
+    description = models.TextField(blank=True, null=True)
     contact = models.ForeignKey(Contact, null=True, on_delete=models.SET_NULL, blank=True)
 
     class Meta:
