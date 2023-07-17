@@ -25,7 +25,7 @@ class OpenProblems(OpenProblem):
         db_table_comment = 'These are the current open problems that we have accepted from the submitted questions'
 
     def __str__(self):
-        return f'{self.question_id}: {self.title}'
+        return f'{self.problem_id}: {self.title}'
 
 
 class SubmittedProblems(OpenProblem):
