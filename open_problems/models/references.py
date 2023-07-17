@@ -38,10 +38,10 @@ class Reference(models.Model):
     ref_id  = models.AutoField(primary_key=True)
     ref_title = models.CharField(max_length=100)
     full_citation = models.TextField() 
-    doi = models.CharField(max_length=50)
-    relevance = models.PositiveSmallIntegerField()
+    doi = models.CharField(max_length=50, null=True, blank=True)
+    relevance = models.PositiveSmallIntegerField(null=True, blank=True)
     publish_date = models.DateField()
-    isbn = models.TextField()
+    isbn = models.IntegerField(max_length=15, null=True)
     journal_id = models.ForeignKey(Journal, on_delete=models.SET_NULL, null=True)
     authors = models.ManyToManyField(Author)
     link = models.CharField(max_length=200, null=True) #If given source is a Link 
