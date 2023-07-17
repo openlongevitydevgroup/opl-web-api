@@ -21,7 +21,7 @@ def questions_list(request):
 
 @api_view(['GET'])
 def questions_root(request):
-    root_questions = OpenProblems.objects.filter(parent_question=None)
+    root_questions = OpenProblems.objects.filter(parent_problem=None)
     serializer = OPSerializer(root_questions, many=True)
     return Response(serializer.data)
 
