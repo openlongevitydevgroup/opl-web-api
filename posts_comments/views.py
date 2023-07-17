@@ -40,7 +40,7 @@ def get_post(request, id): #Return single post
 def submit_post(request, id): #Submit post for a open problem.
     if request.method == "POST": 
         serializer = SubmissionSerializer(data=request.data)
-        open_problem = OpenProblems.objects.filter(question_id = id ).exists()
+        open_problem = OpenProblems.objects.filter(problem_id = id ).exists()
 
         if serializer.is_valid(raise_exception=True) & open_problem:
             serializer.save()
