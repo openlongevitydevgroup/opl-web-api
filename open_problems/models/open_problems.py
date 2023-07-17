@@ -8,8 +8,7 @@ class OpenProblem(models.Model):
     primary_key=True, serialize=True, default=None)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
-    contact = models.OneToOneField(
-        Contact, null=True, on_delete=models.SET_NULL, blank=True)
+    contact = models.ForeignKey(Contact, null=True, on_delete=models.SET_NULL, blank=True)
 
     class Meta:
         abstract = True
