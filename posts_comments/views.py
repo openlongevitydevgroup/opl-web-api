@@ -3,9 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .models.submissions import Submission, SubmittedReferences
-# from .models.submissions import SubmissionReferences
 from .serializers.submissions_serializer import SubmissionSerializer
-# from .serializers.submissions_serializer import SubmissionReferences
 from .serializers.submissions_serializer import SubmittedReferencesSerializer
 from open_problems.models import OpenProblems
 from .utils.parse_submitted_references import parse_submitted_references
