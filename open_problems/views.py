@@ -31,15 +31,15 @@ def questions_root(request):
 @api_view(['GET'])
 def question_detail(request, id):
     ''' Retrieve a single question and its children'''
-    question = OpenProblems.objects.get(question_id=id)
-    parent_question = question.parent_question
-    serializer = OPSerializer(question)
+    problem = OpenProblems.objects.get(problem_id=id)
+    parent = problem.parent_problem
+    serializer = OPSerializer(problem)
     
 
-    if not parent_question:
+    if not parent:
         parent_serializer = None
     else:
-        parent_serializer = PSerializer(parent_question).data
+        parent_serializer = PSerializer(parent).data
 
     data = {
         "open_problem": serializer.data, 
@@ -51,14 +51,14 @@ def question_detail(request, id):
 def submitted_questions(request):
     ''' Submit a new question '''
     if request.method == 'GET':
-        questions = SOP.objects.all()
-        serializer = SPSerializer(questions, many=True)
+        problems = SOP.objects.all()
+        serializer = SPSerializer(problems, many=True)
         return Response(serializer.data)
     if request.method == 'POST':
-        question_serializer = SPSerializer(data=request.data)
-        if question_serializer.is_valid(raise_exception=True):
-            question_serializer.save()
-            return Response(question_serializer.data, status=status.HTTP_201_CREATED)
+        problem_serializer = SPSerializer(data=request.data)
+        if problem_serializer.is_valid(raise_exception=True):
+            problem_serializer.save()
+            return Response(problem_serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['POST'])
 def verify_token(request):
