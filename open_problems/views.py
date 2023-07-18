@@ -83,7 +83,7 @@ def get_references(request,id):
     references = ProblemReference.objects.filter(problem_id=id)
 
     if not references: 
-        return Response(data=None,status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_204_NO_CONTENT)
     else: 
         serializer = FilterReferenceSerializer(references, many=True)
         return Response(data=serializer.data,status=status.HTTP_202_ACCEPTED)
