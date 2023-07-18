@@ -13,7 +13,7 @@ from requests import post
 
 @api_view(['GET'])
 def questions_list(request):
-    questions = OpenProblems.objects.all()
+    questions = OpenProblems.objects.all().order_by("problem_id")
     serializer = OPSerializer(questions, many=True)
     return Response(serializer.data)
 
@@ -22,7 +22,7 @@ def questions_list(request):
 
 @api_view(['GET'])
 def questions_root(request):
-    root_questions = OpenProblems.objects.filter(parent_problem=None)
+    root_questions = OpenProblems.objects.filter(parent_problem=None).order_by("problem_id")
     serializer = OPSerializer(root_questions, many=True)
     return Response(serializer.data)
 
