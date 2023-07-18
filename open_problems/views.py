@@ -4,10 +4,12 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from open_problems.serializers import OPSerializer
 from .models.open_problems import OpenProblems
+from .models.open_problems import ProblemReference
 from open_problems.serializers import SubmittedProblemSerializer as SPSerializer
 from open_problems.serializers import ParentSerializer as PSerializer
 from .models.open_problems import SubmittedProblems as SOP
 from open_problems.serializers import ContactSerializer
+from open_problems.serializers import FilterReferenceSerializer
 from requests import post
 
 
@@ -75,3 +77,13 @@ def verify_token(request):
         content = post_request.text
         return Response(content)
 
+# Get references for an open problem
+@api_view(['GET'])
+def get_references(request,id): 
+    references = ProblemReference.objects.filter(problem_id=id)
+
+    if not references: 
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    else: 
+        serializer = FilterReferenceSerializer(references, many=True)
+        return Response(data=serializer.data,status=status.HTTP_202_ACCEPTED)

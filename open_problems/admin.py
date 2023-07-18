@@ -1,4 +1,4 @@
-from .models.open_problems import OpenProblems, SubmittedProblems, RelatedProblem
+from .models.open_problems import OpenProblems, SubmittedProblems, RelatedProblem, ProblemReference
 from .models.references import Reference, Author, Journal, RefType
 from .models.contacts_users import Contact
 from .forms.forms import CreateRelationForm
@@ -47,4 +47,5 @@ admin.site.register(Reference)
 admin.site.register(Journal)
 admin.site.register(RefType)
 admin.site.register(Contact)
+admin.site.register(ProblemReference)
 

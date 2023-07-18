@@ -6,5 +6,6 @@ urlpatterns = [
     path('root', views.questions_root),
     path('<int:id>', views.question_detail), 
     path('submit', views.submitted_questions),
-    path('verify-token', views.verify_token)
+    path('verify-token', views.verify_token), 
+    path("<int:id>/references", views.get_references)
 ]

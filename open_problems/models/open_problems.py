@@ -74,11 +74,13 @@ class RelatedProblem(models.Model):
         return f'{self.id}: {self.parent_id.title} && {self.child_id.title}'
 
 
-class QuestionReference(models.Model):
-    question_id = models.ForeignKey(
+class ProblemReference(models.Model):
+    problem_id = models.ForeignKey(
         OpenProblems, on_delete=models.SET_NULL, null=True)
     reference_id = models.ForeignKey(
         Reference, on_delete=models.SET_NULL, null=True)
+    def __str__(self) -> str:
+        return f"{self.problem_id} : {self.reference_id.ref_title}"
 
     class Meta:
         db_table = "OP-references"
