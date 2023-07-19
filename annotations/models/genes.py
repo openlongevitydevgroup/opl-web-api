@@ -8,6 +8,9 @@ class Gene(models.Model):
     gene_symbol = models.CharField(max_length=10, unique=True)
     species = models.ForeignKey(Species, blank=True, null=True, on_delete=models.SET_NULL)
 
+    def __str__(self) -> str:
+        return f"{self.gene_symbol}: {self.gene_name}"
+
     class Meta: 
         db_table = "Genes"
         db_table_comment = "Table for all genes"
