@@ -4,6 +4,7 @@ from annotations.models.genes import Gene, GeneProblem
 class GeneSerializer(BaseSerializer): 
     class Meta(BaseSerializer.Meta): 
         model = Gene 
+        fields = "__all__"
 
 
 class GeneProblemlSerializer(BaseSerializer):
