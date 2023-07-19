@@ -7,6 +7,6 @@ class GeneSerializer(BaseSerializer):
 
 
 class GeneProblemlSerializer(BaseSerializer):
-    gene = GeneSerializer() 
+    gene_id = GeneSerializer() 
     class Meta(BaseSerializer.Meta): 
         model = GeneProblem
