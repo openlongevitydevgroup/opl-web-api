@@ -11,6 +11,6 @@ def get_annotation(id, Model,Serializer):
             serializer = Serializer(attached_annotations, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else: 
-            return Response(serializer.data, status = status.HTTP_204_NO_CONTENT)
+            return Response(status = status.HTTP_204_NO_CONTENT)
     else: 
         return Response(status=status.HTTP_404_NOT_FOUND)
