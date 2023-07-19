@@ -160,4 +160,4 @@ CSRF_COOKIE_SECURE = csrf_cookie_secure
 session_cookie_domain = configuration['settings']['session_cookie_domain']
 SESSION_COOKIE_DOMAIN = session_cookie_domain
 
-CSRF_TRUSTED_ORIGINS=['https://admin.longevityknowledge.app', f"http://{os.environ.get('HOME_IP')}", 'http://localhost', "http://127.0.0.1"]
+CSRF_TRUSTED_ORIGINS=['https://admin.longevityknowledge.app', f"http://{os.environ.get('HOME_IP')}", 'http://localhost:8000', "http://127.0.0.1"]
