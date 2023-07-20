@@ -1,7 +1,30 @@
 from rest_framework import serializers
-from models.comments import Comments
+from posts_comments.models.comments import Comment
+from utils.recursive_serializer import RecursiveSerializer
 
-class CommentsSerializer(serializers.ModelSerializer):
+#For serializing a comment without its children 
+class CommentSerializer(serializers.ModelSerializer):
     class Meta: 
-        model = Comments 
-        fields = ["comment_id", "full_text", "question", "parent"]
+        model = Comment 
+        fields = ["comment_id", "submission_id", "parent", "full_text"]
+
+#Nested recursive serializer for getting child comments
+class RecursiveCommentSerializer(CommentSerializer):
+    children = serializers.SerializerMethodField
+    class Meta:
+        model = Comment
+        fields = ["comment_id", "submission_id", "parent", "full_text"]
+    def get_children(self, instance):
+        children_queryset = instance.children.all()
+        serializer = RecursiveCommentSerializer(
+            children_queryset, many=True, context=self.context)
+        return serializer.data
+
+class CommentsSerializer(CommentSerializer):
+    children = RecursiveCommentSerializer(many=True, read_only=True)
+
+    class Meta(CommentSerializer.Meta):
+        model = Comment
+        fields = ["comment_id", "submission_id", "parent", "full_text", "children"]
+
+

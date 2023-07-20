@@ -6,6 +6,8 @@ from .models.comments import *
 class CommentSubmissionAdmin(admin.ModelAdmin): 
     readonly_fields = ["full_text"]
 
+
+admin.site.register(Comment)
 admin.site.register(Submission,CommentSubmissionAdmin)
-admin.site.register(SubmittedReferences, CommentSubmissionAdmin)
+admin.site.register(SubmittedReferences)
 

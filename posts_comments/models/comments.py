@@ -1,11 +1,10 @@
 from django.db import models
-from open_problems.models.open_problems import OpenProblems
 from posts_comments.models.submissions import Submission
 
-class Comments(models.Model):
+class Comment(models.Model):
     comment_id = models.AutoField(primary_key=True) 
     submission = models.ForeignKey(Submission, on_delete=models.DO_NOTHING)
-    parent = models.ForeignKey("self", null=True, on_delete=models.CASCADE)
+    parent = models.ForeignKey("self", null=True, on_delete=models.CASCADE, blank=True, related_name="children")
     full_text = models.TextField(blank=False, null=False)
 
     def __str__(self) -> str:

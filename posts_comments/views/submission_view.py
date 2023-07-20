@@ -2,11 +2,11 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models.submissions import Submission, SubmittedReferences
-from .serializers.submissions_serializer import SubmissionSerializer
-from .serializers.submissions_serializer import SubmittedReferencesSerializer
+from ..models.submissions import Submission, SubmittedReferences
+from ..serializers.submissions_serializer import SubmissionSerializer
+from ..serializers.submissions_serializer import SubmittedReferencesSerializer
 from open_problems.models import OpenProblems
-from .utils.parse_submitted_references import parse_submitted_references
+from ..utils.parse_submitted_references import parse_submitted_references
 # Create your views here.
 # Getting the user submitted posts for a single open problem
 @api_view(["GET"])
