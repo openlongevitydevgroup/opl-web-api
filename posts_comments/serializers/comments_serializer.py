@@ -6,14 +6,14 @@ from utils.recursive_serializer import RecursiveSerializer
 class CommentSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Comment 
-        fields = ["comment_id", "submission_id", "parent", "full_text"]
+        fields = ["comment_id", "submission_id", "parent", "full_text", "alias", "created_at"]
 
 #Nested recursive serializer for getting child comments
 class RecursiveCommentSerializer(CommentSerializer):
     children = serializers.SerializerMethodField
     class Meta:
         model = Comment
-        fields = ["comment_id", "submission_id", "parent", "full_text"]
+        fields = ["comment_id", "submission_id", "parent", "full_text","created_at", "alias"]
     def get_children(self, instance):
         children_queryset = instance.children.all()
         serializer = RecursiveCommentSerializer(
@@ -25,6 +25,6 @@ class CommentsSerializer(CommentSerializer):
 
     class Meta(CommentSerializer.Meta):
         model = Comment
-        fields = ["comment_id", "submission_id", "parent", "full_text", "children"]
+        fields = ["comment_id", "submission_id", "parent", "full_text", "children", "alias", "created_at"]
 
 
