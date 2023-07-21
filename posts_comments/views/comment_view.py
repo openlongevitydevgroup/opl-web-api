@@ -6,12 +6,12 @@ from posts_comments.models.comments import Comment
 from posts_comments.models.submissions import Submission
 from posts_comments.serializers.comments_serializer import CommentsSerializer
 
-# Get comment for a particular post submission
+# Get comment for a particular post submission, only root comments
 @api_view(["GET"])
 def get_comments(request,id): 
     submission = Submission.objects.get(submission_id = id) #Check if submission exists.
     if submission: 
-        comments = Comment.objects.filter(submission_id = id)
+        comments = Comment.objects.filter(submission_id = id, parent=None)
         serializer = CommentsSerializer(comments, many=True)
         if comments:
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
