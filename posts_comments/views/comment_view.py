@@ -7,10 +7,10 @@ from posts_comments.models.submissions import Submission
 from posts_comments.serializers.comments_serializer import CommentsSerializer
 
 
-# Get comment for a particular post submission, only root comments
+# Get comment for a particular post submission, only root comments, only active comments.
 @api_view(["GET"])
 def get_comments(request,id): 
-    submission = Submission.objects.get(submission_id = id) #Check if submission exists.
+    submission = Submission.objects.get(submission_id = id, is_active=True) #Check if submission exists.
     if submission: 
         comments = Comment.objects.filter(submission_id = id, parent=None)
         serializer = CommentsSerializer(comments, many=True)
@@ -21,10 +21,10 @@ def get_comments(request,id):
     else: 
         return Response(status=status.HTTP_404_NOT_FOUND)
     
-# Get particular comment and its children
+# Get particular comment and its children, only active.
 @api_view(["GET"])
 def get_single_comment(request, id): 
-    comment = Comment.objects.get(comment_id = id) #Check is comment exists 
+    comment = Comment.objects.get(comment_id = id, is_active=True) #Check is comment exists 
     if comment: 
         serializer = CommentsSerializer(comment)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
