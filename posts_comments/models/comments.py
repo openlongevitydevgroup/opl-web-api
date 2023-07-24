@@ -8,6 +8,7 @@ class Comment(models.Model):
     full_text = models.TextField(blank=False, null=False)
     alias = models.CharField(max_length=50, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    is_active = models.BooleanField(default=False)
 
 
     def __str__(self) -> str:
