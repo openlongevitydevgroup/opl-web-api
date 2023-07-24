@@ -10,9 +10,9 @@ from posts_comments.serializers.comments_serializer import CommentsSerializer
 # Get comment for a particular post submission, only root comments, only active comments.
 @api_view(["GET"])
 def get_comments(request,id): 
-    submission = Submission.objects.get(submission_id = id, is_active=True) #Check if submission exists.
+    submission = Submission.objects.get(submission_id = id) #Check if submission exists.
     if submission: 
-        comments = Comment.objects.filter(submission_id = id, parent=None)
+        comments = Comment.objects.filter(submission_id = id, parent=None, is_active=True)
         serializer = CommentsSerializer(comments, many=True)
         if comments:
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
