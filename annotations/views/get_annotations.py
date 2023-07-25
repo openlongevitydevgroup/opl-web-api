@@ -14,3 +14,12 @@ def get_annotation(id, Model,Serializer):
             return Response(status = status.HTTP_204_NO_CONTENT)
     else: 
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+# Getting annotation information for a particular annotation 
+def get_annotation_details(annotation_id, Model, Serializer): 
+        annotation = Model.objects.get(annotation_id = annotation_id)
+        if annotation: 
+             serializer = Serializer(annotation)
+             return Response(serializer.data, status=status.HTTP_200_OK)
+        else: 
+             return Response(serializer.data, status=status.HTTP_404_NOT_FOUND)
