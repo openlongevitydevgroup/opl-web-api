@@ -17,7 +17,7 @@ def get_annotation(id, Model,Serializer):
 
 # Getting annotation information for a particular annotation 
 def get_annotation_details(annotation_id, Model, Serializer): 
-        annotation = Model.objects.get(annotation_id)
+        annotation = Model.objects.get(pk=annotation_id)
         if annotation: 
              serializer = Serializer(annotation)
              return Response(serializer.data, status=status.HTTP_200_OK)
