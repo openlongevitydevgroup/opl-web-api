@@ -25,8 +25,12 @@ class Journal(models.Model):
 class RefType(models.Model): 
     rtype_id = models.AutoField(primary_key=True) 
     rtype_class = models.CharField(max_length=50)
-    class_description = models.TextField()
-
+    # edit by Hamid
+    #class_description = models.TextField()
+    class_description = models.TextField(blank=True, null=True)
+    parent_rtype_id=models.ForeignKey('self', on_delete=models.SET_NULL, null=True, related_name='children', blank=True)
+    # end of edit by Hamid
+    
     class Meta:
         db_table = "Reference-type"
         db_table_comment = "A cyclic table that contains all types of references, the self-joini relation is to indicate whether one reference type is a subcategory of another."
