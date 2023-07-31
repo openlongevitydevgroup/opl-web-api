@@ -1,8 +1,8 @@
 from rest_framework.decorators import api_view
 from .get_annotations import get_annotation
-from annotations.models.genes import GeneProblem
-from annotations.serializers.gene_serializer import GeneProblemlSerializer
-
+from annotations.models.genes import GeneProblem, Gene
+from annotations.serializers.gene_serializer import GeneProblemlSerializer, GeneSerializer
+from .get_annotations import get_annotation_details
 
 # Get genes for one open problem 
 @api_view(["GET"])
@@ -12,4 +12,3 @@ def get_genes(request, id):
 @api_view(["GET"])
 def get_gene(request,id): 
     return get_annotation_details(id, Gene, GeneSerializer)
-
