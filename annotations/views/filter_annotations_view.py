@@ -4,10 +4,14 @@ from rest_framework.response import Response
 from rest_framework import status
 from open_problems.serializers import OPSerializer
 
+
+
+# url : api/annotation/filter/<annotation>/
 @api_view(["GET"])
 def filter_annotations(request):
     if request.method == "GET":
         annotations = request.GET
+        print(annotations)
         try:
             open_problems_filtered = filter_by_annotations(annotations)
             serializer = OPSerializer(open_problems_filtered, many=True)

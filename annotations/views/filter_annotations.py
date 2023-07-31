@@ -2,9 +2,12 @@ from open_problems.models.open_problems import OpenProblems
 from annotations.models.theory import Theory
 def filter_by_annotations(annotations):
     query_set = OpenProblems.objects.all() 
-    for annotation_name, annotation_value in annotations.items():
+    annotations_dict = dict(annotations)
+    print(type(annotations_dict))
+    for annotation_name, annotation_value in annotations_dict.items():
         try:
             # Retrieve the model dynamically based on the annotation name
+            print("error")
             annotation_model = globals()[annotation_name]
             # Check if the model name is the same as the annotation name
             if annotation_model.__name__ == annotation_name:
