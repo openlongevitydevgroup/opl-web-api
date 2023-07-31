@@ -11,6 +11,7 @@ def filter_by_annotations(annotations):
                 # Use the correct related name for the filtering (assuming 'theoryproblem__theory')
                 related_name = f"{annotation_name.lower()}problem__{annotation_name.lower()}"
                 query_set = query_set.filter(**{f"{related_name}__pk": annotation_value})
+                return query_set
+
         except KeyError:
-            pass
-    return query_set
+            return KeyError

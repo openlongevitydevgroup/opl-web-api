@@ -12,8 +12,9 @@ def filter_annotations(request):
             open_problems_filtered = filter_by_annotations(annotations)
             serializer = OPSerializer(open_problems_filtered, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
-        except Exception: 
-            return Response({'error': str(Exception)}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e: 
+            print(str(e))
+            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
         
             
 
