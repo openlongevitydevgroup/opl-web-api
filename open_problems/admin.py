@@ -39,7 +39,7 @@ class OPAdmin(admin.ModelAdmin):
 
 
 class SubmittedProblemsAdmin(admin.ModelAdmin):
-    display = [field.name for field in SubmittedProblems]
+    display = [field.name for field in SubmittedProblems._meta.fields]
     actions = ["move_to_open_problems"]
     @admin.action(description="Move submitted problem(s) to the official list of open problems")
     def move_to_open_problems(self, request, queryset):
