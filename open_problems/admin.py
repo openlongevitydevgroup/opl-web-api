@@ -38,7 +38,7 @@ class OPAdmin(admin.ModelAdmin):
             return render(request, 'admin/create_relation.html', context={'form': form_html, 'query': queryset})
 
 
-class SubmittedProblemsAdmin(admin.modelAdmin):
+class SubmittedProblemsAdmin(admin.ModelAdmin):
     display = [field.name for field in SubmittedProblems]
     actions = ["move_to_open_problems"]
     @admin.action(description="Move submitted problem(s) to the official list of open problems")
