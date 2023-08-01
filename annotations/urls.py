@@ -4,7 +4,7 @@ from annotations.views.gene_view import get_genes, get_gene
 from annotations.views.filter_annotations_view import filter_annotations
 
 
-# Base url api/annotations/filter
+# Base url api/annotations/
 urlpatterns = [
     path("<int:id>/theory", get_theories), #Path for getting theories related to an open problem
     path("theory/<int:id>", get_theory), #Path for getting a theory / category out of the database
