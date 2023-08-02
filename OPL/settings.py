@@ -152,8 +152,8 @@ http_protocol = configuration['settings']['httpProtocol']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', http_protocol)
 
 # Set 'SESSION_COOKIE_SECURE' and 'CSRF_COOKIE_SECURE' to True to ensure cookies are only sent over HTTPS.
-session_cookie_secure = eval(configuration['settings']['session_cookie_secure'])
-csrf_cookie_secure = eval(configuration['settings']['csrf_cookie_secure'])
+session_cookie_secure = configuration['settings']['session_cookie_secure']
+csrf_cookie_secure = configuration['settings']['csrf_cookie_secure']
 SESSION_COOKIE_SECURE = session_cookie_secure
 CSRF_COOKIE_SECURE = csrf_cookie_secure
 
