@@ -1,0 +1,16 @@
+from open_problems.models.open_problems import SubmittedProblems, OpenProblems
+from django.contrib import admin
+
+
+class SubmittedProblemsAdmin(admin.ModelAdmin):
+    display = [field.name for field in SubmittedProblems._meta.get_fields()]
+    actions = ["move_to_open_problems"]
+
+    @admin.action(description="Move submitted problem(s) to the official list of open problems")
+    def move_to_open_problems(self, request, queryset):
+        for submitted_problem in queryset:
+            OpenProblems.objects.create(
+                title=submitted_problem.title,
+                description=submitted_problem.description
+            )
+        queryset.delete()

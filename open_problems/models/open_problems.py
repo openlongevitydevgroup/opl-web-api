@@ -5,7 +5,7 @@ from .references import Reference
 
 class OpenProblem(models.Model):
     problem_id = models.AutoField(
-    primary_key=True, serialize=True, default=None)
+        primary_key=True, serialize=True, default=None)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     contact = models.ForeignKey(Contact, null=True, on_delete=models.SET_NULL, blank=True)
@@ -15,8 +15,10 @@ class OpenProblem(models.Model):
 
 
 class OpenProblems(OpenProblem):
-    parent_problem = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True, related_name='children')
+    parent_problem = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True,
+                                       related_name='children')
     is_active = models.BooleanField(default=False)
+
     class Meta:
         db_table = 'OpenProblems'
         db_table_comment = 'These are the current open problems that we have accepted from the submitted questions'
@@ -38,12 +40,10 @@ class SubmittedProblems(OpenProblem):
 
     def __str__(self) -> str:
         return f"{self.title} : {self.email}"
-        
 
     class Meta:
         db_table = 'Submitted-OP'
         db_table_comment = 'These are the submitted questions from users that will undergo review'
-
 
 
 class ProblemRelation(models.Model):
@@ -79,10 +79,10 @@ class ProblemReference(models.Model):
         OpenProblems, on_delete=models.SET_NULL, null=True)
     reference_id = models.ForeignKey(
         Reference, on_delete=models.SET_NULL, null=True)
+
     def __str__(self) -> str:
         return f"{self.problem_id} : {self.reference_id.ref_title}"
 
     class Meta:
         db_table = "OP-references"
         db_table_comment = "Table containing which references are tied to which questions"
-
