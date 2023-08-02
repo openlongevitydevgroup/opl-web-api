@@ -48,9 +48,9 @@ toggle_active_status.description = "For setting open problems to active or inact
 
 ###### THE ADMIN CLASS
 class OPAdmin(admin.ModelAdmin):
-    list_display = [field.name for field in OpenProblems._meta.get_fields()]
+    list_display = ["title", "problem_id", "contact", "is_active"]
     actions = [create_relationship_between_problems, toggle_active_status]
     search_fields = ['problem_id', 'title']
+    list_filter = ["is_active"]
 
 
-admin.site.register(OpenProblems, OPAdmin)
