@@ -8,7 +8,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 
 # Register your models here.
-# admin.site.register(Questions)
 def set_answers(request, queryset):
     parent_id = request.POST.get('parent_question')
     parent_query = queryset.get(question_id=parent_id)
@@ -25,7 +24,7 @@ class OPAdmin(admin.ModelAdmin):
     @admin.action(description="Create a relationship between two questions")
     def create_relationship(self, request, queryset):
         query1, query2 = queryset[0:2]
-        data = [(query1.question_id, query1.title), (query2.question_id, query2.title)]
+        data = [(query1.problem_id, query1.title), (query2.problem_id, query2.title)]
         form = CreateRelationForm(data=data)
         form_html = form.as_table()
         if 'apply' in request.POST:
@@ -41,6 +40,7 @@ class OPAdmin(admin.ModelAdmin):
 class SubmittedProblemsAdmin(admin.ModelAdmin):
     display = [field.name for field in SubmittedProblems._meta.fields]
     actions = ["move_to_open_problems"]
+
     @admin.action(description="Move submitted problem(s) to the official list of open problems")
     def move_to_open_problems(self, request, queryset):
         for submitted_problem in queryset:

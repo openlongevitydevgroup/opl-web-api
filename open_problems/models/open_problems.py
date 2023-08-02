@@ -16,7 +16,7 @@ class OpenProblem(models.Model):
 
 class OpenProblems(OpenProblem):
     parent_problem = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True, related_name='children')
-
+    is_active = models.BooleanField(default=False)
     class Meta:
         db_table = 'OpenProblems'
         db_table_comment = 'These are the current open problems that we have accepted from the submitted questions'
