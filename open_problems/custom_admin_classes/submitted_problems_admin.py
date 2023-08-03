@@ -12,8 +12,8 @@ class SubmittedProblemsAdmin(admin.ModelAdmin):
             open_problem = OpenProblems.objects.create(
                 title=submitted_problem.title,
                 description=submitted_problem.description,
+                parent_problem=submitted_problem.parent_problem
             )
-            if submitted_problem.parent_problem:
-                open_problem.parent_problem = OpenProblems.objects.get(
-                    problem_id=submitted_problem.parent_problem)
+            open_problem.save()
+
         queryset.delete()
