@@ -15,5 +15,5 @@ class SubmittedProblemsAdmin(admin.ModelAdmin):
             )
             if submitted_problem.parent_problem:
                 open_problem.parent_problem = OpenProblems.objects.get(
-                    id=submitted_problem.parent_problem.id)
+                    problem_id=submitted_problem.parent_problem)
         queryset.delete()
