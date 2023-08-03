@@ -11,6 +11,7 @@ class SubmittedProblemsAdmin(admin.ModelAdmin):
         for submitted_problem in queryset:
             OpenProblems.objects.create(
                 title=submitted_problem.title,
-                description=submitted_problem.description
+                description=submitted_problem.description,
+                parent_problem = submitted_problem.parent_problem
             )
         queryset.delete()
