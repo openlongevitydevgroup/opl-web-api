@@ -27,6 +27,7 @@ class OPSerializer(serializers.ModelSerializer):
         fields = ['problem_id', 'title', 'description',
                   'contact', 'parent_problem', 'children']
     def get_children_counts(self):
+        ...
     def get_children(obj):
         return OPSerializer(obj.parent.all(), many=True).data
 
