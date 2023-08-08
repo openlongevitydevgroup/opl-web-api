@@ -1,8 +1,0 @@
-{
-  "settings": {
-    "httpProtocol": "http",
-    "csrf_cookie_secure": false,
-    "session_cookie_secure": false,
-    "session_cookie_domain": "79.99.42.79"
-  }
-}
