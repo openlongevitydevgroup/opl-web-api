@@ -9,4 +9,4 @@ class SubmittedReferencesAdmin(admin.ModelAdmin):
     list_display = ["reference_id", "type", "ref", "submission_id", "submission_full_text"]
 
     def submission_full_text(self, obj):  # Return the full text of the submission?
-        return obj.submission.full_text
+        return obj.submission_id.full_text
