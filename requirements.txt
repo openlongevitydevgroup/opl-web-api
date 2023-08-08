@@ -1,9 +1,9 @@
-django
+django~=4.2.4
 django-cors-headers
 django-environ
 django-js-asset
 django-mptt
-djangorestframework
+djangorestframework~=3.14.0
 psycopg2-binary
-python-dotenv
-requests
+python-dotenv~=1.0.0
+requests~=2.31.0
