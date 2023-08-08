@@ -23,7 +23,7 @@ services:
       - 5432
     volumes: 
       - postgres_data:/var/lib/postgresql/data/
-      - ./OPL.sql:/docker-entrypoint-initdb.d/OPL.sql
+      - ./OPL.sql:/docker-entrypoint-initdb.d/opl.sql
 
     networks:
       - development
