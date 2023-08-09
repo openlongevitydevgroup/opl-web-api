@@ -3,6 +3,7 @@ from posts_comments.views.submission_view import get_posts, get_posts_counts, su
 from posts_comments.views.comment_view import get_comments, get_single_comment, post_comment
 from posts_comments.views.verify_references_view import verify_reference
 
+#url /api/posts/
 urlpatterns = [
     path("<int:id>/", get_posts),
     path("<int:id>/counts", get_posts_counts),
@@ -11,5 +12,5 @@ urlpatterns = [
     path("get/<int:id>/comments", get_comments),
     path("get/<int:post_id>/<int:comment_id>", get_single_comment),
     path("post/<int:post_id>/comment/submit", post_comment),
-    path("post/verify-reference", verify_reference)
+    path("/verify-reference", verify_reference)
 ]
