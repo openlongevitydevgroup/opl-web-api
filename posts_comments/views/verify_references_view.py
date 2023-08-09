@@ -7,7 +7,7 @@ import json
 
 
 @api_view(["POST"])
-def verify_reference(request):
+def verify_reference(request, reference):
     json_request = json.loads(request.body)
 
     type = json_request["type"]
