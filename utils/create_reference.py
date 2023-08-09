@@ -1,69 +1,37 @@
 from crossref.restful import Works
-import requests
-from xml.etree import ElementTree as ET
-
-
-def get_pubmed_info(pubmed_id):
-    base_url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
-    endpoint = "efetch.fcgi"
-    db = "pubmed"
-    retmode = "xml"
-
-    url = f"{base_url}{endpoint}?db={db}&id={pubmed_id}&retmode={retmode}"
-    response = requests.get(url)
-
-    if response.status_code == 200:
-        root = ET.fromstring(response.text)
-
-        title = root.find(".//ArticleTitle").text
-        year = root.find(".//PubDate/Year").text
-        journal = root.find(".//Title").text
-
-        full_text_citation = f"{title}. {year}. {journal}."
-
-        return {
-            "full_text_citation": full_text_citation,
-            "title": title,
-            "year": year,
-            "journal": journal
-        }
-    else:
-        return ValueError("Failed API Call to Entrez")
-
-def format_harvard(data):
-    authors = data['author']
-    year = data['published-print']['date-parts'][0][0]
-    title = data['title'][0]
-    journal = data['short-container-title'][0]
-    volume = data['volume']
-    issue = data['issue']
-    pages = data['page']
-    publisher = data['publisher']
-    doi = data['DOI']
-
-    author_list = ', '.join([f"{author['family']}, {author['given'][0]}." for author in authors])
-
-    citation = f"{author_list} ({year}) \"{title}.\" *{journal}*, {volume}({issue}), {pages}. {publisher}. doi:{doi}"
-    return title, year, journal, volume, citation
+from get_pmid_information import get_pmid_citation, get_pmid_information, PMIDRequestException
+from get_doi_information import doi_crossref_search
 
 
 def create_reference(ref_type, value):
     if ref_type == "DOI":
-        works = Works()
-        try:
-            search = works.doi(value)
-        except TypeError:
-            return None
-        else:
-            title, year, journal, volume, citation = format_harvard(search)
-            return title, year, journal, volume,citation
+        doi_information = doi_crossref_search(value)
+        return doi_information
 
     elif ref_type == "PMID":
-        ...
+
+        # Get the reference information from the pmid
+        try:
+            pmid_information = get_pmid_information(value)
+        except ValueError as e:
+            pmid_information = None
+
+        # Get the full citation from the pmid
+        try:
+            pmid_reference = get_pmid_citation(value)
+        except PMIDRequestException as e:
+            pmid_reference = None
+
+        if pmid_reference is not None and pmid_information is not None:
+            return {
+                "title": pmid_information["title"],
+                "year": pmid_information["year"],
+                "journal": pmid_information["journal"],
+                "volume": pmid_information["volume"],
+                "citation": pmid_reference
+            }
+        else:
+            return None
 
 
-ref_type = "DOI"
-value = "10.1016/j.cell.2013.05.03"
 
-if __name__ == "__main__":
-    create_reference(ref_type, value)
