@@ -12,5 +12,5 @@ urlpatterns = [
     path("get/<int:id>/comments", get_comments),
     path("get/<int:post_id>/<int:comment_id>", get_single_comment),
     path("post/<int:post_id>/comment/submit", post_comment),
-    path("/verify-reference", verify_reference)
+    path("verify-reference", verify_reference)
 ]
