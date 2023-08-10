@@ -1,7 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-
 from posts_comments.models.comments import Comment
 from posts_comments.models.submissions import Submission
 from posts_comments.serializers.comments_serializer import CommentsSerializer

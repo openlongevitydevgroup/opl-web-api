@@ -42,3 +42,6 @@ class SubmittedReferences(models.Model):  # Model for submitted references
     submission_id = models.ForeignKey(Submission, on_delete=models.CASCADE, null=True)
     type = models.CharField(max_length=15)
     ref = models.TextField(blank=True, null=True)
+
+    def __str__(self) -> str:
+        return f"{self.type}: ${self.ref} for ${self.submission_id.full_text}"
