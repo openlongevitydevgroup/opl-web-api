@@ -33,9 +33,6 @@ class OPSerializer(serializers.ModelSerializer):
 
 
 
-
-
-
 # Serializer for user submitted open problems
 class SubmittedProblemSerializer(serializers.ModelSerializer):
     class Meta:

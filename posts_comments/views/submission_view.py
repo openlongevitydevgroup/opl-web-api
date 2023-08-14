@@ -4,13 +4,15 @@ from rest_framework.response import Response
 from rest_framework import status
 from ..models.submissions import Submission, SubmittedReferences, SubmissionReferences
 from ..serializers.submissions_serializer import SubmissionSerializer
-from ..serializers.submissions_serializer import SubmittedReferencesSerializer
+from ..serializers.submissions_serializer import SubmittedReferencesSerializer, SubmissionReferencesSerializer
 from open_problems.models import OpenProblems
 from ..utils.parse_submitted_references import parse_submitted_references
 
+#base url  /api/posts
 
 # Create your views here.
 # Getting the user submitted posts for a single open problem
+
 @api_view(["GET"])
 def get_posts(requests, id):  # Get all posts for a given open problem problem
     submissions_for_open_problem = Submission.objects.filter(open_problem=id, is_active=True)
@@ -64,7 +66,10 @@ def submit_post(request, id):  # Submit post for a open problem.
 
 @api_view(["GET"])
 def get_references(request, id):
-    """Submission asd"""
-    references = SubmissionReferences.objects.filter(submission_id = id)
+    """Get references for a particular solution submission"""
+    references = SubmissionReferences.objects.filter(submission_id=id)
     if references:
-        return Response(references.data)
+        serializer = SubmissionReferencesSerializer(references, many=True)
+        return Response(serializer.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
