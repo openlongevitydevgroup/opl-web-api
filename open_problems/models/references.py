@@ -12,7 +12,7 @@ class Author(models.Model):
 
 class Journal(models.Model): 
     journal_id = models.AutoField(primary_key=True)
-    journal_name = models.CharField(max_length=50)
+    journal_name = models.CharField(max_length=100)
 
     class Meta: 
         db_table = "Journal"
@@ -37,7 +37,7 @@ class Reference(models.Model):
     ref_id  = models.AutoField(primary_key=True)
     ref_title = models.CharField(max_length=100)
     full_citation = models.TextField() 
-    doi = models.CharField(max_length=50, null=True, blank=True)
+    doi = models.CharField(max_length=100, null=True, blank=True)
     relevance = models.PositiveSmallIntegerField(null=True, blank=True)
     publish_date = models.CharField(max_length=4)
     isbn = models.IntegerField(max_length=15, null=True, blank=True)

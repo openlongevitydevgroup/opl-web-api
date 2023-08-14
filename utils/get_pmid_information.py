@@ -45,8 +45,10 @@ def get_pmid_information(pmid):
             volume = root.find(".//Volume").text
         except AttributeError:
             volume = None
+        doi_elem = root.find(".//ArticleId[@IdType='doi']")
+        doi = doi_elem.text if doi_elem is not None else None
 
-        return {"title": title, "year": year, "journal": journal, "volume": volume}
+        return {"title": title, "year": year, "journal": journal, "volume": volume, "doi": doi}
     else:
         return ValueError("Failed API Call to Entrez")
 

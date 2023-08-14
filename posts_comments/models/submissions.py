@@ -36,12 +36,19 @@ class SubmissionReferences(models.Model):  # Model for reviewed references
     submission_id = models.ForeignKey(Submission, on_delete=models.CASCADE)
     reference_id = models.ForeignKey(Reference, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name = "User submissions and Linked References"
+
 
 class SubmittedReferences(models.Model):  # Model for submitted references
+    """ References that are submitted from a user with their solution submission"""
     reference_id = models.AutoField(primary_key=True)
     submission_id = models.ForeignKey(Submission, on_delete=models.CASCADE, null=True)
     type = models.CharField(max_length=15)
     ref = models.TextField(blank=True, null=True)
 
+    class Meta:
+        verbose_name = "Submitted Reference"
+
     def __str__(self) -> str:
-        return f"{self.type}: ${self.ref} for ${self.submission_id.full_text}"
+        return f"{self.type}: {self.ref} for {self.submission_id.full_text}"
