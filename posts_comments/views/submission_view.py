@@ -70,6 +70,6 @@ def get_references(request, id):
     references = SubmissionReferences.objects.filter(submission_id=id)
     if references:
         serializer = SubmissionReferencesSerializer(references, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     else:
         return Response(status=status.HTTP_404_NOT_FOUND)
