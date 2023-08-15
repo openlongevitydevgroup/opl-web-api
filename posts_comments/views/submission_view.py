@@ -63,7 +63,6 @@ def submit_post(request, id):  # Submit post for a open problem.
         else:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
-
 @api_view(["GET"])
 def get_references(request, id):
     """Get references for a particular solution submission"""
