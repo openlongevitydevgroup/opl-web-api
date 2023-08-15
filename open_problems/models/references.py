@@ -35,7 +35,7 @@ class RefType(models.Model):
 
 class Reference(models.Model): 
     ref_id  = models.AutoField(primary_key=True)
-    ref_title = models.CharField(max_length=100)
+    ref_title = models.CharField(max_length=150) # max_length changed from 100 to 150 by Hamid
     full_citation = models.TextField() 
     doi = models.CharField(max_length=100, null=True, blank=True)
     relevance = models.PositiveSmallIntegerField(null=True, blank=True)
