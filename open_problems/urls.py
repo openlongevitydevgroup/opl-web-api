@@ -4,6 +4,7 @@ from open_problems import views
 urlpatterns = [
     path('', views.questions_list), #All questions
     path('root', views.questions_root),
+    path("sorted/descendants", views.sorted_by_descendants),
     path('<int:id>', views.question_detail), 
     path('submit', views.submitted_questions),
     path('verify-token', views.verify_token), 

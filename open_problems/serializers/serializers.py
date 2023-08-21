@@ -1,8 +1,7 @@
 from rest_framework import serializers
-
 from utils.recursive_serializer import RecursiveSerializer
-from .models.open_problems import OpenProblems, SubmittedProblems, Contact, ProblemReference
-from .models.references import Reference
+from open_problems.models.open_problems import OpenProblems, SubmittedProblems, Contact, ProblemReference
+from open_problems.models.references import Reference
 
 
 # Serializer for parent node of open problem
@@ -24,17 +23,10 @@ class OPSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OpenProblems
-        fields = ['problem_id', 'title', 'description',
-                  'contact', 'parent_problem', 'children']
+        fields = ["problem_id", "title", "description",
+                  "contact", "parent_problem", "descendants_count", "children"]
 
-    def get_children_counts(self, obj):
-        count = obj.children.count()
-        for child in obj.children.all():
-            count += self.get_children_counts(child)
-        return count
 
-    def get_children(obj):
-        return OPSerializer(obj.parent.all(), many=True).data
 
 
 # Serializer for user submitted open problems

@@ -1,20 +1,19 @@
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from open_problems.serializers import OPSerializer
+from open_problems.serializers.serializers import OPSerializer
 from open_problems.models.open_problems import OpenProblems
 from open_problems.models.open_problems import ProblemReference
-from open_problems.serializers import SubmittedProblemSerializer as SPSerializer
-from open_problems.serializers import ParentSerializer as PSerializer
+from open_problems.serializers.serializers import SubmittedProblemSerializer as SPSerializer
+from open_problems.serializers.serializers import ParentSerializer as PSerializer
 from open_problems.models.open_problems import SubmittedProblems as SOP
-from open_problems.serializers import ContactSerializer
-from open_problems.serializers import FilterReferenceSerializer
+from open_problems.serializers.serializers import ContactSerializer
+from open_problems.serializers.serializers import FilterReferenceSerializer
+from open_problems.serializers.OpenProblems import DescendantsDescendingSerializer
 from requests import post
 
 
-
-
+# get open problems by oldest -> newest
 @api_view(['GET'])
 def questions_list(request):
     questions = OpenProblems.objects.filter(is_active=True).order_by("problem_id")
@@ -22,13 +21,18 @@ def questions_list(request):
     return Response(serializer.data)
 
 
-# Get the root questions
-
-
+# Get the root questions sorted by oldest -> newest
 @api_view(['GET'])
 def questions_root(request):
     root_questions = OpenProblems.objects.filter(parent_problem=None, is_active=True).order_by("problem_id")
     serializer = OPSerializer(root_questions, many=True)
+    return Response(serializer.data)
+
+
+@api_view(["GET"])
+def sorted_by_descendants(request):
+    all_problems = OpenProblems.objects.filter(is_active=True).order_by("-descendants_count")
+    serializer = DescendantsDescendingSerializer(all_problems, many=True)
     return Response(serializer.data)
 
 

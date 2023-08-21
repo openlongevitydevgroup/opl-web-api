@@ -1,6 +1,6 @@
 from django.db import models
-from .contacts_users import Contact
-from .references import Reference
+from open_problems.models.contacts_users import Contact
+from open_problems.models.references import Reference
 
 
 class OpenProblem(models.Model):
@@ -17,8 +17,29 @@ class OpenProblem(models.Model):
 class OpenProblems(OpenProblem):
     parent_problem = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True,
                                        related_name='children')
+    descendants_count = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=False)
 
+    def get_descendants(self):
+        count = 0
+        children = OpenProblems.objects.filter(parent_problem=self)
+
+        for child in children:
+            count += 1  # Count the immediate child
+            count += child.get_descendants()
+
+        return count
+
+    def get_ordered_children_descending(self):
+        children = OpenProblems.objects.filter(parent_problem=self).order_by('-descendants_count')
+        return children
+
+    @classmethod
+    def update_descendants_count(cls):
+        all_instances = cls.objects.all()
+        for instance in all_instances:
+            instance.descendants_count = instance.get_descendants()
+            instance.save()
     class Meta:
         db_table = 'OpenProblems'
         db_table_comment = 'These are the current open problems that we have accepted from the submitted questions'
