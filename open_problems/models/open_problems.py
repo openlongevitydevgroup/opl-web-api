@@ -19,6 +19,7 @@ class OpenProblems(OpenProblem):
                                        related_name='children')
     descendants_count = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=False)
+    objects = models.Manager()
 
     def get_descendants(self):
         count = 0
@@ -40,6 +41,7 @@ class OpenProblems(OpenProblem):
         for instance in all_instances:
             instance.descendants_count = instance.get_descendants()
             instance.save()
+
     class Meta:
         db_table = 'OpenProblems'
         db_table_comment = 'These are the current open problems that we have accepted from the submitted questions'

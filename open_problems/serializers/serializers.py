@@ -18,15 +18,12 @@ class ContactSerializer(serializers.ModelSerializer):
 
 
 # Serializer for reviewed open problems
-class OPSerializer(serializers.ModelSerializer):
+class OpenProblemsSerializer(serializers.ModelSerializer):
     children = RecursiveSerializer(many=True, read_only=True)
-
     class Meta:
         model = OpenProblems
         fields = ["problem_id", "title", "description",
                   "contact", "parent_problem", "descendants_count", "children"]
-
-
 
 
 # Serializer for user submitted open problems

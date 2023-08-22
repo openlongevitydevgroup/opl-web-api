@@ -1,7 +1,7 @@
 from django.test import TestCase
 from open_problems.models.open_problems import OpenProblems
 from open_problems.models.contacts_users import Contact
-from open_problems.serializers.serializers import OPSerializer
+from open_problems.serializers.serializers import OpenProblemsSerializer
 
 
 class OPSerializerTest(TestCase):
@@ -28,7 +28,7 @@ class OPSerializerTest(TestCase):
         )
 
     def test_serializer_with_children(self):
-        serializer = OPSerializer(instance=self.problem)
+        serializer = OpenProblemsSerializer(instance=self.problem)
         serialized_data = serializer.data
 
         self.assertEqual(serialized_data['problem_id'], self.problem.problem_id)
