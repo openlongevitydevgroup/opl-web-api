@@ -46,12 +46,15 @@ class TheoryProblem(AnnotationsProblems):
 
 
 class TheoryReferences(models.Model):
+    # Field name made lowercase. The composite primary key (Ref_id, Theory_id) found, that is not supported.
+    # The first column is selected.
     ref = models.OneToOneField(
         Reference, models.DO_NOTHING, db_column="Ref_id", primary_key=True
-    )  # Field name made lowercase. The composite primary key (Ref_id, Theory_id) found, that is not supported. The first column is selected.
+    )
+    # Field name made lowercase.
     theory = models.ForeignKey(
         Theory, models.DO_NOTHING, db_column="Theory_id", null=True
-    )  # Field name made lowercase.
+    )
 
     class Meta:
         db_table = "theory_reference"

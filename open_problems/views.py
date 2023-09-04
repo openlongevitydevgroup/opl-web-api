@@ -1,4 +1,3 @@
-from django.views.decorators.csrf import csrf_exempt
 from requests import post
 from rest_framework import status
 from rest_framework.decorators import api_view

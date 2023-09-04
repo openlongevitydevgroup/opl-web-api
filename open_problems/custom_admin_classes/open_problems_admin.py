@@ -2,10 +2,10 @@ from django.contrib import admin
 from django.shortcuts import redirect, render
 
 from open_problems.forms.forms import CreateRelationForm
-from open_problems.models.open_problems import OpenProblems, RelatedProblem
+from open_problems.models.open_problems import RelatedProblem
 
 
-########## ADMIN ACTIONS FOR FORMING RELATIONSHIPS BETWEEN OPEN PROBLEMS #####
+# ADMIN ACTIONS FOR FORMING RELATIONSHIPS BETWEEN OPEN PROBLEMS
 def set_answers(request, queryset):
     parent_id = request.POST.get("parent_problem")
     parent_query = queryset.get(question_id=parent_id)
@@ -44,7 +44,7 @@ create_relationship_between_problems.short_description = (
 )
 
 
-###### ADMIN ACTIONS FOR SETTING MULTIPLE OPEN PROBLEMS TO ACTIVE OR INACTIVE.
+# ADMIN ACTIONS FOR SETTING MULTIPLE OPEN PROBLEMS TO ACTIVE OR INACTIVE.
 def toggle_active_status(modeladmin, request, queryset):
     for open_problem in queryset:
         open_problem.is_active = not open_problem.is_active
@@ -57,7 +57,7 @@ def toggle_active_status(modeladmin, request, queryset):
 toggle_active_status.description = "For setting open problems to active or inactive."
 
 
-###### THE ADMIN CLASS
+# THE ADMIN CLASS
 class OPAdmin(admin.ModelAdmin):
     list_display = ["title", "problem_id", "contact", "is_active", "parent_problem"]
     actions = [create_relationship_between_problems, toggle_active_status]

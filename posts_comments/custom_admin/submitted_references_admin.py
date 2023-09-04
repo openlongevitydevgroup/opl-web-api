@@ -1,12 +1,12 @@
 from django.contrib import admin
 
 from open_problems.models.references import Journal, Reference
-from posts_comments.models.submissions import Submission, SubmissionReferences
+from posts_comments.models.submissions import SubmissionReferences
 from utils.create_reference import create_reference
 from utils.validations import validate_journal, validate_submitted_reference
 
 
-#### Action to convert pubmed ids and doi's to
+# Action to convert pubmed ids and doi's to
 def apply_references(modeladmin, request, queryset):
     failed_conversions = []
     existing_references = []
@@ -60,7 +60,9 @@ def apply_references(modeladmin, request, queryset):
 
     failed_string = ", ".join(failed_conversions)
     existing_string = ", ".join(existing_references)
-    message = f"{successful_conversions} successfully converted and saved as references. {len(existing_references)} references already existed: {existing_string}. {len(failed_conversions)} failed to convert: {failed_string}"
+    message = f"{successful_conversions} successfully converted and saved as references. \
+        {len(existing_references)} references already existed: {existing_string}. \
+        {len(failed_conversions)} failed to convert: {failed_string}"
     modeladmin.message_user(request, message)
 
 
@@ -71,7 +73,7 @@ apply_references.description = (
 )
 
 
-##### CUSTOM CLASS
+# CUSTOM CLASS
 class SubmittedReferencesAdmin(admin.ModelAdmin):
     list_display = [
         "reference_id",

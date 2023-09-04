@@ -3,8 +3,8 @@ from django.contrib import admin
 from .custom_admin.submission_admin import SubmissionAdmin
 from .custom_admin.submission_references_admin import SubmissionReferenceAdmin
 from .custom_admin.submitted_references_admin import SubmittedReferencesAdmin
-from .models.comments import *
-from .models.submissions import *
+from .models.comments import Comment
+from .models.submissions import Submission, SubmissionReferences, SubmittedReferences
 
 
 # Register your models here.

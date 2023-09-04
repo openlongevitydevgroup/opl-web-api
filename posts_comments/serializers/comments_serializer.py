@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
 from posts_comments.models.comments import Comment
-from utils.recursive_serializer import RecursiveSerializer
 
 
 # For serializing a comment without its children

@@ -31,7 +31,8 @@ class RefType(models.Model):
 
     class Meta:
         db_table = "Reference-type"
-        db_table_comment = "A cyclic table that contains all types of references, the self-joini relation is to indicate whether one reference type is a subcategory of another."
+        db_table_comment = "A cyclic table that contains all types of references, \
+                the self-joini relation is to indicate whether one reference type is a subcategory of another."
 
     def __str__(self) -> str:
         return f"{self.rtpe_id}: {self.rtype_class}:"

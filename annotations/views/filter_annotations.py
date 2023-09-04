@@ -1,6 +1,5 @@
 from django.apps import apps
 
-from annotations.models.annotations import AnnotationsProblems
 from open_problems.models.open_problems import OpenProblems
 
 
