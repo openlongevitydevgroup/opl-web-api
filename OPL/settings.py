@@ -1,6 +1,5 @@
 from os import environ
 from pathlib import Path
-from urllib.parse import urlparse
 
 from dotenv import load_dotenv
 
@@ -17,7 +16,7 @@ SECRET_KEY = environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = environ.get("DEBUG_MODE").lower() == "true"
 
-ALLOWED_HOSTS = [urlparse(i).hostname for i in (web_api_urls + spa_urls)]
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 INSTALLED_APPS = [
@@ -46,7 +45,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = web_api_urls + spa_urls
+CORS_ALLOWED_ORIGINS = ["*"]
 
 REST_FRAMEWORK = {"DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"]}
 
@@ -103,15 +102,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = "en-us"
-
-TIME_ZONE = "UTC"
-
-USE_I18N = True
-
-USE_TZ = True
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 STATIC_URL = "static/"
@@ -120,13 +110,3 @@ STATIC_ROOT = str(cwd_path.joinpath("staticfiles"))
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# Set 'SECURE_PROXY_SSL_HEADER' to tell Django that the connection is HTTPS even if it's forwarded by a proxy.
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", environ.get("HTTP_PROTOCOL"))
-
-# Set 'SESSION_COOKIE_SECURE' and 'CSRF_COOKIE_SECURE' to True to ensure cookies are only sent over HTTPS.
-SESSION_COOKIE_SECURE = environ.get("SESSION_COOKIE_SECURE").lower() == "true"
-SESSION_COOKIE_DOMAIN = environ.get("HTTP_PROTOCOL")
-
-CSRF_COOKIE_SECURE = environ.get("CSRF_COOKIE_SECURE").lower() == "true"
-CSRF_TRUSTED_ORIGINS = web_api_urls + spa_urls
