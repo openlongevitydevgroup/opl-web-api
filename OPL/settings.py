@@ -6,15 +6,30 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv("./OPL/config.env")
 
-web_api_urls = environ.get("WEB_API_URLS").split("|")
-spa_urls = environ.get("SPA_URLS").split("|")
+match (environ.get("WEB_API_URLS")):
+    case str(value):
+        web_api_urls = value.split("|")
+    case _:
+        web_api_urls = []
+
+match (environ.get("SPA_URLS")):
+    case str(value):
+        spa_urls = value.split("|")
+    case _:
+        spa_urls = []
+
 cwd_path = Path.cwd()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = environ.get("DEBUG_MODE").lower() == "true"
+match (environ.get("DEBUG_MODE")):
+    case str(value):
+        debug_mode = value.lower() == "true"
+    case _:
+        debug_mode = []
+DEBUG = debug_mode
 
 ALLOWED_HOSTS = ["*"]
 
