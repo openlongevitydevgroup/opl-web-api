@@ -1,4 +1,8 @@
-from .get_pmid_information import get_pmid_citation, get_pmid_information, PMIDRequestException
+from .get_pmid_information import (
+    get_pmid_citation,
+    get_pmid_information,
+    PMIDRequestException,
+)
 from .get_doi_information import doi_crossref_search
 
 
@@ -38,11 +42,7 @@ def create_reference(ref_type, value):
                 "year": pmid_information["year"],
                 "journal": pmid_information["journal"],
                 "citation": pmid_reference,
-                "doi": pmid_information.get("doi")
+                "doi": pmid_information.get("doi"),
             }
 
     return None
-
-
-
-

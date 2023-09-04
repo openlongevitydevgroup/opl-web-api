@@ -13,9 +13,7 @@ from open_problems.serializers import FilterReferenceSerializer
 from requests import post
 
 
-
-
-@api_view(['GET'])
+@api_view(["GET"])
 def questions_list(request):
     questions = OpenProblems.objects.filter(is_active=True).order_by("problem_id")
     serializer = OPSerializer(questions, many=True)
@@ -25,9 +23,11 @@ def questions_list(request):
 # Get the root questions
 
 
-@api_view(['GET'])
+@api_view(["GET"])
 def questions_root(request):
-    root_questions = OpenProblems.objects.filter(parent_problem=None, is_active=True).order_by("problem_id")
+    root_questions = OpenProblems.objects.filter(
+        parent_problem=None, is_active=True
+    ).order_by("problem_id")
     serializer = OPSerializer(root_questions, many=True)
     return Response(serializer.data)
 
@@ -35,9 +35,9 @@ def questions_root(request):
 # Returns a single question with its child questions
 
 
-@api_view(['GET'])
+@api_view(["GET"])
 def question_detail(request, id):
-    """ Retrieve a single question and its children"""
+    """Retrieve a single question and its children"""
     problem = OpenProblems.objects.get(problem_id=id)
     parent = problem.parent_problem
     serializer = OPSerializer(problem)
@@ -55,38 +55,40 @@ def question_detail(request, id):
     data = {
         "open_problem": serializer.data,
         "parent_data": parent_serializer,
-        "contact": contact_serializer
+        "contact": contact_serializer,
     }
     return Response(data)
 
 
-@api_view(['GET', 'POST'])
+@api_view(["GET", "POST"])
 def submitted_questions(request):
-    """ Submit a new question """
-    if request.method == 'GET':
+    """Submit a new question"""
+    if request.method == "GET":
         problems = SOP.objects.all()
         serializer = SPSerializer(problems, many=True)
         return Response(serializer.data)
-    if request.method == 'POST':
+    if request.method == "POST":
         problem_serializer = SPSerializer(data=request.data)
         if problem_serializer.is_valid(raise_exception=True):
             problem_serializer.save()
             return Response(problem_serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view(['POST'])
+@api_view(["POST"])
 def verify_token(request):
-    ''' Verify google recaptcha token'''
-    if request.method == 'POST':
+    """Verify google recaptcha token"""
+    if request.method == "POST":
         data = request.data
-        post_request = post('https://www.google.com/recaptcha/api/siteverify',
-                            data={'secret': data['secret'], 'response': data['response']})
+        post_request = post(
+            "https://www.google.com/recaptcha/api/siteverify",
+            data={"secret": data["secret"], "response": data["response"]},
+        )
         content = post_request.text
         return Response(content)
 
 
 # Get references for an open problem
-@api_view(['GET'])
+@api_view(["GET"])
 def get_references(request, id):
     references = ProblemReference.objects.filter(problem_id=id)
     serializer = FilterReferenceSerializer(references, many=True)

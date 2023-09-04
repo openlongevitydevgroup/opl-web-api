@@ -2,21 +2,30 @@ from crossref.restful import Works
 
 
 def format_harvard(data):
-    """Gets reference information from cross-ref api response and creates citation """
-    authors = data['author']
-    year = data['published-print']['date-parts'][0][0]
-    title = data['title'][0]
-    journal = data['short-container-title'][0]
-    volume = data['volume']
-    issue = data['issue']
-    pages = data['page']
-    publisher = data['publisher']
-    doi = data['DOI']
+    """Gets reference information from cross-ref api response and creates citation"""
+    authors = data["author"]
+    year = data["published-print"]["date-parts"][0][0]
+    title = data["title"][0]
+    journal = data["short-container-title"][0]
+    volume = data["volume"]
+    issue = data["issue"]
+    pages = data["page"]
+    publisher = data["publisher"]
+    doi = data["DOI"]
 
-    author_list = ', '.join([f"{author['family']}, {author['given'][0]}." for author in authors])
+    author_list = ", ".join(
+        [f"{author['family']}, {author['given'][0]}." for author in authors]
+    )
 
-    citation = f"{author_list} ({year}) \"{title}.\" *{journal}*, {volume}({issue}), {pages}. {publisher}. doi:{doi}"
-    return {'title': title, 'year': year, 'journal': journal, 'volume': volume, 'citation': citation, "doi": {doi}}
+    citation = f'{author_list} ({year}) "{title}." *{journal}*, {volume}({issue}), {pages}. {publisher}. doi:{doi}'
+    return {
+        "title": title,
+        "year": year,
+        "journal": journal,
+        "volume": volume,
+        "citation": citation,
+        "doi": {doi},
+    }
 
 
 def doi_crossref_search(doi: str):

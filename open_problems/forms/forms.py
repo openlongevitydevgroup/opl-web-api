@@ -1,11 +1,13 @@
-from django import forms 
+from django import forms
 from open_problems.models.open_problems import OpenProblems
+
 
 class CreateRelationForm(forms.Form):
     def __init__(self, *args, **kwargs):
-        data = kwargs.pop('data', None)
+        data = kwargs.pop("data", None)
         super(CreateRelationForm, self).__init__(*args, **kwargs)
 
-        if data: 
-            self.fields['parent_question'].choices = data
-    parent_question = forms.ChoiceField() 
+        if data:
+            self.fields["parent_question"].choices = data
+
+    parent_question = forms.ChoiceField()

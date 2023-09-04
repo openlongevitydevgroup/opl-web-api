@@ -1,7 +1,12 @@
 from rest_framework import serializers
 
 from utils.recursive_serializer import RecursiveSerializer
-from .models.open_problems import OpenProblems, SubmittedProblems, Contact, ProblemReference
+from .models.open_problems import (
+    OpenProblems,
+    SubmittedProblems,
+    Contact,
+    ProblemReference,
+)
 from .models.references import Reference
 
 
@@ -24,8 +29,14 @@ class OPSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OpenProblems
-        fields = ['problem_id', 'title', 'description',
-                  'contact', 'parent_problem', 'children']
+        fields = [
+            "problem_id",
+            "title",
+            "description",
+            "contact",
+            "parent_problem",
+            "children",
+        ]
 
     def get_children_counts(self, obj):
         count = obj.children.count()
@@ -41,11 +52,18 @@ class OPSerializer(serializers.ModelSerializer):
 class SubmittedProblemSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubmittedProblems
-        fields = ['problem_id', 'title', 'description',
-                  'species', 'citation', 'parent_problem', 'contact']
+        fields = [
+            "problem_id",
+            "title",
+            "description",
+            "species",
+            "citation",
+            "parent_problem",
+            "contact",
+        ]
 
 
-# Serializer to return a reference to be nested in serializer below 
+# Serializer to return a reference to be nested in serializer below
 class ReferenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reference

@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 
 ########## ADMIN ACTIONS FOR FORMING RELATIONSHIPS BETWEEN OPEN PROBLEMS #####
 def set_answers(request, queryset):
-    parent_id = request.POST.get('parent_problem')
+    parent_id = request.POST.get("parent_problem")
     parent_query = queryset.get(question_id=parent_id)
     child_query = queryset.all().exclude(question_id=parent_id)[0]
     return parent_query, child_query
@@ -14,23 +14,33 @@ def set_answers(request, queryset):
 
 def create_relationship_between_problems(modeladmin, request, queryset):
     if len(queryset) < 2:
-        modeladmin.message_user(request, "Please select at least two questions to create a relationship.")
+        modeladmin.message_user(
+            request, "Please select at least two questions to create a relationship."
+        )
         return
 
     data = [(query.problem_id, query.title) for query in queryset[:2]]
     form = CreateRelationForm(data=data)
     form_html = form.as_table()
 
-    if 'apply' in request.POST:
-        parent, child = set_answers(queryset, request.POST.get('parent_problem'))
+    if "apply" in request.POST:
+        parent, child = set_answers(queryset, request.POST.get("parent_problem"))
         RelatedProblem(parent_id=parent, child_id=child).save()
-        modeladmin.message_user(request, f'Created relationship between: {parent.title} and {child.title}')
-        return redirect('admin:questions_questions_changelist')
+        modeladmin.message_user(
+            request, f"Created relationship between: {parent.title} and {child.title}"
+        )
+        return redirect("admin:questions_questions_changelist")
     else:
-        return render(request, 'admin/create_relation.html', context={'form': form_html, 'query': queryset})
+        return render(
+            request,
+            "admin/create_relation.html",
+            context={"form": form_html, "query": queryset},
+        )
 
 
-create_relationship_between_problems.short_description = "Create a relationship between two questions"
+create_relationship_between_problems.short_description = (
+    "Create a relationship between two questions"
+)
 
 
 ###### ADMIN ACTIONS FOR SETTING MULTIPLE OPEN PROBLEMS TO ACTIVE OR INACTIVE.
@@ -50,7 +60,5 @@ toggle_active_status.description = "For setting open problems to active or inact
 class OPAdmin(admin.ModelAdmin):
     list_display = ["title", "problem_id", "contact", "is_active", "parent_problem"]
     actions = [create_relationship_between_problems, toggle_active_status]
-    search_fields = ['problem_id', 'title']
+    search_fields = ["problem_id", "title"]
     list_filter = ["is_active", "parent_problem"]
-
-

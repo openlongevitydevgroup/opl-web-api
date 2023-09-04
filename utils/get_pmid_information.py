@@ -10,10 +10,7 @@ class PMIDRequestException(Exception):
 def get_pmid_citation(pmid):
     """Get the full text citation for a given pubmed id using NCBI API."""
     endpoint = "https://api.ncbi.nlm.nih.gov/lit/ctxp/v1/pubmed/"
-    params = {
-        "format": "citation",
-        "id": pmid
-    }
+    params = {"format": "citation", "id": pmid}
     try:
         response = requests.get(endpoint, params=params)
         response.raise_for_status()
@@ -48,7 +45,13 @@ def get_pmid_information(pmid):
         doi_elem = root.find(".//ArticleId[@IdType='doi']")
         doi = doi_elem.text if doi_elem is not None else None
 
-        return {"title": title, "year": year, "journal": journal, "volume": volume, "doi": doi}
+        return {
+            "title": title,
+            "year": year,
+            "journal": journal,
+            "volume": volume,
+            "doi": doi,
+        }
     else:
         return ValueError("Failed API Call to Entrez")
 

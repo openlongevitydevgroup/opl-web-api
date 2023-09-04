@@ -7,6 +7,7 @@ from .models.genes import Gene, GeneProblem
 
 # Register your models here.
 
+
 class TheoryProblemAdmin(admin.ModelAdmin):
     list_fields = ["theory_title", "problem_title"]
 
