@@ -1,7 +1,8 @@
 from django.contrib import admin
-from open_problems.models.open_problems import OpenProblems, RelatedProblem
+from django.shortcuts import redirect, render
+
 from open_problems.forms.forms import CreateRelationForm
-from django.shortcuts import render, redirect
+from open_problems.models.open_problems import OpenProblems, RelatedProblem
 
 
 ########## ADMIN ACTIONS FOR FORMING RELATIONSHIPS BETWEEN OPEN PROBLEMS #####

@@ -1,6 +1,8 @@
 from django.db import models
-from .annotations import AnnotationsProblems
+
 from open_problems.models import Reference
+
+from .annotations import AnnotationsProblems
 
 
 # Theory models to attach for a particular open problem.

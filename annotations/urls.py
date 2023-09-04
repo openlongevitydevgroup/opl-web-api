@@ -1,8 +1,8 @@
 from django.urls import path
-from annotations.views.theory_view import get_theories, get_theory
-from annotations.views.gene_view import get_genes, get_gene
-from annotations.views.filter_annotations_view import filter_annotations
 
+from annotations.views.filter_annotations_view import filter_annotations
+from annotations.views.gene_view import get_gene, get_genes
+from annotations.views.theory_view import get_theories, get_theory
 
 # Base url api/annotations/
 urlpatterns = [

@@ -1,8 +1,10 @@
-from .filter_annotations import filter_by_annotations
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
+
 from open_problems.serializers import OPSerializer
+
+from .filter_annotations import filter_by_annotations
 
 
 # url : api/annotation/filter/<annotation>/

@@ -1,6 +1,7 @@
 from django.db import models
-from .species import Species
+
 from .annotations import AnnotationsProblems
+from .species import Species
 
 
 class Proteins(models.Model):

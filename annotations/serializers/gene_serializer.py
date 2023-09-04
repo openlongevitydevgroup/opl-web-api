@@ -1,5 +1,5 @@
-from annotations.serializers.base_serializer import BaseSerializer
 from annotations.models.genes import Gene, GeneProblem
+from annotations.serializers.base_serializer import BaseSerializer
 
 
 class GeneSerializer(BaseSerializer):

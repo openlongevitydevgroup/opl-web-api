@@ -1,4 +1,5 @@
 from django.db import models
+
 from .contacts_users import Contact
 from .references import Reference
 

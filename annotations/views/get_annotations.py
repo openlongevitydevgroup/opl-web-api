@@ -1,6 +1,7 @@
-from open_problems.models import OpenProblems
-from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.response import Response
+
+from open_problems.models import OpenProblems
 
 
 # Common logic for all the view.py files to extract annotations for a single open_problem

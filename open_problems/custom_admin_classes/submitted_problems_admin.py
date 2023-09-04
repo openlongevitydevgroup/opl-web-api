@@ -1,5 +1,6 @@
-from open_problems.models.open_problems import SubmittedProblems, OpenProblems
 from django.contrib import admin
+
+from open_problems.models.open_problems import OpenProblems, SubmittedProblems
 
 
 class SubmittedProblemsAdmin(admin.ModelAdmin):

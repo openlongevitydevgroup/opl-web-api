@@ -1,14 +1,15 @@
 from django.shortcuts import render
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
-from ..models.submissions import Submission, SubmittedReferences, SubmissionReferences
-from ..serializers.submissions_serializer import SubmissionSerializer
-from ..serializers.submissions_serializer import (
-    SubmittedReferencesSerializer,
-    SubmissionReferencesSerializer,
-)
+
 from open_problems.models import OpenProblems
+
+from ..models.submissions import (Submission, SubmissionReferences,
+                                  SubmittedReferences)
+from ..serializers.submissions_serializer import (
+    SubmissionReferencesSerializer, SubmissionSerializer,
+    SubmittedReferencesSerializer)
 from ..utils.parse_submitted_references import parse_submitted_references
 
 # base url  /api/posts

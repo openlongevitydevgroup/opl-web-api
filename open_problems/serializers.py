@@ -1,12 +1,9 @@
 from rest_framework import serializers
 
 from utils.recursive_serializer import RecursiveSerializer
-from .models.open_problems import (
-    OpenProblems,
-    SubmittedProblems,
-    Contact,
-    ProblemReference,
-)
+
+from .models.open_problems import (Contact, OpenProblems, ProblemReference,
+                                   SubmittedProblems)
 from .models.references import Reference
 
 

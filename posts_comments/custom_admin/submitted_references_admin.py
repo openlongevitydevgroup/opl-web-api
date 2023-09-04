@@ -1,8 +1,9 @@
 from django.contrib import admin
+
+from open_problems.models.references import Journal, Reference
+from posts_comments.models.submissions import Submission, SubmissionReferences
 from utils.create_reference import create_reference
-from utils.validations import validate_submitted_reference, validate_journal
-from open_problems.models.references import Reference, Journal
-from posts_comments.models.submissions import SubmissionReferences, Submission
+from utils.validations import validate_journal, validate_submitted_reference
 
 
 #### Action to convert pubmed ids and doi's to
