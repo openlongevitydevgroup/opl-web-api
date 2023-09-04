@@ -1,11 +1,17 @@
 from django.urls import path
 
-from posts_comments.views.comment_view import (get_comments,
-                                               get_single_comment,
-                                               post_comment)
-from posts_comments.views.submission_view import (get_post, get_posts,
-                                                  get_posts_counts,
-                                                  get_references, submit_post)
+from posts_comments.views.comment_view import (
+    get_comments,
+    get_single_comment,
+    post_comment,
+)
+from posts_comments.views.submission_view import (
+    get_post,
+    get_posts,
+    get_posts_counts,
+    get_references,
+    submit_post,
+)
 from posts_comments.views.verify_references_view import verify_reference
 
 # url /api/posts/

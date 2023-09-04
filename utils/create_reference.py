@@ -1,6 +1,9 @@
 from .get_doi_information import doi_crossref_search
-from .get_pmid_information import (PMIDRequestException, get_pmid_citation,
-                                   get_pmid_information)
+from .get_pmid_information import (
+    PMIDRequestException,
+    get_pmid_citation,
+    get_pmid_information,
+)
 
 
 def create_reference(ref_type, value):

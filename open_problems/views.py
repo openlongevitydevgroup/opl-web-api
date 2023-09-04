@@ -6,11 +6,13 @@ from rest_framework.response import Response
 
 from open_problems.models.open_problems import OpenProblems, ProblemReference
 from open_problems.models.open_problems import SubmittedProblems as SOP
-from open_problems.serializers import (ContactSerializer,
-                                       FilterReferenceSerializer, OPSerializer)
+from open_problems.serializers import (
+    ContactSerializer,
+    FilterReferenceSerializer,
+    OPSerializer,
+)
 from open_problems.serializers import ParentSerializer as PSerializer
-from open_problems.serializers import \
-    SubmittedProblemSerializer as SPSerializer
+from open_problems.serializers import SubmittedProblemSerializer as SPSerializer
 
 
 @api_view(["GET"])

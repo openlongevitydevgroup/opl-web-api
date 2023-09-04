@@ -5,11 +5,12 @@ from rest_framework.response import Response
 
 from open_problems.models import OpenProblems
 
-from ..models.submissions import (Submission, SubmissionReferences,
-                                  SubmittedReferences)
+from ..models.submissions import Submission, SubmissionReferences, SubmittedReferences
 from ..serializers.submissions_serializer import (
-    SubmissionReferencesSerializer, SubmissionSerializer,
-    SubmittedReferencesSerializer)
+    SubmissionReferencesSerializer,
+    SubmissionSerializer,
+    SubmittedReferencesSerializer,
+)
 from ..utils.parse_submitted_references import parse_submitted_references
 
 # base url  /api/posts

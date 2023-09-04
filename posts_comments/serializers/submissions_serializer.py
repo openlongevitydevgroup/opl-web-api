@@ -1,8 +1,10 @@
 from rest_framework import serializers
 
-from posts_comments.models.submissions import (Submission,
-                                               SubmissionReferences,
-                                               SubmittedReferences)
+from posts_comments.models.submissions import (
+    Submission,
+    SubmissionReferences,
+    SubmittedReferences,
+)
 
 
 class SubmissionSerializer(serializers.ModelSerializer):
