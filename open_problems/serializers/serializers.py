@@ -1,13 +1,13 @@
 from rest_framework import serializers
 from utils.recursive_serializer import RecursiveSerializer
 
-from .models.open_problems import (
+from ..models.open_problems import (
     Contact,
     OpenProblems,
     ProblemReference,
     SubmittedProblems,
 )
-from .models.references import Reference
+from ..models.references import Reference
 
 
 # Serializer for parent node of open problem

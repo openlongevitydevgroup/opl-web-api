@@ -60,7 +60,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = ["*"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "https://longevityknowledge.com", "http://127.0.0.1"]
 
 REST_FRAMEWORK = {"DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"]}
 
@@ -127,16 +127,20 @@ STATIC_ROOT = str(cwd_path.joinpath("staticfiles"))
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Set 'SECURE_PROXY_SSL_HEADER' to tell Django that the connection is HTTPS even if it's forwarded by a proxy.
-http_protocol = configuration['settings']['httpProtocol']
+# http_protocol = configuration['settings']['httpProtocol']
+http_protocol = environ.get("HTTP_PROTOCOL")
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', http_protocol)
 
 # Set 'SESSION_COOKIE_SECURE' and 'CSRF_COOKIE_SECURE' to True to ensure cookies are only sent over HTTPS.
-session_cookie_secure = configuration['settings']['session_cookie_secure']
-csrf_cookie_secure = configuration['settings']['csrf_cookie_secure']
+# session_cookie_secure = configuration['settings']['session_cookie_secure']
+session_cookie_secure = environ.get("SESSION_COOKIE_SECURE")
+# csrf_cookie_secure = configuration['settings']['csrf_cookie_secure']
+csrf_cookie_secure = environ.get("CSRF_COOKIE_SECURE")
 SESSION_COOKIE_SECURE = session_cookie_secure
 CSRF_COOKIE_SECURE = csrf_cookie_secure
 
-session_cookie_domain = configuration['settings']['session_cookie_domain']
+# session_cookie_domain = configuration['settings']['session_cookie_domain']
+session_cookie_domain = environ.get("SESSION_COOKIE_DOMAIN")
 SESSION_COOKIE_DOMAIN = session_cookie_domain
 
-CSRF_TRUSTED_ORIGINS=['https://admin.longevityknowledge.app', f"http://{os.environ.get('HOME_IP')}", 'http://localhost:8000', "http://127.0.0.1"]
+CSRF_TRUSTED_ORIGINS=['https://admin.longevityknowledge.app', 'http://localhost:8000', "http://127.0.0.1"]
