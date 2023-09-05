@@ -1,11 +1,11 @@
 from django.contrib import admin
-from .models.annotations import AnnotationsProblems
-from .models.theory import Theory, TheoryProblem
-from .models.species import Species
-from .models.genes import Gene, GeneProblem
 
+from .models.genes import Gene, GeneProblem
+from .models.species import Species
+from .models.theory import Theory, TheoryProblem
 
 # Register your models here.
+
 
 class TheoryProblemAdmin(admin.ModelAdmin):
     list_fields = ["theory_title", "problem_title"]

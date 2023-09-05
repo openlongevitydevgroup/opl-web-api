@@ -16,7 +16,9 @@ def format_harvard(data):
     publisher = data.get('publisher', '')
     doi = data.get('DOI', '')
 
-    author_list = ', '.join([f"{author['family']}, {author['given'][0]}." for author in authors])
+    author_list = ", ".join(
+        [f"{author['family']}, {author['given'][0]}." for author in authors]
+    )
 
     citation = f"{author_list} ({year}) \"{title}.\" *{journal}*, {volume}({issue}), {pages}. {publisher}. doi:{doi}"
     return {'title': title, 'year': year, 'journal': journal, 'volume': volume, 'citation': citation, 'doi': doi}

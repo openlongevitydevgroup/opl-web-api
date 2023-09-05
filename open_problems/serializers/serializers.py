@@ -1,7 +1,13 @@
 from rest_framework import serializers
 from utils.recursive_serializer import RecursiveSerializer
-from open_problems.models.open_problems import OpenProblems, SubmittedProblems, Contact, ProblemReference
-from open_problems.models.references import Reference
+
+from .models.open_problems import (
+    Contact,
+    OpenProblems,
+    ProblemReference,
+    SubmittedProblems,
+)
+from .models.references import Reference
 
 
 # Serializer for parent node of open problem
@@ -30,11 +36,18 @@ class OpenProblemsSerializer(serializers.ModelSerializer):
 class SubmittedProblemSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubmittedProblems
-        fields = ['problem_id', 'title', 'description',
-                  'species', 'citation', 'parent_problem', 'contact']
+        fields = [
+            "problem_id",
+            "title",
+            "description",
+            "species",
+            "citation",
+            "parent_problem",
+            "contact",
+        ]
 
 
-# Serializer to return a reference to be nested in serializer below 
+# Serializer to return a reference to be nested in serializer below
 class ReferenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reference

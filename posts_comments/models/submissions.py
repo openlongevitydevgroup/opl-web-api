@@ -1,4 +1,5 @@
 from django.db import models
+
 from open_problems.models.contacts_users import Contact
 from open_problems.models.open_problems import OpenProblems
 from open_problems.models.references import Reference
@@ -20,10 +21,13 @@ class Submission(models.Model):
     first_name = models.CharField(max_length=50, null=True, blank=True)
     last_name = models.CharField(max_length=50, null=True, blank=True)
     affiliation = models.CharField(max_length=50, null=True, blank=True)
-    contact = models.ForeignKey(Contact, on_delete=models.DO_NOTHING, blank=True, null=True)
+    contact = models.ForeignKey(
+        Contact, on_delete=models.DO_NOTHING, blank=True, null=True
+    )
     submitted_references = models.TextField(blank=True, null=True)
     is_active = models.BooleanField(
-        default=False)  # When submission is reviewed we set this to true to display on the web page.
+        default=False
+    )  # When submission is reviewed we set this to true to display on the web page.
 
     # Are contacts required to submit ??
 
@@ -41,7 +45,8 @@ class SubmissionReferences(models.Model):  # Model for reviewed references
 
 
 class SubmittedReferences(models.Model):  # Model for submitted references
-    """ References that are submitted from a user with their solution submission"""
+    """References that are submitted from a user with their solution submission"""
+
     reference_id = models.AutoField(primary_key=True)
     submission_id = models.ForeignKey(Submission, on_delete=models.CASCADE, null=True)
     type = models.CharField(max_length=15)

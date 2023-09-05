@@ -1,12 +1,26 @@
 from rest_framework import serializers
-from posts_comments.models.submissions import Submission, SubmittedReferences, SubmissionReferences
+
+from posts_comments.models.submissions import (
+    Submission,
+    SubmissionReferences,
+    SubmittedReferences,
+)
 
 
 class SubmissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Submission
-        fields = ["submission_id", "created_at", "full_text", "contact", "submitted_references", "open_problem",
-                  "first_name", "last_name", "affiliation"]
+        fields = [
+            "submission_id",
+            "created_at",
+            "full_text",
+            "contact",
+            "submitted_references",
+            "open_problem",
+            "first_name",
+            "last_name",
+            "affiliation",
+        ]
 
 
 class SubmissionReferencesSerializer(serializers.ModelSerializer):
@@ -20,7 +34,7 @@ class SubmissionReferencesSerializer(serializers.ModelSerializer):
         reference = obj.reference_id
         return {
             "id": reference.ref_id,
-            "full_citation": reference.full_citation
+            "full_citation": reference.full_citation,
         }  # For now we only need this information
 
 

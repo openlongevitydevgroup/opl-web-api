@@ -1,12 +1,12 @@
 from django.contrib import admin
+
+from open_problems.models.references import Journal, Reference
+from posts_comments.models.submissions import SubmissionReferences
 from utils.create_reference import create_reference
-from utils.validations import validate_submitted_reference, validate_journal
-from open_problems.models.references import Reference, Journal
-from posts_comments.models.submissions import SubmissionReferences, Submission
+from utils.validations import validate_journal, validate_submitted_reference
 
 
-
-#### Action to convert pubmed ids and doi's to
+# Action to convert pubmed ids and doi's to
 def apply_references(modeladmin, request, queryset):
     failed_conversions = []
     existing_references = []
@@ -15,7 +15,9 @@ def apply_references(modeladmin, request, queryset):
     for reference in queryset:
         reference_type = reference.type
         reference_value = reference.ref
-        reference_information = create_reference(ref_type=reference_type, value=reference_value)
+        reference_information = create_reference(
+            ref_type=reference_type, value=reference_value
+        )
 
         if reference_information is not None:
             title = reference_information["title"]
@@ -37,10 +39,17 @@ def apply_references(modeladmin, request, queryset):
                     new_journal.save()
                     journal_instance = new_journal
 
-                reference_object = Reference(ref_title=title, publish_date=year, full_citation=citation,
-                                             journal_id=journal_instance, doi=doi)
+                reference_object = Reference(
+                    ref_title=title,
+                    publish_date=year,
+                    full_citation=citation,
+                    journal_id=journal_instance,
+                    doi=doi,
+                )
                 reference_object.save()
-                SubmissionReferences(reference_id=reference_object, submission_id=reference.submission_id).save()
+                SubmissionReferences(
+                    reference_id=reference_object, submission_id=reference.submission_id
+                ).save()
 
             successful_conversions += 1  # Increment successful conversion count
 
@@ -51,18 +60,28 @@ def apply_references(modeladmin, request, queryset):
 
     failed_string = ", ".join(failed_conversions)
     existing_string = ", ".join(existing_references)
-    message = f"{successful_conversions} successfully converted and saved as references. {len(existing_references)} references already existed: {existing_string}. {len(failed_conversions)} failed to convert: {failed_string}"
+    message = f"{successful_conversions} successfully converted and saved as references. \
+        {len(existing_references)} references already existed: {existing_string}. \
+        {len(failed_conversions)} failed to convert: {failed_string}"
     modeladmin.message_user(request, message)
 
 
 apply_references.short_description = "Convert and Save References"
 
-apply_references.description = "Extract reference information from user submitted DOIs and PUBMED Ids - "
+apply_references.description = (
+    "Extract reference information from user submitted DOIs and PUBMED Ids - "
+)
 
 
-##### CUSTOM CLASS
+# CUSTOM CLASS
 class SubmittedReferencesAdmin(admin.ModelAdmin):
-    list_display = ["reference_id", "type", "ref", "submission_id", "submission_full_text"]
+    list_display = [
+        "reference_id",
+        "type",
+        "ref",
+        "submission_id",
+        "submission_full_text",
+    ]
     actions = [apply_references]
 
     def submission_full_text(self, obj):  # Return the full text of the submission?

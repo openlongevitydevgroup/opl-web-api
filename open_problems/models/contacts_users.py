@@ -11,17 +11,21 @@ class JobInformation(models.Model):
 
 class Organisation(JobInformation):
     def __str__(self) -> str:
-        return f'{self.info_title}'
+        return f"{self.info_title}"
 
 
 class JobField(JobInformation):
     def __str__(self) -> str:
-        return f'{self.info_title}'
+        return f"{self.info_title}"
 
 
 class Contact(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=50)
-    job_field = models.ForeignKey(JobField, on_delete=models.SET_NULL, null=True, blank=True)
-    organisation = models.ForeignKey(Organisation, on_delete=models.SET_NULL, null=True, blank=True)
+    job_field = models.ForeignKey(
+        JobField, on_delete=models.SET_NULL, null=True, blank=True
+    )
+    organisation = models.ForeignKey(
+        Organisation, on_delete=models.SET_NULL, null=True, blank=True
+    )
