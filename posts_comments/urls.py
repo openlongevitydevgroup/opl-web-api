@@ -12,7 +12,10 @@ from posts_comments.views.submission_view import (
     get_references,
     submit_post,
 )
-from posts_comments.views.verify_references_view import verify_reference
+from posts_comments.views.verify_references_view import (
+    verify_reference,
+    verify_references,
+)
 
 # url /api/posts/
 urlpatterns = [
@@ -24,6 +27,7 @@ urlpatterns = [
     path("get/<int:post_id>/<int:comment_id>", get_single_comment),
     path("post/<int:post_id>/comment/submit", post_comment),
     path("verify-reference", verify_reference),
+    path("verify-references", verify_references),
     path(
         "get/<int:id>/submission/reference", get_references
     ),  # get references for a particular solution submision

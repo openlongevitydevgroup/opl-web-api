@@ -26,3 +26,48 @@ def verify_reference(request):
             return Response(status=status.HTTP_404_NOT_FOUND)
         else:
             return Response(data=pmid_information, status=status.HTTP_200_OK)
+
+
+@api_view(["POST"])
+def verify_references(request):
+    # Verify multiple references in one request
+    json_request = json.loads(request.body)
+    references = json_request["references"]
+    verified_references = []
+    unverified_references = []
+
+    for reference in references:
+        reference_type = reference["type"]
+        value = reference["value"]
+        if reference_type == "DOI":
+            doi_information = doi_crossref_search(value)
+            if not doi_information:
+                unverified_references.append(
+                    {"type": "DOI", "value": value, "error": "Not found"}
+                )
+            else:
+                verified_references.append(doi_information)
+        elif reference_type == "PMID":
+            try:
+                pmid_information = get_pmid_information(value)
+                print("DONE")
+            except ValueError:
+                print("error")
+                unverified_references.append(
+                    {"type": "PMID", "value": value, "error": "Not found"}
+                )
+            else:
+                print("no error")
+                if not pmid_information:
+                    unverified_references.append(
+                        {"type": "PMID", "value": value, "error": "Not found"}
+                    )
+                else:
+                    verified_references.append(pmid_information)
+    return Response(
+        data={
+            "verified_references": verified_references,
+            "unverified_references": unverified_references,
+        },
+        status=status.HTTP_200_OK,
+    )

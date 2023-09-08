@@ -1,4 +1,9 @@
+import json
+
 from rest_framework import serializers
+
+from utils.get_doi_information import doi_crossref_search
+from utils.get_pmid_information import get_pmid_citation
 from utils.recursive_serializer import RecursiveSerializer
 
 from ..models.open_problems import (
@@ -26,14 +31,24 @@ class ContactSerializer(serializers.ModelSerializer):
 # Serializer for reviewed open problems
 class OpenProblemsSerializer(serializers.ModelSerializer):
     children = RecursiveSerializer(many=True, read_only=True)
+
     class Meta:
         model = OpenProblems
-        fields = ["problem_id", "title", "description",
-                  "contact", "parent_problem", "descendants_count", "children"]
+        fields = [
+            "problem_id",
+            "title",
+            "description",
+            "contact",
+            "parent_problem",
+            "descendants_count",
+            "children",
+        ]
 
 
 # Serializer for user submitted open problems
 class SubmittedProblemSerializer(serializers.ModelSerializer):
+    # converted_references = serializers.SerializerMethodField()
+
     class Meta:
         model = SubmittedProblems
         fields = [
@@ -41,10 +56,28 @@ class SubmittedProblemSerializer(serializers.ModelSerializer):
             "title",
             "description",
             "species",
-            "citation",
+            "references",
             "parent_problem",
             "contact",
         ]
+
+    # def get_converted_references(self, instance):
+    #     references = instance.references
+    #     reference_json = json.loads(references)
+    #     print(reference_json)
+    #     reference_dict = {}
+
+    #     for key, ref in reference_json.items():
+    #         if ref["type"] == "DOI":
+    #             reference_dict[ref["value"]] = doi_crossref_search(ref["value"])
+    #         elif ref["type"] == "PMID":
+    #             reference_dict[ref["value"]] = get_pmid_citation(ref["value"])
+    #     instance.references = json.dumps(reference_dict)
+    #     return reference_dict
+
+    # def to_representation(self, instance):
+    #     data = super().to_representation(instance)
+    #     return data
 
 
 # Serializer to return a reference to be nested in serializer below

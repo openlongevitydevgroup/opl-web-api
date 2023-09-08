@@ -1,4 +1,5 @@
 from django.db import models
+
 from .contacts_users import Contact
 from .references import Reference
 
@@ -16,8 +17,13 @@ class OpenProblem(models.Model):
 
 
 class OpenProblems(OpenProblem):
-    parent_problem = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True,
-                                       related_name='children')
+    parent_problem = models.ForeignKey(
+        "self",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="children",
+    )
     descendants_count = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=False)
     objects = models.Manager()
@@ -33,7 +39,9 @@ class OpenProblems(OpenProblem):
         return count
 
     def get_ordered_children_descending(self):
-        children = OpenProblems.objects.filter(parent_problem=self).order_by('-descendants_count')
+        children = OpenProblems.objects.filter(parent_problem=self).order_by(
+            "-descendants_count"
+        )
         return children
 
     @classmethod
@@ -56,7 +64,7 @@ class SubmittedProblems(OpenProblem):
         OpenProblems, null=True, blank=True, on_delete=models.SET_NULL
     )
     species = models.CharField(max_length=50, null=True, blank=True)
-    citation = models.TextField(blank=True)
+    references = models.TextField(blank=True)
     first_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50, blank=True)
     email = models.EmailField(max_length=50, null=True, blank=True)
@@ -67,7 +75,7 @@ class SubmittedProblems(OpenProblem):
         return f"{self.title} : {self.email}"
 
     class Meta:
-        db_table = "Submitted-OP"
+        db_table = "SubmittedProblems"
         db_table_comment = (
             "These are the submitted questions from users that will undergo review"
         )
@@ -79,7 +87,7 @@ class ProblemRelation(models.Model):
     QR_description = models.TextField(blank=True)
 
     class Meta:
-        db_table = "Open-relations"
+        db_table = "ProblemRelation"
         db_table_comment = "This contains information about how a question/submitted question is related to a question"
 
 
@@ -118,7 +126,7 @@ class ProblemReference(models.Model):
         return f"{self.problem_id} : {self.reference_id.ref_title}"
 
     class Meta:
-        db_table = "OP-references"
+        db_table = "ProblemReferences"
         db_table_comment = (
             "Table containing which references are tied to which questions"
         )

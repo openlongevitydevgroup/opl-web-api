@@ -54,9 +54,5 @@ def get_pmid_information(pmid):
             "doi": doi,
         }
     else:
-        return ValueError("Failed API Call to Entrez")
-
-
-if __name__ == "__main__":
-    get_pmid_citation("1231231")
-    pmid_info = get_pmid_information("1231231")
+        print("value error")
+        raise ValueError("Failed API Call to Entrez")
