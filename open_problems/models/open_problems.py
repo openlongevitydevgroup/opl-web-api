@@ -54,9 +54,12 @@ class OpenProblems(OpenProblem):
     class Meta:
         db_table = "OpenProblems"
         db_table_comment = "These are the current open problems that we have accepted from the submitted questions"
+        verbose_name = "Open Problem"
 
     def __str__(self):
         return f"{self.problem_id}: {self.title}"
+
+
 
 
 class SubmittedProblems(OpenProblem):
@@ -79,6 +82,7 @@ class SubmittedProblems(OpenProblem):
         db_table_comment = (
             "These are the submitted questions from users that will undergo review"
         )
+        verbose_name = "Submitted Problem"
 
 
 class ProblemRelation(models.Model):
@@ -130,3 +134,4 @@ class ProblemReference(models.Model):
         db_table_comment = (
             "Table containing which references are tied to which questions"
         )
+        verbose_name = "Open Problems and Linked References"

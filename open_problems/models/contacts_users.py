@@ -29,3 +29,10 @@ class Contact(models.Model):
     organisation = models.ForeignKey(
         Organisation, on_delete=models.SET_NULL, null=True, blank=True
     )
+
+    class Meta:
+        db_table = "Contact"
+        db_table_comment = "This table contains the contact details of the person who submitted the question"
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} : {self.email}"

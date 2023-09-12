@@ -58,26 +58,13 @@ class SubmittedProblemSerializer(serializers.ModelSerializer):
             "species",
             "references",
             "parent_problem",
-            "contact",
+            "first_name",
+            "last_name",
+            "email",
+            "organisation"
         ]
 
-    # def get_converted_references(self, instance):
-    #     references = instance.references
-    #     reference_json = json.loads(references)
-    #     print(reference_json)
-    #     reference_dict = {}
 
-    #     for key, ref in reference_json.items():
-    #         if ref["type"] == "DOI":
-    #             reference_dict[ref["value"]] = doi_crossref_search(ref["value"])
-    #         elif ref["type"] == "PMID":
-    #             reference_dict[ref["value"]] = get_pmid_citation(ref["value"])
-    #     instance.references = json.dumps(reference_dict)
-    #     return reference_dict
-
-    # def to_representation(self, instance):
-    #     data = super().to_representation(instance)
-    #     return data
 
 
 # Serializer to return a reference to be nested in serializer below

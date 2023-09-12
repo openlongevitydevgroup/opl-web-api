@@ -35,7 +35,7 @@ class RefType(models.Model):
                 the self-joini relation is to indicate whether one reference type is a subcategory of another."
 
     def __str__(self) -> str:
-        return f"{self.rtpe_id}: {self.rtype_class}:"
+        return f"{self.rtype_id}: {self.rtype_class}:"
 
 
 class Reference(models.Model):

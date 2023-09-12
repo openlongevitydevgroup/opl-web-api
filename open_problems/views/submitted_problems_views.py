@@ -1,16 +1,12 @@
 import json
-
 from rest_framework import status
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from open_problems.serializers.serializers import (
-    SubmittedProblems,
     SubmittedProblemSerializer,
 )
-from utils.get_doi_information import doi_crossref_search
-from utils.get_pmid_information import get_pmid_citation
+from utils.create_reference import create_reference
 
 
 class SubmitOpenProblem(APIView):
@@ -21,14 +17,9 @@ class SubmitOpenProblem(APIView):
         references_dict = {}
 
         for ref, key in references_json.items():
-            type = key["type"]
+            ref_type = key["type"]
             value = key["value"]
-            if type == "DOI":
-                citation_information = doi_crossref_search(value)
-                references_dict[ref] = citation_information
-            elif type == "PMID":
-                citation_information = get_pmid_citation(value)
-                references_dict[ref] = citation_information
+            references_dict[ref] = create_reference(ref_type, value)
         return references_dict
 
     def post(self, request, *args, **kwargs):

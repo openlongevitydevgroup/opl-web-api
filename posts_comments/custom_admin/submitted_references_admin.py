@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from open_problems.models.references import Journal, Reference
 from posts_comments.models.submissions import SubmissionReferences
 from utils.create_reference import create_reference

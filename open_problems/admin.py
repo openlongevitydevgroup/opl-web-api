@@ -4,6 +4,7 @@ from open_problems.custom_admin_classes.open_problems_admin import OPAdmin
 from open_problems.custom_admin_classes.submitted_problems_admin import (
     SubmittedProblemsAdmin,
 )
+from open_problems.custom_admin_classes.open_problems_references_admin import OpenProblemsReferencesAdmin
 from open_problems.models.open_problems import (
     Contact,
     OpenProblems,
@@ -23,4 +24,4 @@ admin.site.register(Reference)
 admin.site.register(Journal)
 admin.site.register(RefType)
 admin.site.register(Contact)
-admin.site.register(ProblemReference)
+admin.site.register(ProblemReference, OpenProblemsReferencesAdmin)

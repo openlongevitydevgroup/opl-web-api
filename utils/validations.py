@@ -1,5 +1,6 @@
 from typing import Union
 
+from open_problems.models.contacts_users import Contact, Organisation
 from open_problems.models.references import Journal, Reference
 
 
@@ -32,3 +33,41 @@ def validate_journal(journal_name: str) -> Union[object, bool]:
         return journal
     else:
         return False
+
+
+def validate_contact(data: dict):
+    """
+    Check whether the contact is present in the database or not.
+    """
+
+    # Start with an empty filter query
+    filter_query = {}
+
+    # Add conditions to the filter query based on provided input values
+    if "first_name" in data:
+        filter_query['first_name__iexact'] = data["first_name"]
+    if "last_name" in data:
+        filter_query['last_name__iexact'] = data["last_name"]
+    if "email" in data:
+        filter_query['email__iexact'] = data["email"]
+
+
+    try:
+        # Use the filter method to search for a contact based on the filter query
+        contact = Contact.objects.filter(**filter_query).first()
+
+        if contact:
+            return True, contact
+        else:
+            return False, None
+    except Contact.DoesNotExist:
+        return False, None
+
+
+def validate_organisation(organisation: str):
+    """
+    Check whether the organisation is present in the database or not.
+    """
+    return Organisation.objects.filter(info_title=organisation).exists()
+
+
