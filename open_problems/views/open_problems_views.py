@@ -15,7 +15,7 @@ from open_problems.serializers.serializers import ParentSerializer as PSerialize
 # get open problems by oldest -> newest
 @api_view(["GET"])
 def open_problems_latest(request):
-    questions = OpenProblems.objects.filter(is_active=True).order_by("problem_id")
+    questions = OpenProblems.objects.filter(is_active=True).order_by("-problem_id")
     serializer = OpenProblemsSerializer(questions, many=True)
     return Response(serializer.data)
 
