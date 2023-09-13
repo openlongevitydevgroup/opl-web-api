@@ -1,3 +1,4 @@
+from open_problems.serializers.OpenProblems import OpenProblemsSerializer
 from annotations.models.theory import Theory, TheoryProblem
 from annotations.serializers.base_serializer import BaseSerializer
 
@@ -10,6 +11,7 @@ class TheorySerializer(BaseSerializer):
 
 class TheoryProblemSerializer(BaseSerializer):
     theory = TheorySerializer()
+    open_problem = OpenProblemsSerializer()
 
     class Meta(BaseSerializer.Meta):
         model = TheoryProblem
