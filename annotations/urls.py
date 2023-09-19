@@ -9,14 +9,14 @@ from annotations.views.subject_view import (
 
 # Register routers the viewsets
 router = routers.DefaultRouter()
-router.register(r"genes", GeneViewSet, basename="genes")
-router.register(f"subjects", SubjectViewSet, basename="subjects")
+router.register(r"gene", GeneViewSet, basename="genes")
+router.register(f"subject", SubjectViewSet, basename="subjects")
 
 
 # Create a list of prefixes for the viewsets for urls to be dynamically generated
 viewsets_patterns = [
-    (GeneProblemViewSet, "genes"),
-    (SubjectProblemViewSet, "subjects"),
+    (GeneProblemViewSet, "gene"),
+    (SubjectProblemViewSet, "subject"),
 ]
 
 
