@@ -1,22 +1,22 @@
 from django.urls import path, include
 from rest_framework import routers
 from annotations.views.gene_view import GeneViewSet, GeneProblemViewSet
-from annotations.views.theory_view import (
-    TheoryViewSet,
-    TheoryProblemViewSet,
+from annotations.views.subject_view import (
+    SubjectViewSet,
+    SubjectProblemViewSet,
 )
 
 
 # Register routers the viewsets
 router = routers.DefaultRouter()
 router.register(r"genes", GeneViewSet, basename="genes")
-router.register(f"theories", TheoryViewSet, basename="theories")
+router.register(f"subjects", SubjectViewSet, basename="subjects")
 
 
 # Create a list of prefixes for the viewsets for urls to be dynamically generated
 viewsets_patterns = [
     (GeneProblemViewSet, "genes"),
-    (TheoryProblemViewSet, "theories"),
+    (SubjectProblemViewSet, "subjects"),
 ]
 
 
