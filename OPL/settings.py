@@ -4,7 +4,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 # Load environment variables
-load_dotenv("./OPL/.env")
+load_dotenv()
 
 match (environ.get("WEB_API_URLS")):
     case str(value):
