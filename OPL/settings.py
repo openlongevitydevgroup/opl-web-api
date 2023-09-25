@@ -96,11 +96,11 @@ WSGI_APPLICATION = "OPL.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": environ.get("DB_NAME"),
-        "USER": environ.get("DB_USER"),
-        "PASSWORD": environ.get("DB_PASSWORD"),
-        "HOST": environ.get("DB_HOST"),
-        "PORT": environ.get("DB_PORT"),
+        "NAME": environ.get("POSTGRES_DB"),
+        "USER": environ.get("POSTGRES_USER"),
+        "PASSWORD": environ.get("POSTGRES_PASSWORD"),
+        "HOST": environ.get("POSTGRES_HOST"),
+        "PORT": environ.get("POSTGRES_PORT"),
     }
 }
 
@@ -123,7 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-STATIC_URL = "/static/"
+STATIC_URL = "static/"
 STATIC_ROOT = str(cwd_path.joinpath("staticfiles"))
 
 # Default primary key field type
@@ -136,14 +136,11 @@ http_protocol = environ.get("HTTP_PROTOCOL")
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", http_protocol)
 
 # Set 'SESSION_COOKIE_SECURE' and 'CSRF_COOKIE_SECURE' to True to ensure cookies are only sent over HTTPS.
-# session_cookie_secure = configuration['settings']['session_cookie_secure']
 session_cookie_secure = environ.get("SESSION_COOKIE_SECURE")
-# csrf_cookie_secure = configuration['settings']['csrf_cookie_secure']
 csrf_cookie_secure = environ.get("CSRF_COOKIE_SECURE")
 SESSION_COOKIE_SECURE = session_cookie_secure
 CSRF_COOKIE_SECURE = csrf_cookie_secure
 
-# session_cookie_domain = configuration['settings']['session_cookie_domain']
 session_cookie_domain = environ.get("SESSION_COOKIE_DOMAIN")
 SESSION_COOKIE_DOMAIN = session_cookie_domain
 
