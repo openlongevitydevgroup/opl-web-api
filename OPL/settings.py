@@ -100,9 +100,11 @@ DATABASES = {
         "USER": environ.get("POSTGRES_USER"),
         "PASSWORD": environ.get("POSTGRES_PASSWORD"),
         "HOST": environ.get("POSTGRES_HOST"),
-        "PORT": 5432,
+        "PORT": environ.get("POSTGRES_PORT"),
     }
 }
+
+print(DATABASES)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
