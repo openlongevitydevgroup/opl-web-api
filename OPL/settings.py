@@ -62,6 +62,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://dev.longevityknowledge.app",
     "https://longevityknowledge.app",
     "http://127.0.0.1",
 ]
@@ -103,7 +104,6 @@ DATABASES = {
         "PORT": environ.get("POSTGRES_PORT"),
     }
 }
-print(DATABASES)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -146,6 +146,7 @@ session_cookie_domain = environ.get("SESSION_COOKIE_DOMAIN")
 SESSION_COOKIE_DOMAIN = session_cookie_domain
 
 CSRF_TRUSTED_ORIGINS = [
+    "https://dev-api.longevityknowledge.app",
     "https://admin.longevityknowledge.app",
     "http://localhost:8000",
     "http://127.0.0.1",
