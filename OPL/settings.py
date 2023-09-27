@@ -50,9 +50,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -146,6 +146,7 @@ session_cookie_domain = environ.get("SESSION_COOKIE_DOMAIN")
 SESSION_COOKIE_DOMAIN = session_cookie_domain
 
 CSRF_TRUSTED_ORIGINS = [
+    "https://dev.longevityknowledge.app",
     "https://dev-api.longevityknowledge.app",
     "https://admin.longevityknowledge.app",
     "http://localhost:8000",
