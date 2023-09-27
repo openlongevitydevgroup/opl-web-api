@@ -103,7 +103,6 @@ DATABASES = {
         "PORT": environ.get("POSTGRES_PORT"),
     }
 }
-
 print(DATABASES)
 
 # Password validation
