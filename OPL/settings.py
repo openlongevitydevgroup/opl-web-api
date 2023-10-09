@@ -52,10 +52,10 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -65,6 +65,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://dev.longevityknowledge.app",
     "https://longevityknowledge.app",
     "http://127.0.0.1",
+    "https://localhost:8000"
 ]
 
 REST_FRAMEWORK = {"DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"]}
@@ -141,7 +142,6 @@ session_cookie_secure = environ.get("SESSION_COOKIE_SECURE")
 csrf_cookie_secure = environ.get("CSRF_COOKIE_SECURE")
 SESSION_COOKIE_SECURE = session_cookie_secure
 CSRF_COOKIE_SECURE = csrf_cookie_secure
-
 session_cookie_domain = environ.get("SESSION_COOKIE_DOMAIN")
 SESSION_COOKIE_DOMAIN = session_cookie_domain
 
