@@ -18,22 +18,16 @@ match (environ.get("SPA_URLS")):
     case _:
         spa_urls = []
 
-cwd_path = Path.cwd()
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = environ.get("SECRET_KEY")
-
-# SECURITY WARNING: don't run with debug turned on in production!
 match (environ.get("DEBUG_MODE")):
     case str(value):
         debug_mode = value.lower() == "true"
     case _:
         debug_mode = []
+
+cwd_path = Path.cwd()
+
+SECRET_KEY = environ.get("SECRET_KEY")
 DEBUG = debug_mode
-
-ALLOWED_HOSTS = ["*"]
-
-# Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -45,12 +39,8 @@ INSTALLED_APPS = [
     "open_problems",
     "posts_comments",
     "annotations",
-    "corsheaders",
-    "mptt",
 ]
-
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -67,9 +57,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 REST_FRAMEWORK = {"DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"]}
-
 ROOT_URLCONF = "OPL.urls"
-
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -88,11 +76,7 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = "OPL.wsgi.application"
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -103,9 +87,10 @@ DATABASES = {
         "PORT": environ.get("DB_PORT"),
     }
 }
+STATIC_URL = "static/"
+STATIC_ROOT = str(cwd_path.joinpath("staticfiles"))
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
