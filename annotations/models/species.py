@@ -19,7 +19,7 @@ class SpeciesProblems(AnnotationsProblems):
     species = models.ForeignKey(Species, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return f"{self.species.species_id}: {self.open_problem.open_problem_id} "
+        return f"{self.species}: {self.open_problem.open_problem_id} "
 
     class Meta:
         db_table_comment = "Relation table for each species and open problem"

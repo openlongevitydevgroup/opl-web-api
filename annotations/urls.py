@@ -5,18 +5,30 @@ from annotations.views.subject_view import (
     SubjectViewSet,
     SubjectProblemViewSet,
 )
-
+from annotations.views.species_view import SpeciesViewSet, SpeciesProblemViewSet
+from annotations.views.compounds_view import CompoundViewSet, CompoundProblemViewSet
 
 # Register routers the viewsets
-router = routers.DefaultRouter()
-router.register(r"gene", GeneViewSet, basename="genes")
-router.register(f"subject", SubjectViewSet, basename="subjects")
 
+router = routers.DefaultRouter()
+viewsets = {
+    "gene": GeneViewSet,
+    "subject": SubjectViewSet,
+    "species": SpeciesViewSet,
+    "compound": CompoundViewSet,
+}
+
+for route, viewset in viewsets.items():
+    router.register(route, viewset, basename=route)
 
 # Create a list of prefixes for the viewsets for urls to be dynamically generated
+
+
 viewsets_patterns = [
     (GeneProblemViewSet, "gene"),
     (SubjectProblemViewSet, "subject"),
+    (SpeciesProblemViewSet, "species"),
+    (CompoundProblemViewSet, "compound"),
 ]
 
 

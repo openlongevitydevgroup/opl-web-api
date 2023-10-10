@@ -2,7 +2,7 @@ from django.db import models
 from .annotations import AnnotationsProblems
 
 
-class Compounds:
+class Compounds(models.Model):
     compound_id = models.AutoField(primary_key=True)
     compound_name = models.CharField(max_length=50, unique=True)
 

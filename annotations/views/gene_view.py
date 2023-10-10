@@ -5,7 +5,7 @@ from annotations.serializers.gene_serializer import (
     GeneProblemlSerializer,
     GeneSerializer,
 )
-from .annotation_viewset import AnnotationViewSet, AnnotationProblemViewSet
+from .annotation_view import AnnotationViewSet, AnnotationProblemViewSet
 
 
 # Class view using inherited view set
