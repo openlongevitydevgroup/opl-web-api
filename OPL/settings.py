@@ -27,6 +27,10 @@ match (environ.get("DEBUG_MODE")):
 cwd_path = Path.cwd()
 
 SECRET_KEY = environ.get("SECRET_KEY")
+
+cwd_path = Path.cwd()
+
+SECRET_KEY = environ.get("SECRET_KEY")
 DEBUG = debug_mode
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -39,6 +43,7 @@ INSTALLED_APPS = [
     "open_problems",
     "posts_comments",
     "annotations",
+    "corsheaders",
 ]
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

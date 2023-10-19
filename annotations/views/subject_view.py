@@ -1,5 +1,5 @@
 from rest_framework.views import APIView
-from .annotation_viewset import AnnotationViewSet, AnnotationProblemViewSet
+from .annotation_view import AnnotationViewSet, AnnotationProblemViewSet
 from annotations.models.subjects import Subject, SubjectProblem
 from annotations.serializers.subject_serializer import (
     SubjectProblemSerializer,
@@ -33,6 +33,7 @@ class AnnotationProblemReferencesView(APIView):
         super().__init__()
 
     """ View for obtaining all the references from all open problems under a specific annotation """
+    # Do we need this?
 
     def get(self):
         ...
