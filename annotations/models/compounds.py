@@ -1,9 +1,10 @@
 from django.db import models
+
 from .annotations import AnnotationsProblems
 
 
 class Compounds(models.Model):
-    compound_id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     compound_name = models.CharField(max_length=50, unique=True)
 
     class Meta:
@@ -15,7 +16,7 @@ class Compounds(models.Model):
 
 
 class CompoundProblems(AnnotationsProblems):
-    compound_id = models.ForeignKey(Compounds, on_delete=models.CASCADE)
+    compound = models.ForeignKey(Compounds, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.compound_id.compound_name} : {self.open_problem}"
+        return f"{self.compound.compound_name} : {self.open_problem}"
