@@ -1,6 +1,6 @@
-from open_problems.serializers.OpenProblems import OpenProblemsSerializer
 from annotations.models.subjects import Subject, SubjectProblem
-from annotations.serializers.base_serializer import BaseSerializer
+from open_problems.serializers.OpenProblems import OpenProblemsSerializer
+from utils.base_serializer import BaseSerializer
 
 
 class SubjectSerializer(BaseSerializer):

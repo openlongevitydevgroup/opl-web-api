@@ -1,6 +1,6 @@
 from annotations.models.compounds import Compounds, CompoundProblems
-from .base_serializer import BaseSerializer
 from open_problems.serializers.OpenProblems import OpenProblemsSerializer
+from utils.base_serializer import BaseSerializer
 
 
 class CompoundsSerializer(BaseSerializer):
