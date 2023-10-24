@@ -1,16 +1,14 @@
 from django.db import models
 from django.db.models import QuerySet
 from rest_framework import status
-from rest_framework.decorators import api_view
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
+from rest_framework.serializers import Serializer
 
 from open_problems.models.open_problems import OpenProblems
 from open_problems.serializers.OpenProblems import (
     OpenProblemsSerializer,
 )
-from open_problems.serializers.serializers import ContactSerializer
-from open_problems.serializers.serializers import ParentSerializer as PSerializer
 from ..utils.clean_query_params import clean_query_params
 from ..utils.queryset_helpers import (
     get_queryset_ordered,
@@ -19,10 +17,20 @@ from ..utils.queryset_helpers import (
 
 
 class RetrieveProblems(ListAPIView):
+    """
+    For retrieving all open problems and sort them depending on url and query parameters.
+    """
+
     serializer_class = OpenProblemsSerializer
 
     @staticmethod
     def sort_queryset(queryset: QuerySet, sorting: str) -> QuerySet:
+        """
+        Static method for final sorting of filtered queryset. Utilises helper functions.
+        Parameters:
+            queryset: Model queryset
+            sorting (str): Type of sorting to appy.
+        """
         if sorting == "latest":
             return get_queryset_ordered(
                 queryset=queryset, id_string="-problem_id", is_active=True
@@ -58,6 +66,16 @@ class RetrieveProblems(ListAPIView):
     def filter_by_annotations(
         queryset: QuerySet, annotation_type: str, ids: [int]
     ) -> QuerySet:
+        """
+        Static method to apply filtering on queryset.
+        Parameters:
+            queryset (QuerySet): Django Queryset of selected model
+            annotation_type (str): Annotation type referencing the model to cross-reference to with current queryset
+            ids ([ids]): Array of ids to retrieve objects from given annotation model.
+
+        Returns:
+            QuerySet
+        """
         if len(ids) == 0:
             return queryset
         else:
@@ -65,6 +83,12 @@ class RetrieveProblems(ListAPIView):
             return queryset.filter(**{filter_keyword: ids})
 
     def get_queryset(self) -> QuerySet:
+        """
+        The queryset to be returned as the list view. Queryset is filtered by annotation and then sorted and then sorted
+        at the end.
+        Returns:
+            Queryset
+        """
         queryset = OpenProblems.objects.all()
         query_params = clean_query_params(self.request.query_params)
         # Remove sorting and store separately as we want to sort at the end and to remove it from the annotation
@@ -85,45 +109,18 @@ class RetrieveProblems(ListAPIView):
         return queryset
 
 
-# Get a singular open problems with additional information such as contact, parent problem.
-@api_view(["GET"])
-def open_problems_single(request, id):
-    """Retrieve a single question and its children"""
-    problem = OpenProblems.objects.get(problem_id=id)
-    parent = problem.parent_problem
-    serializer = OpenProblemsSerializer(problem)
-    contact = problem.contact
+class RetrieveSingleProblem(RetrieveAPIView):
+    """
+    Retrieve single open problem using an identifier
+    """
 
-    if not parent:
-        parent_serializer = None
-    else:
-        parent_serializer = PSerializer(parent).data
-    if not contact:
-        contact_serializer = None
-    else:
-        contact_serializer = ContactSerializer(contact).data
+    serializer_class: Serializer = OpenProblemsSerializer
+    queryset = OpenProblems
 
-    data = {
-        "open_problem": serializer.data,
-        "parent_data": parent_serializer,
-        "contact": contact_serializer,
-    }
-    return Response(data)
-
-
-class RetrieveSingleInstance(RetrieveAPIView):
-    serializer_class = OpenProblemsSerializer
-
-
-# Get all open problems that have been answered  (i.e. have at least one submission)
-@api_view(["GET"])
-def open_problems_answered(request):
-    open_problems_answered = (
-        OpenProblems.objects.filter(is_active=True)
-        .annotate(submission_count=models.Count("submission"))
-        .filter(submission__is_active=True)
-        .filter(submission_count__gte=1)
-        .order_by("-submission_count")  # Order by submission count in descending order
-    )
-    serializer = OpenProblemsSerializer(open_problems_answered, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    def get(self, request, *args, **kwargs):
+        """
+        Retrieve id from url path and return single object instance
+        """
+        object_id = self.kwargs.get("id")
+        queryset = self.queryset.objects.get(problem_id=object_id)
+        return Response(self.serializer_class(queryset).data, status=status.HTTP_200_OK)
