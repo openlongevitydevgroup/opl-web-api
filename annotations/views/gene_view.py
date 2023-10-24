@@ -1,5 +1,3 @@
-from rest_framework.decorators import api_view
-
 from annotations.models.genes import Gene, GeneProblem
 from annotations.serializers.gene_serializer import (
     GeneProblemlSerializer,
