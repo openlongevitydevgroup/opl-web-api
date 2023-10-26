@@ -6,7 +6,7 @@ from annotations.serializers.base_serializer import BaseSerializer
 class SubjectSerializer(BaseSerializer):
     class Meta(BaseSerializer.Meta):
         model = Subject
-        fields = ["title", "description", "id"]
+        fields = ["title", "description", "id", "parent"]
 
 
 class SubjectProblemSerializer(BaseSerializer):

@@ -1,6 +1,5 @@
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.mixins import ListModelMixin
-from open_problems.models import OpenProblems
 from rest_framework import status
 from rest_framework.response import Response
 from utils.exceptions import EmptyQuerySetError
@@ -23,6 +22,12 @@ class AnnotationViewSet(ReadOnlyModelViewSet, ListModelMixin):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except self.detail_model.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def list(self, request, *args, **kwargs):
+        """Retrieve all annotation entries"""
+        queryset = self.queryset
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 
 class AnnotationProblemViewSet(ReadOnlyModelViewSet):
