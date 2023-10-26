@@ -61,7 +61,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://dev.longevityknowledge.app",
     "https://longevityknowledge.app",
     "http://127.0.0.1",
-    "https://localhost:8000"
+    "https://localhost:8000",
 ]
 
 REST_FRAMEWORK = {"DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"]}
@@ -143,3 +143,5 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1",
 ]
+
+ALLOWED_HOSTS = ["*"]
