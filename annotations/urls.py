@@ -2,7 +2,6 @@ from django.urls import path, include
 from rest_framework import routers
 
 from annotations.views.compounds_view import CompoundViewSet, CompoundProblemViewSet
-from annotations.views.filter_view import FilterOpenProblemsView
 from annotations.views.gene_view import GeneViewSet, GeneProblemViewSet
 from annotations.views.species_view import SpeciesViewSet, SpeciesProblemViewSet
 from annotations.views.subject_view import (
@@ -37,7 +36,6 @@ viewsets_patterns = [
 # Base url api/annotations/
 urlpatterns = [
     path("", include(router.urls)),
-    path("filter", FilterOpenProblemsView.as_view()),
 ]
 
 
