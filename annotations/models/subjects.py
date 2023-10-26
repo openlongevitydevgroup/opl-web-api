@@ -1,7 +1,6 @@
 from django.db import models
 
 from open_problems.models import Reference
-
 from .annotations import AnnotationsProblems
 
 
@@ -43,7 +42,7 @@ class SubjectProblem(AnnotationsProblems):
         db_table_comment = "Relation table for each subject and open problem"
 
 
-class SubjectReferences(models.Model):
+class SubjectReference(models.Model):
     # Field name made lowercase. The composite primary key (Ref_id, Theory_id) found, that is not supported.
     # The first column is selected.
     ref = models.OneToOneField(

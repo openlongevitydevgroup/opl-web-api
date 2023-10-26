@@ -1,9 +1,9 @@
-from annotations.models.species import Species, SpeciesProblems
-from .annotation_view import AnnotationViewSet, AnnotationProblemViewSet
+from annotations.models.species import Species, SpeciesProblem
 from annotations.serializers.species_serializer import (
     SpeciesSerializer,
     SpeciesProblemSerializer,
 )
+from .annotation_view import AnnotationViewSet, AnnotationProblemViewSet
 
 
 class SpeciesViewSet(AnnotationViewSet):
@@ -18,5 +18,5 @@ class SpeciesProblemViewSet(AnnotationProblemViewSet):
 
     def __init__(self):
         super().__init__(
-            SpeciesProblems, SpeciesProblemSerializer, annotation_foreign_key="species"
+            SpeciesProblem, SpeciesProblemSerializer, annotation_foreign_key="species"
         )
