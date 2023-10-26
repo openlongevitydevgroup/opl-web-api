@@ -95,7 +95,7 @@ DATABASES = {
         "PORT": environ.get("POSTGRES_PORT"),
     }
 }
-STATIC_URL = "static/"
+STATIC_URL = "api/static/"
 STATIC_ROOT = str(cwd_path.joinpath("staticfiles"))
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

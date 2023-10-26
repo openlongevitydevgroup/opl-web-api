@@ -23,9 +23,9 @@ static_urlpatterns = [
 ]
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("api/admin/", admin.site.urls),
     path("api/open-problems/", include("open_problems.urls")),
     path("api/posts/", include("posts_comments.urls")),
     path("api/annotations/", include("annotations.urls")),
-    path("static/", include(static_urlpatterns)),
+    path("api/static/", include(static_urlpatterns)),
 ]
