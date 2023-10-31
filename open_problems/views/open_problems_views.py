@@ -91,6 +91,7 @@ class RetrieveProblems(ListAPIView):
         """
         queryset = OpenProblems.objects.all()
         query_params = clean_query_params(self.request.query_params)
+
         # Remove sorting and store separately as we want to sort at the end and to remove it from the annotation
         # filtering loop below.
         if "sorting" in query_params.keys():
@@ -104,6 +105,7 @@ class RetrieveProblems(ListAPIView):
             queryset = self.filter_by_annotations(
                 queryset=queryset, annotation_type=parameter_name, ids=parameter_value
             )
+
         queryset = self.sort_queryset(queryset, sorting)
 
         return queryset
