@@ -14,4 +14,5 @@ class SpeciesProblemSerializer(BaseSerializer):
     open_problem = OpenProblemsSerializer()
 
     class Meta(BaseSerializer.Meta):
-        model = "__all__"
+        model = SpeciesProblems
+        fields = "__all__"

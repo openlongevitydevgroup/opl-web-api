@@ -33,6 +33,7 @@ cwd_path = Path.cwd()
 SECRET_KEY = environ.get("SECRET_KEY")
 DEBUG = debug_mode
 INSTALLED_APPS = [
+    "drf_yasg",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
