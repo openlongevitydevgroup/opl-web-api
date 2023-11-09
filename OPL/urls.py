@@ -28,7 +28,7 @@ static_urlpatterns = [
 schema_view = get_schema_view(
     openapi.Info(
         title="Open Longevity Web API",
-        default_version="v1",
+        default_version=settings.BUILD_VERSION,
         contact=openapi.Contact(email="openlongevitydevgroup@gmail.com"),
     ),
     public=True,

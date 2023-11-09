@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
+BUILD_VERSION = environ.get("BUILD_VERSION")
+
 match (environ.get("WEB_API_URLS")):
     case str(value):
         web_api_urls = value.split("|")
