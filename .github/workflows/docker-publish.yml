@@ -39,7 +39,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            BUILD_VERSION=Test
+            BUILD_VERSION=${{ steps.date.outputs.date }}.${{ github.run_number }}
 
       - name: Rollout the latest image
         uses: appleboy/ssh-action@v1.0.0
