@@ -15,7 +15,7 @@ class Species(models.Model):
         db_table = "Species"
 
 
-class SpeciesProblems(AnnotationsProblems):
+class SpeciesProblem(AnnotationsProblems):
     species = models.ForeignKey(Species, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
